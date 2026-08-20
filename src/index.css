@@ -45,7 +45,10 @@ body.away #away {
 
 .card {
   position: relative;
-  width: 280px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  min-height: 468px;
   padding: 10px 14px 12px;
   background: var(--card);
   border: 1px solid var(--line);
@@ -87,11 +90,64 @@ button.icon:disabled {
   cursor: default;
 }
 
+/* ── 当前任务标题 ── */
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 6px 0 2px;
+  padding: 7px 9px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border-radius: 9px;
+  background: hsl(var(--hue) 45% 50% / 0.13);
+  border-left: 3px solid hsl(var(--hue) 60% 58%);
+}
+
+.title .badge {
+  flex: none;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: hsl(var(--hue) 60% 55%);
+  color: #0d0f13;
+  font-size: 11px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.title .task {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.title .lock {
+  flex: none;
+  font-size: 11px;
+}
+
+.title .dur {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.title.pinned {
+  border-left-color: #f5a623;
+}
+
 /* ── 圆盘 ── */
 
 .dial {
   display: block;
   width: 100%;
+  max-width: 232px;
+  margin: 0 auto;
   height: auto;
   overflow: visible;
 }
@@ -155,10 +211,62 @@ button.icon:disabled {
   font-size: 9px;
 }
 
+/* ── 跑步的小狗 + 漏斗 ── */
+
+.runner {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 6px;
+  shape-rendering: crispEdges; /* 像素图别被抗锯齿糊掉 */
+}
+
+.dog {
+  fill: #d8c9a4;
+}
+.dog-eye {
+  fill: #1a1d22;
+}
+
+.ground {
+  stroke: #363d47;
+  stroke-width: 1;
+  fill: none;
+}
+.ground.moving {
+  animation: ground-scroll 0.45s linear infinite;
+}
+@keyframes ground-scroll {
+  to {
+    stroke-dashoffset: -6;
+  }
+}
+
+.glass {
+  fill: #565f6c;
+}
+.sand {
+  fill: var(--accent);
+}
+.grain {
+  fill: var(--accent);
+  animation: grain-fall 0.4s steps(2) infinite;
+}
+@keyframes grain-fall {
+  0% {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+  100% {
+    opacity: 0.15;
+    transform: translateY(1px);
+  }
+}
+
 /* ── 底部信息 ── */
 
 footer {
-  margin-top: 8px;
+  margin-top: 6px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -206,12 +314,10 @@ footer {
 
 /* ── 弹出层 ── */
 
+/* 在流里，不盖住小狗 —— 等确认的时候正好看见它坐下 */
 .sheet {
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
-  padding: 10px 12px;
+  margin-top: auto;
+  padding: 9px 11px;
   background: #1c2129f2;
   backdrop-filter: blur(8px);
   border: 1px solid var(--line);
@@ -224,6 +330,11 @@ footer {
   display: flex;
   justify-content: space-between;
   gap: 8px;
+}
+.ellip {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .plus {
   color: var(--accent);

@@ -1,7 +1,9 @@
-import { useEffect, useReducer, useRef, useState } from 'react'
+import { useEffect, useReducer, useRef, useState, type CSSProperties } from 'react'
 import Dial from './Dial'
+import Runner from './Runner'
 import { openPip, pipSupported } from './pip'
 import {
+  HUES,
   MS_HOUR,
   MS_MIN,
   fmtClock,
@@ -143,15 +145,16 @@ export default function App() {
   }
 
   async function toPip() {
-    const win = await openPip(280, 392)
+    const win = await openPip(300, 486)
     setPipWin(win)
     win.addEventListener('pagehide', () => setPipWin(null))
   }
 
   return (
       <div className="card">
-        <header>
-          <span className="today">
+        {/* 无边框窗口靠这块拖动；在浏览器里这个属性没有副作用 */}
+        <header data-tauri-drag-region>
+          <span className="today" data-tauri-drag-region>
             今日 {state.roundsToday} 轮 · {fmtDur(todayMs)}
           </span>
           <span className="tools">
@@ -166,6 +169,17 @@ export default function App() {
           </span>
         </header>
 
+        <h1
+          className={state.pinned ? 'title pinned' : 'title'}
+          style={{ '--hue': HUES[shownIndex % HUES.length] } as CSSProperties}
+          title={shown.name}
+        >
+          <span className="badge">{shownIndex + 1}</span>
+          <span className="task">{shown.name}</span>
+          {state.pinned && <span className="lock">🔒</span>}
+          <span className="dur">{fmtDur(shownMs)}</span>
+        </h1>
+
         <Dial
           state={state}
           totals={totals}
@@ -173,14 +187,9 @@ export default function App() {
           onDoubleClick={() => dispatch({ type: 'togglePin' })}
         />
 
+        <Runner progress={liveMs / total} running={state.phase === 'running'} />
+
         <footer>
-          <div className="row">
-            <span className="name">
-              {state.pinned && <b className="lock">🔒</b>}
-              {shownIndex + 1} · {shown.name}
-            </span>
-            <span className="dur">{fmtDur(shownMs)}</span>
-          </div>
           <div className="row">
             <span className="ticks">
               {Array.from({ length: TICKS }, (_, i) => (
@@ -207,13 +216,12 @@ export default function App() {
         {state.phase === 'awaiting' && sheet === 'none' && (
           <div className="sheet">
             <p className="sheet-title">
-              {state.justFinished! + 1} · {finished!.name}
+              <span className="ellip">
+                {state.pinned
+                  ? '锁定中 · 连续投喂本片'
+                  : `→ 下一片  ${state.currentIndex + 1} · ${current.name}`}
+              </span>
               <span className="plus">+{state.sliceLenMin}min</span>
-            </p>
-            <p className="sheet-sub">
-              {state.pinned
-                ? `锁定中 · 连续投喂本片`
-                : `→ 下一片  ${state.currentIndex + 1} · ${current.name}`}
             </p>
             <div className="btns">
               <button className="primary" onClick={() => dispatch({ type: 'confirm', at: Date.now() })}>
