@@ -5,6 +5,9 @@ import Runner from './Runner'
 import { openPip, pipSupported } from './pip'
 import {
   HUES,
+  LEN_PRESETS,
+  MAX_LEN,
+  MIN_LEN,
   MS_HOUR,
   MS_MIN,
   fmtClock,
@@ -63,6 +66,7 @@ export default function App() {
   const [sheet, setSheet] = useState<'none' | 'settings' | 'summary'>('none')
   const [pipWin, setPipWin] = useState<Window | null>(null)
   const [ioMsg, setIoMsg] = useState<string | null>(null)
+  const [openLen, setOpenLen] = useState<string | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
 
@@ -129,7 +133,7 @@ export default function App() {
   const shownMs = totals[shownIndex]
   const r = rings(shownMs)
   const minInHour = (shownMs % MS_HOUR) / MS_MIN
-  const roundsToRing = Math.max(1, Math.ceil((60 - minInHour) / state.sliceLenMin))
+  const roundsToRing = Math.max(1, Math.ceil((60 - minInHour) / shown.lenMin))
   const todayMs = totals.reduce((a, ms) => a + ms, 0)
 
   const hub =
@@ -160,7 +164,7 @@ export default function App() {
         {/* 无边框窗口靠这块拖动；在浏览器里这个属性没有副作用 */}
         <header data-tauri-drag-region>
           <span className="today" data-tauri-drag-region>
-            今日 {state.roundsToday} 轮 · {fmtDur(todayMs)}
+            今日 {fmtDur(todayMs)} · {state.roundsToday} 轮
           </span>
           <span className="tools">
             {pipSupported() && !pipWin && (
@@ -183,6 +187,7 @@ export default function App() {
           <span className="badge">{shownIndex + 1}</span>
           <span className="task">{shown.name}</span>
           {state.pinned && <span className="lock">🔒</span>}
+          {state.phase === 'awaiting' && <span className="plus">+{shown.lenMin}m</span>}
           <span className="dur">{fmtDur(shownMs)}</span>
         </h1>
 
@@ -203,14 +208,17 @@ export default function App() {
               ))}
             </span>
             <span className="hint">
-              {r.maxed ? '满片' : `再 ${roundsToRing} 轮成环`}
+              {shown.lenMin}m · {r.maxed ? '满片' : `再 ${roundsToRing} 轮成环`}
             </span>
           </div>
         </footer>
 
         {state.phase === 'idle' && sheet === 'none' && (
           <div className="sheet">
-            <p className="sheet-title">从 {state.currentIndex + 1} · {current.name} 开始</p>
+            <p className="sheet-title">
+              <span className="ellip">从 {state.currentIndex + 1} · {current.name} 开始</span>
+              <span className="len-chip">⏱ {current.lenMin}m</span>
+            </p>
             <div className="btns">
               <button className="primary" onClick={() => dispatch({ type: 'start' })}>
                 开始 ⏎
@@ -225,9 +233,9 @@ export default function App() {
               <span className="ellip">
                 {state.pinned
                   ? '锁定中 · 连续投喂本片'
-                  : `→ 下一片  ${state.currentIndex + 1} · ${current.name}`}
+                  : `→ ${state.currentIndex + 1} · ${current.name}`}
               </span>
-              <span className="plus">+{state.sliceLenMin}min</span>
+              <span className="len-chip">⏱ {current.lenMin}m</span>
             </p>
             <div className="btns">
               <button className="primary" onClick={() => dispatch({ type: 'confirm', at: Date.now() })}>
@@ -252,32 +260,62 @@ export default function App() {
               </button>
             </div>
             <label className="len">
-              片长
+              新片默认
               <input
                 type="number"
-                min={1}
-                max={120}
-                value={state.sliceLenMin}
-                onChange={(e) => dispatch({ type: 'setSliceLen', min: Number(e.target.value) })}
+                min={MIN_LEN}
+                max={MAX_LEN}
+                value={state.defaultLenMin}
+                onChange={(e) => dispatch({ type: 'setDefaultLen', min: Number(e.target.value) })}
               />
               min
             </label>
             <ul className="slices">
               {state.slices.map((s, i) => (
-                <li key={s.id}>
-                  <span className="idx">{i + 1}</span>
-                  <input
-                    value={s.name}
-                    onChange={(e) => dispatch({ type: 'rename', id: s.id, name: e.target.value })}
-                  />
-                  <span className="dur">{fmtDur(s.totalMs)}</span>
-                  <button
-                    className="icon"
-                    disabled={state.slices.length <= 3}
-                    onClick={() => dispatch({ type: 'removeSlice', id: s.id })}
-                  >
-                    ✕
-                  </button>
+                <li key={s.id} className={openLen === s.id ? 'open' : undefined}>
+                  <div className="slice-row">
+                    <span className="idx">{i + 1}</span>
+                    <input
+                      value={s.name}
+                      onChange={(e) => dispatch({ type: 'rename', id: s.id, name: e.target.value })}
+                    />
+                    <button
+                      className="len-chip tap"
+                      onClick={() => setOpenLen(openLen === s.id ? null : s.id)}
+                      title="改这一片的片长"
+                    >
+                      {s.lenMin}m
+                    </button>
+                    <button
+                      className="icon"
+                      disabled={state.slices.length <= 3}
+                      onClick={() => dispatch({ type: 'removeSlice', id: s.id })}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  {openLen === s.id && (
+                    <div className="len-presets">
+                      {LEN_PRESETS.map((min) => (
+                        <button
+                          key={min}
+                          className={s.lenMin === min ? 'on' : undefined}
+                          onClick={() => dispatch({ type: 'setLen', id: s.id, min })}
+                        >
+                          {min}
+                        </button>
+                      ))}
+                      <input
+                        type="number"
+                        min={MIN_LEN}
+                        max={MAX_LEN}
+                        value={s.lenMin}
+                        aria-label="自定义片长"
+                        onChange={(e) => dispatch({ type: 'setLen', id: s.id, min: Number(e.target.value) })}
+                      />
+                      <span className="dur">{fmtDur(s.totalMs)}</span>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>

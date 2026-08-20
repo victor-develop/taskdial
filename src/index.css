@@ -454,15 +454,74 @@ footer {
   flex: 1;
 }
 
-.slices li,
 .bars li {
   display: flex;
   align-items: center;
   gap: 6px;
 }
-.slices li input {
+
+.slice-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.slice-row input {
   flex: 1;
   min-width: 0;
+}
+
+/* 片长 chip：主界面里是只读标签，设置面板里 .tap 是可点的 */
+.len-chip {
+  flex: none;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: var(--dim);
+  background: #ffffff10;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px 5px;
+  white-space: nowrap;
+}
+.len-chip.tap {
+  cursor: pointer;
+  color: var(--fg);
+}
+.len-chip.tap:hover {
+  background: #ffffff1f;
+}
+
+.len-presets {
+  display: flex;
+  gap: 4px;
+  margin: 4px 0 2px 19px;
+}
+.len-presets button {
+  flex: 1;
+  padding: 3px 0;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: #1f242c;
+  color: var(--dim);
+  cursor: pointer;
+}
+.len-presets button:hover {
+  color: var(--fg);
+}
+.len-presets button.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.len-presets input {
+  width: 42px;
+  flex: none;
+  padding: 3px 4px;
+  text-align: center;
+}
+.len-presets .dur {
+  align-self: center;
+  padding-left: 2px;
 }
 
 .idx {

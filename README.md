@@ -7,6 +7,7 @@ A task rotator built on fixed time slices. One circle, N wedges, each wedge a ta
 - The current task name sits at the very top, with a colour-coded wedge number and total time on it
 - A pixel dog runs left to right along the bottom, tracking progress through the current slice, then sits down when the slice ends
 - A pixel bone spins at the finish line, faster as the slice runs out
+- Every task carries **its own slice length** — 5 minutes for inbox triage, 50 for deep work
 
 ## Install
 
@@ -72,6 +73,9 @@ Why it's shelved: `strictPort` already solves the bucket problem, and once you'r
 | Pinning is explicit | Double-click the dial, or hit 🔒 in the confirm bar | Going all-in on one task is a decision, not a default |
 | Manual end-of-day | Settings → wrap up; no calendar-day rollover | Working until 2am shouldn't be filed as the next day |
 | Time from timestamps | Always `Date.now()` deltas, never accumulated `setInterval` ticks | Background tabs get throttled and an accumulator runs slow |
+| Wedge angles stay equal | A 50-minute task gets exactly the same wedge as a 5-minute one | Slice length is "how much per sitting", rings are "how much in total". Collapsing both onto one geometry makes rings incomparable — the short-slice task would look starved no matter how much time went in |
+
+Per-task slice length is set in Settings; tap the `5m` chip on a row. The **default** there only seeds newly added tasks — there is no live inheritance, every task carries an explicit number. Whatever is coming next is shown on the confirm bar before you commit to it, because with a fixed rotation the next slice may well be a different length than the one you just finished.
 
 ## Tree rings
 

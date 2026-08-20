@@ -9,12 +9,18 @@ export const CAP_MS = RINGS_PER_LAP * MAX_LAPS * MS_HOUR
 /** 每片一个色相 */
 export const HUES = [174, 38, 268, 344, 142, 210, 20, 300]
 
-export type Slice = { id: string; name: string; totalMs: number }
+/** 片长可选的几档，设置面板里那排 chip */
+export const LEN_PRESETS = [5, 15, 25, 50]
+export const MIN_LEN = 1
+export const MAX_LEN = 180
+
+export type Slice = { id: string; name: string; totalMs: number; lenMin: number }
 export type Phase = 'idle' | 'running' | 'awaiting'
 
 export type State = {
   slices: Slice[]
-  sliceLenMin: number
+  /** 只用来给新片赋初值，不做继承 —— 每片都有自己的显式片长 */
+  defaultLenMin: number
   currentIndex: number
   /** 累加的盘面角度，只减不加，保证转向永远一致 */
   rotationDeg: number
@@ -33,7 +39,8 @@ export type Action =
   | { type: 'confirm'; at: number }
   | { type: 'skip' }
   | { type: 'togglePin' }
-  | { type: 'setSliceLen'; min: number }
+  | { type: 'setLen'; id: string; min: number }
+  | { type: 'setDefaultLen'; min: number }
   | { type: 'rename'; id: string; name: string }
   | { type: 'addSlice' }
   | { type: 'removeSlice'; id: string }
@@ -41,17 +48,25 @@ export type Action =
   | { type: 'replace'; state: State }
 
 const newId = () => Math.random().toString(36).slice(2, 9)
-export const makeSlice = (name: string): Slice => ({ id: newId(), name, totalMs: 0 })
+export const makeSlice = (name: string, lenMin: number): Slice => ({
+  id: newId(),
+  name,
+  totalMs: 0,
+  lenMin,
+})
+
+export const clampLen = (min: number) =>
+  Math.max(MIN_LEN, Math.min(MAX_LEN, Math.round(min) || MIN_LEN))
 
 export function initialState(now: number): State {
   return {
     slices: [
-      makeSlice('写 PRD'),
-      makeSlice('回 review'),
-      makeSlice('主线开发'),
-      makeSlice('杂事'),
+      makeSlice('写 PRD', 5),
+      makeSlice('回 review', 15),
+      makeSlice('主线开发', 25),
+      makeSlice('杂事', 5),
     ],
-    sliceLenMin: 5,
+    defaultLenMin: 5,
     currentIndex: 0,
     rotationDeg: 0,
     pinned: false,
@@ -63,8 +78,12 @@ export function initialState(now: number): State {
   }
 }
 
+// 角度只跟片数有关，跟片长无关 —— 片长是「一次给多少」，年轮是「总共给了多少」，
+// 压到同一个几何量上，年轮就没法互相比了。
 export const sliceAngle = (n: number) => 360 / n
-export const roundMs = (s: State) => s.sliceLenMin * MS_MIN
+
+export const lenMsOf = (slice: Slice) => slice.lenMin * MS_MIN
+export const roundMs = (s: State) => lenMsOf(s.slices[s.currentIndex])
 
 /** 年轮状态：当前在第几圈、长了几层、当前层长了多少 */
 export function rings(totalMs: number) {
@@ -133,8 +152,16 @@ export function reducer(s: State, action: Action): State {
       return { ...s, ...back, pinned: true }
     }
 
-    case 'setSliceLen':
-      return { ...s, sliceLenMin: Math.max(1, Math.min(120, action.min)) }
+    case 'setLen':
+      return {
+        ...s,
+        slices: s.slices.map((sl) =>
+          sl.id === action.id ? { ...sl, lenMin: clampLen(action.min) } : sl,
+        ),
+      }
+
+    case 'setDefaultLen':
+      return { ...s, defaultLenMin: clampLen(action.min) }
 
     case 'rename':
       return {
@@ -144,7 +171,7 @@ export function reducer(s: State, action: Action): State {
 
     case 'addSlice':
       if (s.slices.length >= 8) return s
-      return { ...s, slices: [...s.slices, makeSlice('新任务')] }
+      return { ...s, slices: [...s.slices, makeSlice('新任务', s.defaultLenMin)] }
 
     case 'removeSlice': {
       if (s.slices.length <= 3) return s
@@ -172,13 +199,36 @@ export function reducer(s: State, action: Action): State {
   }
 }
 
+type LegacyFields = { defaultLenMin?: number; sliceLenMin?: number }
+
+/**
+ * v0.1 的存档只有一个全局 sliceLenMin。把它写进每一片当初值，
+ * 行为跟升级前完全一致，不丢东西。
+ *
+ * 判断依据必须是**原始解析结果**，不能是跟 initialState 合并之后的对象 ——
+ * 合并之后 defaultLenMin 总是存在（默认 5），?? 永远短路不到老字段上，
+ * 老用户的 25min 片长会被悄悄改成 5min。
+ */
+function migrate(merged: State, raw: LegacyFields): State {
+  const fallback = clampLen(raw.defaultLenMin ?? raw.sliceLenMin ?? merged.defaultLenMin)
+  return {
+    ...merged,
+    defaultLenMin: fallback,
+    slices: merged.slices.map((sl) => ({
+      ...sl,
+      lenMin: typeof sl.lenMin === 'number' ? clampLen(sl.lenMin) : fallback,
+    })),
+  }
+}
+
 const KEY = 'dial.v1'
 
 export function load(now: number): State {
   try {
     const raw = localStorage.getItem(KEY)
     if (!raw) return initialState(now)
-    const s = { ...initialState(now), ...(JSON.parse(raw) as State) }
+    const parsed = JSON.parse(raw) as Partial<State> & LegacyFields
+    const s = migrate({ ...initialState(now), ...parsed } as State, parsed)
     // 关掉 app 后再打开：跑过头太久就不算这一轮，免得白给自己发奖
     if (s.phase === 'running' && s.roundStartedAt) {
       const over = now - s.roundStartedAt
@@ -210,6 +260,12 @@ export function parseSnapshot(text: string, now: number): State {
   if (!Array.isArray(o.slices) || o.slices.length < 3 || o.slices.length > 8)
     throw new Error('slices 得是 3–8 片')
 
+  const num = (v: unknown, fallback: number) =>
+    typeof v === 'number' && Number.isFinite(v) ? v : fallback
+
+  // v0.1 的存档没有 defaultLenMin，只有一个全局 sliceLenMin
+  const defaultLenMin = clampLen(num(o.defaultLenMin, num(o.sliceLenMin, 5)))
+
   const slices: Slice[] = o.slices.map((s: unknown, i: number) => {
     const v = s as Record<string, unknown>
     if (typeof v?.name !== 'string') throw new Error(`第 ${i + 1} 片没有名字`)
@@ -219,18 +275,15 @@ export function parseSnapshot(text: string, now: number): State {
       id: typeof v.id === 'string' && v.id ? v.id : newId(),
       name: v.name.slice(0, 60),
       totalMs: Math.min(v.totalMs, CAP_MS),
+      // 老存档的片没有自己的片长，回落到全局值
+      lenMin: clampLen(num(v.lenMin, defaultLenMin)),
     }
   })
-
-  const num = (v: unknown, fallback: number) =>
-    typeof v === 'number' && Number.isFinite(v) ? v : fallback
-
-  const sliceLenMin = Math.max(1, Math.min(120, num(o.sliceLenMin, 5)))
   const currentIndex = Math.max(0, Math.min(slices.length - 1, Math.floor(num(o.currentIndex, 0))))
 
   return {
     slices,
-    sliceLenMin,
+    defaultLenMin,
     currentIndex,
     rotationDeg: -sliceAngle(slices.length) * currentIndex,
     pinned: false,
