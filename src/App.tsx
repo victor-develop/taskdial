@@ -145,7 +145,7 @@ export default function App() {
   }
 
   async function toPip() {
-    const win = await openPip(240, 378)
+    const win = await openPip(240, 397)
     setPipWin(win)
     win.addEventListener('pagehide', () => setPipWin(null))
   }
@@ -188,7 +188,7 @@ export default function App() {
           onDoubleClick={() => dispatch({ type: 'togglePin' })}
         />
 
-        <Runner progress={liveMs / total} running={state.phase === 'running'} />
+        <Runner progress={liveMs / total} phase={state.phase} />
 
         <footer>
           <div className="row">

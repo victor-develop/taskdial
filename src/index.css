@@ -62,7 +62,7 @@ body.away #away {
   display: flex;
   flex-direction: column;
   width: 240px;
-  min-height: 378px;
+  min-height: 397px;
   padding: 7px 10px 9px;
   background: var(--card);
   border: 1px solid var(--line);
@@ -262,25 +262,11 @@ button.icon:disabled {
   }
 }
 
-.glass {
-  fill: #565f6c;
+.bone {
+  fill: #ece5d2;
 }
-.sand {
-  fill: var(--accent);
-}
-.grain {
-  fill: var(--accent);
-  animation: grain-fall 0.4s steps(2) infinite;
-}
-@keyframes grain-fall {
-  0% {
-    opacity: 1;
-    transform: translateY(-1px);
-  }
-  100% {
-    opacity: 0.15;
-    transform: translateY(1px);
-  }
+.bone.still {
+  fill: #6d7583;
 }
 
 /* ── 底部信息 ── */
@@ -348,13 +334,17 @@ footer {
   margin: 0;
   font-size: 12px;
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
 }
+/* 下一片的任务名要能换行，truncate 掉就看不出是哪个了；最多两行封顶 */
 .ellip {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.35;
 }
 .plus {
   color: var(--accent);

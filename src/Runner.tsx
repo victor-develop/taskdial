@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import type { Phase } from './model'
 
 // ── 像素小狗 ──────────────────────────────────────────────
 // 每行一个字符串，'#' 是身体，'o' 是眼睛。16 宽。
@@ -63,69 +64,86 @@ function toPath(rows: string[], ch: string) {
 const RUN_PATHS = RUN_FRAMES.map((f) => ({ body: toPath(f, '#'), eye: toPath(f, 'o') }))
 const SIT_PATH = { body: toPath(SIT, '#'), eye: toPath(SIT, 'o') }
 
-// ── 漏斗 ──────────────────────────────────────────────────
-// 每一行的内腔跨度。上腔 y=1..5 越往下越窄，下腔镜像。
+// ── 转动的骨头 ────────────────────────────────────────────
+// 像素图不能靠 transform 转 —— 转出来是糊的锯齿。手画 0° 和 45°，
+// 另外两帧转置得到。骨头 180° 对称，四帧连起来就是一整圈。
 
-const CHAMBER: Array<[number, number]> = [
-  [1, 9],
-  [2, 8],
-  [3, 7],
-  [4, 6],
-  [5, 5],
+const BONE_0 = [
+  '...........',
+  '...........',
+  '...........',
+  '.##.....##.',
+  '####...####',
+  '###########',
+  '####...####',
+  '.##.....##.',
+  '...........',
+  '...........',
+  '...........',
 ]
-const GLASS_W = 11
-const GLASS_H = 12
 
-function glassFrame() {
-  let d = `M0 0h${GLASS_W}v1H0z M0 ${GLASS_H - 1}h${GLASS_W}v1H0z`
-  CHAMBER.forEach(([a, b], i) => {
-    for (const y of [1 + i, GLASS_H - 2 - i]) {
-      d += `M${a - 1} ${y}h1v1h-1z M${b + 1} ${y}h1v1h-1z`
-    }
-  })
-  return d
-}
-const GLASS_PATH = glassFrame()
+const BONE_45 = [
+  '........##.',
+  '.......####',
+  '.......###.',
+  '......###..',
+  '.....###...',
+  '....###....',
+  '...###.....',
+  '..###......',
+  '.###.......',
+  '####.......',
+  '.##........',
+]
 
-/** left = 还剩多少（1 → 满） */
-function sandPath(left: number) {
-  let d = ''
-  // 上腔：沙面从上往下掉，剩下的堆在窄的那头
-  CHAMBER.forEach(([a, b], i) => {
-    const y = 1 + i
-    if (5 - i <= left * 5) d += `M${a} ${y}h${b - a + 1}v1h-${b - a + 1}z`
-  })
-  // 下腔：从最宽的底部往上堆
-  CHAMBER.forEach(([a, b], i) => {
-    const y = GLASS_H - 2 - i
-    if (i + 1 <= (1 - left) * 5) d += `M${a} ${y}h${b - a + 1}v1h-${b - a + 1}z`
-  })
-  return d
+/** 顺时针转 90°：new[y][x] = old[n-1-x][y] */
+function rot90(rows: string[]) {
+  const n = rows.length
+  return Array.from({ length: n }, (_, y) =>
+    Array.from({ length: n }, (_, x) => rows[n - 1 - x][y]).join(''),
+  )
 }
+
+const BONE_SIZE = BONE_0.length
+const BONE_PATHS = [BONE_0, BONE_45, rot90(BONE_0), rot90(BONE_45)].map((f) => toPath(f, '#'))
+
+/** 越接近这一轮的终点转得越快 */
+const SPIN_MS = [210, 170, 130, 95]
 
 // ── 组装 ──────────────────────────────────────────────────
 
 const TRACK = 92 // viewBox 宽；越小像素越大颗
-const DOG_RUN = TRACK - GLASS_W - 6 - W // 给漏斗留出右边
+const DOG_RUN = TRACK - BONE_SIZE - 5 - W
 
-type Props = { progress: number; running: boolean }
+type Props = { progress: number; phase: Phase }
 
-export default function Runner({ progress, running }: Props) {
-  const [frame, setFrame] = useState(0)
+export default function Runner({ progress, phase }: Props) {
+  const running = phase === 'running'
+  const p = Math.max(0, Math.min(1, progress))
+
+  const [dogFrame, setDogFrame] = useState(0)
+  const [boneFrame, setBoneFrame] = useState(0)
 
   useEffect(() => {
     if (!running) return
-    const id = setInterval(() => setFrame((f) => (f + 1) % RUN_PATHS.length), 130)
+    const id = setInterval(() => setDogFrame((f) => (f + 1) % RUN_PATHS.length), 130)
     return () => clearInterval(id)
   }, [running])
 
-  const p = Math.max(0, Math.min(1, progress))
-  const dog = running ? RUN_PATHS[frame] : SIT_PATH
-  const x = Math.round(p * DOG_RUN)
+  // 用分档的进度当依赖，一轮里只重建 4 次定时器，不是每 250ms 一次
+  const speedStep = Math.min(SPIN_MS.length - 1, Math.floor(p * SPIN_MS.length))
+  useEffect(() => {
+    if (!running) return
+    const id = setInterval(() => setBoneFrame((f) => (f + 1) % BONE_PATHS.length), SPIN_MS[speedStep])
+    return () => clearInterval(id)
+  }, [running, speedStep])
+
+  const dog = running ? RUN_PATHS[dogFrame] : SIT_PATH
+  // 等确认时把狗放到终点 —— 它刚跑完这一轮，就该在骨头旁边坐着
+  const x = running ? Math.round(p * DOG_RUN) : phase === 'awaiting' ? DOG_RUN : 0
 
   return (
     <svg className="runner" viewBox={`0 0 ${TRACK} 16`}>
-      {/* 地面，跑起来的时候往后滚 */}
       <path
         className={running ? 'ground moving' : 'ground'}
         d={`M0 13.5h${DOG_RUN + W}`}
@@ -137,12 +155,8 @@ export default function Runner({ progress, running }: Props) {
         <path className="dog-eye" d={dog.eye} />
       </g>
 
-      <g transform={`translate(${TRACK - GLASS_W} 2)`}>
-        <path className="glass" d={GLASS_PATH} />
-        <path className="sand" d={sandPath(1 - p)} />
-        {running && p < 1 && (
-          <path className="grain" d={`M5 ${GLASS_H / 2 - 1}h1v2h-1z`} />
-        )}
+      <g transform={`translate(${TRACK - BONE_SIZE} 2)`}>
+        <path className={running ? 'bone' : 'bone still'} d={BONE_PATHS[running ? boneFrame : 0]} />
       </g>
     </svg>
   )

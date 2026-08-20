@@ -4,7 +4,7 @@
 
 - 当前任务名在最上面，带片号色标和累计时长
 - 底部一只像素小狗跟着本轮进度从左跑到右，到点坐下等你确认
-- 漏斗按本轮剩余时间漏沙
+- 终点一根像素骨头在转，越接近本轮结束转得越快
 
 ## 跑起来
 
@@ -84,7 +84,7 @@ npm run dev
 - `src/model.ts` — 状态机、年轮换算、localStorage 存档
 - `src/Dial.tsx` — SVG 盘面，扇环 path 和转盘动画
 - `src/App.tsx` — 计时循环、确认弹窗、设置、收工总结
-- `src/Runner.tsx` — 像素小狗和漏斗，精灵图是字符串矩阵压成的 path
+- `src/Runner.tsx` — 像素小狗和骨头，精灵图是字符串矩阵压成的 path
 - `src/pip.ts` — Document PiP，把 `#root` 整个搬进小窗（不重挂载，状态不丢）
 - `src-tauri/` — 桌面外壳，窗口配置在 `tauri.conf.json`
 
