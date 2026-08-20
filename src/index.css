@@ -597,3 +597,165 @@ footer {
   color: #06120f;
   font-weight: 600;
 }
+
+/* ── 紧急暂停 ── */
+
+button.icon.danger {
+  color: #f5a623;
+}
+button.icon.danger:hover {
+  background: #f5a62322;
+  color: #ffc55e;
+}
+
+/* 暂停时整张卡片换个色调，一眼区分「停着」和「在跑」 */
+.card.paused {
+  background: #1b1814;
+}
+.card.paused .pointer {
+  fill: #f5a623;
+}
+.card.paused .hub-sub {
+  fill: #f5a623;
+}
+
+.pause-sheet .btns {
+  margin-top: 6px;
+}
+
+.reason-picks {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+.reason-picks button {
+  flex: 1;
+  padding: 3px 4px;
+  font-size: 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #242a33;
+  color: var(--dim);
+  cursor: pointer;
+}
+.reason-picks button:hover {
+  color: var(--fg);
+}
+.reason-picks button.on {
+  border-color: #f5a623;
+  color: #f5a623;
+}
+
+.reason-input {
+  width: 100%;
+  margin-top: 6px;
+  background: #1f242c;
+  border: 1px solid var(--line);
+  color: var(--fg);
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 11px;
+  font-family: inherit;
+}
+.reason-input:focus {
+  outline: 1px solid #f5a623;
+}
+
+/* ── 暂停报告 ── */
+
+.insights {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.empty {
+  margin: 0;
+  font-size: 11px;
+  color: var(--dim);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.block.grow {
+  flex: 1;
+  min-height: 0;
+}
+.block-title {
+  font-size: 10px;
+  color: var(--dim);
+}
+
+.hours {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 28px;
+}
+.hours i {
+  flex: 1;
+  background: #2c323c;
+  border-radius: 1px;
+}
+.hours i.peak {
+  background: #f5a623;
+}
+.hour-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--dim);
+}
+
+.reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.reason-chip {
+  font-size: 10px;
+  color: var(--dim);
+  background: #ffffff10;
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+.reason-chip b {
+  color: var(--fg);
+}
+
+.pause-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow-y: auto;
+  font-size: 10px;
+}
+.pause-list li {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+}
+.pause-list .when {
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+.pause-list .len {
+  color: #f5a623;
+  font-variant-numeric: tabular-nums;
+  flex: none;
+  width: 34px;
+}
+.pause-list .why {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

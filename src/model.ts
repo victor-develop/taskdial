@@ -15,7 +15,21 @@ export const MIN_LEN = 1
 export const MAX_LEN = 180
 
 export type Slice = { id: string; name: string; totalMs: number; lenMin: number }
-export type Phase = 'idle' | 'running' | 'awaiting'
+export type Phase = 'idle' | 'running' | 'paused' | 'awaiting'
+
+/** 一次暂停。endedAt 为 null 表示还停着 */
+export type PauseRecord = {
+  at: number
+  endedAt: number | null
+  reason?: string
+  sliceName: string
+}
+
+/** 点一下就走的常见原因，省得每次打字 */
+export const PAUSE_REASONS = ['会议', '打断', '休息', '卡住']
+
+/** 暂停日志最多留这么多条，别让存档无限长 */
+export const MAX_PAUSES = 200
 
 export type State = {
   slices: Slice[]
@@ -26,15 +40,22 @@ export type State = {
   rotationDeg: number
   pinned: boolean
   phase: Phase
+  /** 当前这一段跑起来的时刻；暂停时为 null */
   roundStartedAt: number | null
+  /** 本轮已经累计的投入，跨暂停累加 —— 暂停冻结的是它，不是丢掉 */
+  roundElapsedMs: number
   /** 刚跑完的那一片，等确认时用 */
   justFinished: number | null
+  pauses: PauseRecord[]
   roundsToday: number
   dayStartedAt: number
 }
 
 export type Action =
   | { type: 'start' }
+  | { type: 'pause'; at: number }
+  | { type: 'resume'; at: number }
+  | { type: 'setPauseReason'; reason: string }
   | { type: 'complete'; at: number }
   | { type: 'confirm'; at: number }
   | { type: 'skip' }
@@ -72,7 +93,9 @@ export function initialState(now: number): State {
     pinned: false,
     phase: 'idle',
     roundStartedAt: null,
+    roundElapsedMs: 0,
     justFinished: null,
+    pauses: [],
     roundsToday: 0,
     dayStartedAt: now,
   }
@@ -109,10 +132,55 @@ function advance(s: State, steps = 1): Pick<State, 'currentIndex' | 'rotationDeg
   }
 }
 
+/** 本轮到目前为止的真实投入：已累计 + 正在跑的这一段 */
+export function elapsedMs(s: State, now: number) {
+  const live = s.phase === 'running' && s.roundStartedAt ? now - s.roundStartedAt : 0
+  return Math.max(0, s.roundElapsedMs + live)
+}
+
 export function reducer(s: State, action: Action): State {
   switch (action.type) {
     case 'start':
-      return { ...s, phase: 'running', roundStartedAt: Date.now(), justFinished: null }
+      return {
+        ...s,
+        phase: 'running',
+        roundStartedAt: Date.now(),
+        roundElapsedMs: 0,
+        justFinished: null,
+      }
+
+    // 先停表再问原因 —— 紧急暂停要是得先打字才生效，那就不叫紧急
+    case 'pause': {
+      if (s.phase !== 'running') return s
+      return {
+        ...s,
+        phase: 'paused',
+        roundStartedAt: null,
+        roundElapsedMs: elapsedMs(s, action.at),
+        pauses: [
+          { at: action.at, endedAt: null, sliceName: s.slices[s.currentIndex].name },
+          ...s.pauses,
+        ].slice(0, MAX_PAUSES),
+      }
+    }
+
+    case 'resume': {
+      if (s.phase !== 'paused') return s
+      const [open, ...rest] = s.pauses
+      return {
+        ...s,
+        phase: 'running',
+        roundStartedAt: action.at,
+        pauses: open && open.endedAt === null ? [{ ...open, endedAt: action.at }, ...rest] : s.pauses,
+      }
+    }
+
+    case 'setPauseReason': {
+      const [latest, ...rest] = s.pauses
+      if (!latest) return s
+      const reason = action.reason.trim().slice(0, 40)
+      return { ...s, pauses: [{ ...latest, reason: reason || undefined }, ...rest] }
+    }
 
     case 'complete': {
       const finished = s.currentIndex
@@ -128,11 +196,18 @@ export function reducer(s: State, action: Action): State {
         justFinished: finished,
         phase: 'awaiting',
         roundStartedAt: null,
+        roundElapsedMs: 0,
       }
     }
 
     case 'confirm':
-      return { ...s, phase: 'running', roundStartedAt: action.at, justFinished: null }
+      return {
+        ...s,
+        phase: 'running',
+        roundStartedAt: action.at,
+        roundElapsedMs: 0,
+        justFinished: null,
+      }
 
     // 等确认时再往前跳一片，被跳过的那片不计时间
     case 'skip':
@@ -190,6 +265,7 @@ export function reducer(s: State, action: Action): State {
         phase: 'idle',
         pinned: false,
         roundStartedAt: null,
+        roundElapsedMs: 0,
         justFinished: null,
         roundsToday: 0,
         dayStartedAt: action.at,
@@ -230,9 +306,12 @@ export function load(now: number): State {
     const parsed = JSON.parse(raw) as Partial<State> & LegacyFields
     const s = migrate({ ...initialState(now), ...parsed } as State, parsed)
     // 关掉 app 后再打开：跑过头太久就不算这一轮，免得白给自己发奖
+    // 暂停不算跑飞 —— 那正是「先停着，回头再说」该有的样子
     if (s.phase === 'running' && s.roundStartedAt) {
       const over = now - s.roundStartedAt
-      if (over > roundMs(s) * 2) return { ...s, phase: 'idle', roundStartedAt: null }
+      if (over > roundMs(s) * 2) {
+        return { ...s, phase: 'idle', roundStartedAt: null, roundElapsedMs: 0 }
+      }
     }
     return s
   } catch {
@@ -281,9 +360,27 @@ export function parseSnapshot(text: string, now: number): State {
   })
   const currentIndex = Math.max(0, Math.min(slices.length - 1, Math.floor(num(o.currentIndex, 0))))
 
+  const pauses: PauseRecord[] = (Array.isArray(o.pauses) ? o.pauses : [])
+    .filter((p: unknown) => {
+      const v = p as Record<string, unknown>
+      return v && typeof v.at === 'number' && Number.isFinite(v.at)
+    })
+    .slice(0, MAX_PAUSES)
+    .map((p: unknown) => {
+      const v = p as Record<string, unknown>
+      return {
+        at: v.at as number,
+        endedAt: typeof v.endedAt === 'number' && Number.isFinite(v.endedAt) ? v.endedAt : null,
+        reason: typeof v.reason === 'string' ? v.reason.slice(0, 40) : undefined,
+        sliceName: typeof v.sliceName === 'string' ? v.sliceName.slice(0, 60) : '',
+      }
+    })
+
   return {
     slices,
     defaultLenMin,
+    pauses,
+    roundElapsedMs: 0,
     currentIndex,
     rotationDeg: -sliceAngle(slices.length) * currentIndex,
     pinned: false,

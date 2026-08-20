@@ -1,15 +1,18 @@
 import { useEffect, useReducer, useRef, useState, type CSSProperties } from 'react'
 import { autoSizeWindow } from './autosize'
 import Dial from './Dial'
+import Insights from './Insights'
 import Runner from './Runner'
 import { openPip, pipSupported } from './pip'
 import {
   HUES,
   LEN_PRESETS,
+  PAUSE_REASONS,
   MAX_LEN,
   MIN_LEN,
   MS_HOUR,
   MS_MIN,
+  elapsedMs,
   fmtClock,
   fmtDur,
   load,
@@ -63,7 +66,7 @@ function exportSnapshot(state: State) {
 export default function App() {
   const [state, dispatch] = useReducer(reducer, 0, () => load(Date.now()))
   const [now, setNow] = useState(() => Date.now())
-  const [sheet, setSheet] = useState<'none' | 'settings' | 'summary'>('none')
+  const [sheet, setSheet] = useState<'none' | 'settings' | 'summary' | 'insights'>('none')
   const [pipWin, setPipWin] = useState<Window | null>(null)
   const [ioMsg, setIoMsg] = useState<string | null>(null)
   const [openLen, setOpenLen] = useState<string | null>(null)
@@ -77,17 +80,15 @@ export default function App() {
 
   // 计时只在跑的时候走；时间一律拿 Date.now() 现算，后台降频也不会走慢
   useEffect(() => {
-    if (state.phase !== 'running') return
+    if (state.phase !== 'running' && state.phase !== 'paused') return
     setNow(Date.now())
     const id = setInterval(() => setNow(Date.now()), 250)
     return () => clearInterval(id)
   }, [state.phase])
 
   const total = roundMs(state)
-  const remaining =
-    state.phase === 'running' && state.roundStartedAt
-      ? state.roundStartedAt + total - now
-      : total
+  const elapsed = state.phase === 'idle' || state.phase === 'awaiting' ? 0 : elapsedMs(state, now)
+  const remaining = total - elapsed
 
   useEffect(() => {
     if (state.phase === 'running' && remaining <= 0) {
@@ -96,11 +97,9 @@ export default function App() {
     }
   }, [state.phase, remaining])
 
-  // 正在跑的这一轮实时算进当前片，年轮是连着长的；确认那一刻不会跳
-  const liveMs =
-    state.phase === 'running' && state.roundStartedAt
-      ? Math.max(0, Math.min(now - state.roundStartedAt, total))
-      : 0
+  // 正在跑的这一轮实时算进当前片，年轮是连着长的；确认那一刻不会跳。
+  // 暂停期间它不动 —— 冻住的是投入，不是丢掉。
+  const liveMs = Math.min(elapsed, total)
   const totals = state.slices.map((s, i) => s.totalMs + (i === state.currentIndex ? liveMs : 0))
 
   // 长满一整层年轮的那一下，给个不一样的声音
@@ -118,7 +117,12 @@ export default function App() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Enter' || sheet !== 'none') return
+      if (e.target instanceof HTMLInputElement && e.target.type === 'text') {
+        // 暂停原因输入框里按回车就是「继续」，但别把字吃掉
+        e.target.blur()
+      }
       if (state.phase === 'idle') dispatch({ type: 'start' })
+      if (state.phase === 'paused') dispatch({ type: 'resume', at: Date.now() })
       if (state.phase === 'awaiting') dispatch({ type: 'confirm', at: Date.now() })
     }
     const docs = [document, pipWin?.document].filter(Boolean) as Document[]
@@ -139,9 +143,13 @@ export default function App() {
   const hub =
     state.phase === 'running'
       ? { main: fmtClock(remaining) }
-      : state.phase === 'awaiting'
-        ? { main: '⏎', sub: '确认' }
-        : { main: '开始' }
+      : state.phase === 'paused'
+        ? { main: fmtClock(remaining), sub: '已暂停' }
+        : state.phase === 'awaiting'
+          ? { main: '⏎', sub: '确认' }
+          : { main: '开始' }
+
+  const openPause = state.phase === 'paused' ? state.pauses[0] : undefined
 
   async function importSnapshot(file: File) {
     try {
@@ -160,13 +168,25 @@ export default function App() {
   }
 
   return (
-      <div className="card" ref={cardRef}>
+      <div className={state.phase === 'paused' ? 'card paused' : 'card'} ref={cardRef}>
         {/* 无边框窗口靠这块拖动；在浏览器里这个属性没有副作用 */}
         <header data-tauri-drag-region>
           <span className="today" data-tauri-drag-region>
             今日 {fmtDur(todayMs)} · {state.roundsToday} 轮
           </span>
           <span className="tools">
+            {state.phase === 'running' && (
+              <button
+                className="icon danger"
+                onClick={() => dispatch({ type: 'pause', at: Date.now() })}
+                title="紧急暂停"
+              >
+                ⏸
+              </button>
+            )}
+            <button className="icon" onClick={() => setSheet('insights')} title="暂停报告">
+              ▤
+            </button>
             {pipSupported() && !pipWin && (
               <button className="icon" onClick={toPip} title="浮到桌面">
                 ⧉
@@ -213,6 +233,43 @@ export default function App() {
             </span>
           </div>
         </footer>
+
+        {state.phase === 'paused' && sheet === 'none' && (
+          <div className="sheet pause-sheet">
+            <p className="sheet-title">
+              <span className="ellip">⏸ 已暂停 {fmtDur(now - (openPause?.at ?? now))}</span>
+              <span className="len-chip">本轮已投入 {fmtDur(elapsed)}</span>
+            </p>
+            <div className="reason-picks">
+              {PAUSE_REASONS.map((reason) => (
+                <button
+                  key={reason}
+                  className={openPause?.reason === reason ? 'on' : undefined}
+                  onClick={() =>
+                    dispatch({
+                      type: 'setPauseReason',
+                      reason: openPause?.reason === reason ? '' : reason,
+                    })
+                  }
+                >
+                  {reason}
+                </button>
+              ))}
+            </div>
+            <input
+              className="reason-input"
+              type="text"
+              placeholder="原因（可选）"
+              value={openPause?.reason ?? ''}
+              onChange={(e) => dispatch({ type: 'setPauseReason', reason: e.target.value })}
+            />
+            <div className="btns">
+              <button className="primary" onClick={() => dispatch({ type: 'resume', at: Date.now() })}>
+                继续 ⏎
+              </button>
+            </div>
+          </div>
+        )}
 
         {state.phase === 'idle' && sheet === 'none' && (
           <div className="sheet">
@@ -343,6 +400,10 @@ export default function App() {
               <button onClick={() => setSheet('summary')}>收工</button>
             </div>
           </div>
+        )}
+
+        {sheet === 'insights' && (
+          <Insights pauses={state.pauses} now={now} onClose={() => setSheet('none')} />
         )}
 
         {sheet === 'summary' && <Summary state={state} onBack={() => setSheet('settings')} onFinish={() => { dispatch({ type: 'finishDay', at: Date.now() }); setSheet('none') }} />}

@@ -139,8 +139,14 @@ export default function Runner({ progress, phase }: Props) {
   }, [running, speedStep])
 
   const dog = running ? RUN_PATHS[dogFrame] : SIT_PATH
-  // 等确认时把狗放到终点 —— 它刚跑完这一轮，就该在骨头旁边坐着
-  const x = running ? Math.round(p * DOG_RUN) : phase === 'awaiting' ? DOG_RUN : 0
+  // 等确认时把狗放到终点 —— 它刚跑完这一轮，就该在骨头旁边坐着。
+  // 暂停就地坐下，停在跑到哪儿算哪儿。
+  const x =
+    running || phase === 'paused'
+      ? Math.round(p * DOG_RUN)
+      : phase === 'awaiting'
+        ? DOG_RUN
+        : 0
 
   return (
     <svg className="runner" viewBox={`0 0 ${TRACK} 16`}>
