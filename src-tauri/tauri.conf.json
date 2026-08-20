@@ -12,10 +12,11 @@
   "app": {
     "windows": [
       {
-        "label": "dial",
+        "label": "main",
         "title": "轮盘",
-        "width": 300,
-        "height": 486,
+        "width": 240,
+        "height": 378,
+        "center": false,
         "resizable": false,
         "fullscreen": false,
         "decorations": false,
@@ -29,7 +30,9 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["app"],
+    "targets": [
+      "app"
+    ],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

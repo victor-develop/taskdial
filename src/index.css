@@ -34,7 +34,7 @@ body.in-pip .card {
 }
 
 /* 窗口正好就是卡片那么大时（Tauri 无边框窗口），铺满，别留边和滚动条 */
-@media (max-width: 320px) {
+@media (max-width: 260px) {
   html,
   body {
     overflow: hidden;
@@ -61,9 +61,9 @@ body.away #away {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  min-height: 468px;
-  padding: 10px 14px 12px;
+  width: 240px;
+  min-height: 378px;
+  padding: 7px 10px 9px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -75,9 +75,9 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--dim);
-  height: 20px;
+  height: 17px;
 }
 
 .tools {
@@ -109,25 +109,30 @@ button.icon:disabled {
 .title {
   display: flex;
   align-items: center;
-  gap: 7px;
-  margin: 6px 0 2px;
-  padding: 7px 9px;
-  font-size: 16px;
+  gap: 6px;
+  margin: 5px 0 1px;
+  padding: 5px 7px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.01em;
-  border-radius: 9px;
+  border-radius: 8px;
   background: hsl(var(--hue) 45% 50% / 0.13);
   border-left: 3px solid hsl(var(--hue) 60% 58%);
 }
 
+/* 子元素不吃事件，整条标题都能当拖拽把手 */
+.title > * {
+  pointer-events: none;
+}
+
 .title .badge {
   flex: none;
-  width: 19px;
-  height: 19px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   background: hsl(var(--hue) 60% 55%);
   color: #0d0f13;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   display: grid;
   place-items: center;
@@ -147,7 +152,7 @@ button.icon:disabled {
 }
 
 .title .dur {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
 }
 
@@ -160,7 +165,7 @@ button.icon:disabled {
 .dial {
   display: block;
   width: 100%;
-  max-width: 232px;
+  max-width: 184px;
   margin: 0 auto;
   height: auto;
   overflow: visible;
@@ -231,7 +236,8 @@ button.icon:disabled {
   display: block;
   width: 100%;
   height: auto;
-  margin-top: 6px;
+  /* 吃掉多余空间，把跑道/底栏/弹窗整组压到底部 */
+  margin-top: auto;
   shape-rendering: crispEdges; /* 像素图别被抗锯齿糊掉 */
 }
 
@@ -280,10 +286,10 @@ button.icon:disabled {
 /* ── 底部信息 ── */
 
 footer {
-  margin-top: 6px;
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .row {
@@ -291,7 +297,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .name {
@@ -314,11 +320,11 @@ footer {
 
 .ticks {
   display: flex;
-  gap: 3px;
+  gap: 2px;
 }
 .ticks i {
-  width: 8px;
-  height: 4px;
+  width: 7px;
+  height: 3px;
   border-radius: 1px;
   background: #2c323c;
 }
@@ -330,8 +336,8 @@ footer {
 
 /* 在流里，不盖住小狗 —— 等确认的时候正好看见它坐下 */
 .sheet {
-  margin-top: auto;
-  padding: 9px 11px;
+  margin-top: 6px;
+  padding: 7px 9px;
   background: #1c2129f2;
   backdrop-filter: blur(8px);
   border: 1px solid var(--line);
@@ -362,14 +368,14 @@ footer {
 
 .btns {
   display: flex;
-  gap: 6px;
-  margin-top: 9px;
+  gap: 5px;
+  margin-top: 7px;
 }
 
 .btns button {
   flex: 1;
-  padding: 6px 4px;
-  font-size: 12px;
+  padding: 5px 3px;
+  font-size: 11px;
   border-radius: 8px;
   border: 1px solid var(--line);
   background: #242a33;
@@ -401,7 +407,7 @@ footer {
   position: absolute;
   inset: 0;
   background: var(--card);
-  padding: 10px 14px 12px;
+  padding: 7px 10px 9px;
   display: flex;
   flex-direction: column;
   gap: 8px;

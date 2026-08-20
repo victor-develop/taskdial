@@ -145,7 +145,7 @@ export default function App() {
   }
 
   async function toPip() {
-    const win = await openPip(300, 486)
+    const win = await openPip(240, 378)
     setPipWin(win)
     win.addEventListener('pagehide', () => setPipWin(null))
   }
@@ -170,6 +170,7 @@ export default function App() {
         </header>
 
         <h1
+          data-tauri-drag-region
           className={state.pinned ? 'title pinned' : 'title'}
           style={{ '--hue': HUES[shownIndex % HUES.length] } as CSSProperties}
           title={shown.name}
