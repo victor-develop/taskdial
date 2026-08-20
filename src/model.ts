@@ -1,3 +1,5 @@
+import { systemEnv, type Env } from './env'
+
 export const MS_MIN = 60_000
 export const MS_HOUR = 3_600_000
 
@@ -53,11 +55,11 @@ export type State = {
 
 export type Action =
   | { type: 'start' }
-  | { type: 'pause'; at: number }
-  | { type: 'resume'; at: number }
+  | { type: 'pause' }
+  | { type: 'resume' }
   | { type: 'setPauseReason'; reason: string }
-  | { type: 'complete'; at: number }
-  | { type: 'confirm'; at: number }
+  | { type: 'complete' }
+  | { type: 'confirm' }
   | { type: 'skip' }
   | { type: 'togglePin' }
   | { type: 'setLen'; id: string; min: number }
@@ -65,21 +67,13 @@ export type Action =
   | { type: 'rename'; id: string; name: string }
   | { type: 'addSlice' }
   | { type: 'removeSlice'; id: string }
-  | { type: 'finishDay'; at: number }
+  | { type: 'finishDay' }
   | { type: 'replace'; state: State }
-
-const newId = () => Math.random().toString(36).slice(2, 9)
-export const makeSlice = (name: string, lenMin: number): Slice => ({
-  id: newId(),
-  name,
-  totalMs: 0,
-  lenMin,
-})
 
 export const clampLen = (min: number) =>
   Math.max(MIN_LEN, Math.min(MAX_LEN, Math.round(min) || MIN_LEN))
 
-export function initialState(now: number): State {
+function makeInitial(env: Env, makeSlice: (name: string, lenMin: number) => Slice): State {
   return {
     slices: [
       makeSlice('写 PRD', 5),
@@ -97,7 +91,7 @@ export function initialState(now: number): State {
     justFinished: null,
     pauses: [],
     roundsToday: 0,
-    dayStartedAt: now,
+    dayStartedAt: env.now(),
   }
 }
 
@@ -138,13 +132,27 @@ export function elapsedMs(s: State, now: number) {
   return Math.max(0, s.roundElapsedMs + live)
 }
 
-export function reducer(s: State, action: Action): State {
-  switch (action.type) {
+/**
+ * 时间和 id 从 env 拿，不从 action 里传 —— 换个 env 就能把整套逻辑
+ * 放到假时钟上跑，调用方也不用每次记得塞时间戳。
+ */
+export function createModel(env: Env) {
+  const makeSlice = (name: string, lenMin: number): Slice => ({
+    id: env.newId(),
+    name,
+    totalMs: 0,
+    lenMin,
+  })
+
+  const initialState = (): State => makeInitial(env, makeSlice)
+
+  function reducer(s: State, action: Action): State {
+    switch (action.type) {
     case 'start':
       return {
         ...s,
         phase: 'running',
-        roundStartedAt: Date.now(),
+        roundStartedAt: env.now(),
         roundElapsedMs: 0,
         justFinished: null,
       }
@@ -156,9 +164,9 @@ export function reducer(s: State, action: Action): State {
         ...s,
         phase: 'paused',
         roundStartedAt: null,
-        roundElapsedMs: elapsedMs(s, action.at),
+        roundElapsedMs: elapsedMs(s, env.now()),
         pauses: [
-          { at: action.at, endedAt: null, sliceName: s.slices[s.currentIndex].name },
+          { at: env.now(), endedAt: null, sliceName: s.slices[s.currentIndex].name },
           ...s.pauses,
         ].slice(0, MAX_PAUSES),
       }
@@ -170,8 +178,9 @@ export function reducer(s: State, action: Action): State {
       return {
         ...s,
         phase: 'running',
-        roundStartedAt: action.at,
-        pauses: open && open.endedAt === null ? [{ ...open, endedAt: action.at }, ...rest] : s.pauses,
+        roundStartedAt: env.now(),
+        pauses:
+          open && open.endedAt === null ? [{ ...open, endedAt: env.now() }, ...rest] : s.pauses,
       }
     }
 
@@ -204,7 +213,7 @@ export function reducer(s: State, action: Action): State {
       return {
         ...s,
         phase: 'running',
-        roundStartedAt: action.at,
+        roundStartedAt: env.now(),
         roundElapsedMs: 0,
         justFinished: null,
       }
@@ -268,12 +277,104 @@ export function reducer(s: State, action: Action): State {
         roundElapsedMs: 0,
         justFinished: null,
         roundsToday: 0,
-        dayStartedAt: action.at,
+        dayStartedAt: env.now(),
         currentIndex: 0,
         rotationDeg: 0,
       }
+    }
   }
+
+  function load(): State {
+    try {
+      const raw = localStorage.getItem(KEY)
+      if (!raw) return initialState()
+      const parsed = JSON.parse(raw) as Partial<State> & LegacyFields
+      const s = migrate({ ...initialState(), ...parsed } as State, parsed)
+      // 关掉 app 后再打开：跑过头太久就不算这一轮，免得白给自己发奖。
+      // 暂停不算跑飞 —— 那正是「先停着，回头再说」该有的样子。
+      if (s.phase === 'running' && s.roundStartedAt) {
+        if (env.now() - s.roundStartedAt > roundMs(s) * 2) {
+          return { ...s, phase: 'idle', roundStartedAt: null, roundElapsedMs: 0 }
+        }
+      }
+      return s
+    } catch {
+      return initialState()
+    }
+  }
+
+  /**
+   * 解析导入的存档。外面来的东西一律不可信，逐字段验，坏的直接抛。
+   * 一律落回 idle：别拿另一台机器上没跑完的那一轮接着计时。
+   */
+  function parseSnapshot(text: string): State {
+    const raw: unknown = JSON.parse(text)
+    if (typeof raw !== 'object' || raw === null) throw new Error('不是一个存档对象')
+    const o = raw as Record<string, unknown>
+
+    if (!Array.isArray(o.slices) || o.slices.length < 3 || o.slices.length > 8)
+      throw new Error('slices 得是 3–8 片')
+
+    const num = (v: unknown, fallback: number) =>
+      typeof v === 'number' && Number.isFinite(v) ? v : fallback
+
+    // v0.1 的存档没有 defaultLenMin，只有一个全局 sliceLenMin
+    const defaultLenMin = clampLen(num(o.defaultLenMin, num(o.sliceLenMin, 5)))
+
+    const slices: Slice[] = o.slices.map((s: unknown, i: number) => {
+      const v = s as Record<string, unknown>
+      if (typeof v?.name !== 'string') throw new Error(`第 ${i + 1} 片没有名字`)
+      if (typeof v?.totalMs !== 'number' || !Number.isFinite(v.totalMs) || v.totalMs < 0)
+        throw new Error(`第 ${i + 1} 片的 totalMs 不对`)
+      return {
+        id: typeof v.id === 'string' && v.id ? v.id : env.newId(),
+        name: v.name.slice(0, 60),
+        totalMs: Math.min(v.totalMs, CAP_MS),
+        // 老存档的片没有自己的片长，回落到全局值
+        lenMin: clampLen(num(v.lenMin, defaultLenMin)),
+      }
+    })
+    const currentIndex = Math.max(0, Math.min(slices.length - 1, Math.floor(num(o.currentIndex, 0))))
+
+    const pauses: PauseRecord[] = (Array.isArray(o.pauses) ? o.pauses : [])
+      .filter((p: unknown) => {
+        const v = p as Record<string, unknown>
+        return v && typeof v.at === 'number' && Number.isFinite(v.at)
+      })
+      .slice(0, MAX_PAUSES)
+      .map((p: unknown) => {
+        const v = p as Record<string, unknown>
+        return {
+          at: v.at as number,
+          endedAt: typeof v.endedAt === 'number' && Number.isFinite(v.endedAt) ? v.endedAt : null,
+          reason: typeof v.reason === 'string' ? v.reason.slice(0, 40) : undefined,
+          sliceName: typeof v.sliceName === 'string' ? v.sliceName.slice(0, 60) : '',
+        }
+      })
+
+    return {
+      slices,
+      defaultLenMin,
+      pauses,
+      roundElapsedMs: 0,
+      currentIndex,
+      rotationDeg: -sliceAngle(slices.length) * currentIndex,
+      pinned: false,
+      phase: 'idle',
+      roundStartedAt: null,
+      justFinished: null,
+      roundsToday: Math.max(0, Math.floor(num(o.roundsToday, 0))),
+      dayStartedAt: num(o.dayStartedAt, env.now()),
+    }
+  }
+
+  return { initialState, makeSlice, reducer, load, save, parseSnapshot }
 }
+
+export type Model = ReturnType<typeof createModel>
+
+/** app 用的那一份 */
+export const model = createModel(systemEnv)
 
 type LegacyFields = { defaultLenMin?: number; sliceLenMin?: number }
 
@@ -299,96 +400,11 @@ function migrate(merged: State, raw: LegacyFields): State {
 
 const KEY = 'dial.v1'
 
-export function load(now: number): State {
-  try {
-    const raw = localStorage.getItem(KEY)
-    if (!raw) return initialState(now)
-    const parsed = JSON.parse(raw) as Partial<State> & LegacyFields
-    const s = migrate({ ...initialState(now), ...parsed } as State, parsed)
-    // 关掉 app 后再打开：跑过头太久就不算这一轮，免得白给自己发奖
-    // 暂停不算跑飞 —— 那正是「先停着，回头再说」该有的样子
-    if (s.phase === 'running' && s.roundStartedAt) {
-      const over = now - s.roundStartedAt
-      if (over > roundMs(s) * 2) {
-        return { ...s, phase: 'idle', roundStartedAt: null, roundElapsedMs: 0 }
-      }
-    }
-    return s
-  } catch {
-    return initialState(now)
-  }
-}
-
 export function save(s: State) {
   try {
     localStorage.setItem(KEY, JSON.stringify(s))
   } catch {
     /* 存不下就算了，不该因为存档挂掉计时 */
-  }
-}
-
-/**
- * 解析导入的存档。外面来的东西一律不可信，逐字段验，坏的直接抛。
- * 一律落回 idle：别拿另一台机器上没跑完的那一轮接着计时。
- */
-export function parseSnapshot(text: string, now: number): State {
-  const raw: unknown = JSON.parse(text)
-  if (typeof raw !== 'object' || raw === null) throw new Error('不是一个存档对象')
-  const o = raw as Record<string, unknown>
-
-  if (!Array.isArray(o.slices) || o.slices.length < 3 || o.slices.length > 8)
-    throw new Error('slices 得是 3–8 片')
-
-  const num = (v: unknown, fallback: number) =>
-    typeof v === 'number' && Number.isFinite(v) ? v : fallback
-
-  // v0.1 的存档没有 defaultLenMin，只有一个全局 sliceLenMin
-  const defaultLenMin = clampLen(num(o.defaultLenMin, num(o.sliceLenMin, 5)))
-
-  const slices: Slice[] = o.slices.map((s: unknown, i: number) => {
-    const v = s as Record<string, unknown>
-    if (typeof v?.name !== 'string') throw new Error(`第 ${i + 1} 片没有名字`)
-    if (typeof v?.totalMs !== 'number' || !Number.isFinite(v.totalMs) || v.totalMs < 0)
-      throw new Error(`第 ${i + 1} 片的 totalMs 不对`)
-    return {
-      id: typeof v.id === 'string' && v.id ? v.id : newId(),
-      name: v.name.slice(0, 60),
-      totalMs: Math.min(v.totalMs, CAP_MS),
-      // 老存档的片没有自己的片长，回落到全局值
-      lenMin: clampLen(num(v.lenMin, defaultLenMin)),
-    }
-  })
-  const currentIndex = Math.max(0, Math.min(slices.length - 1, Math.floor(num(o.currentIndex, 0))))
-
-  const pauses: PauseRecord[] = (Array.isArray(o.pauses) ? o.pauses : [])
-    .filter((p: unknown) => {
-      const v = p as Record<string, unknown>
-      return v && typeof v.at === 'number' && Number.isFinite(v.at)
-    })
-    .slice(0, MAX_PAUSES)
-    .map((p: unknown) => {
-      const v = p as Record<string, unknown>
-      return {
-        at: v.at as number,
-        endedAt: typeof v.endedAt === 'number' && Number.isFinite(v.endedAt) ? v.endedAt : null,
-        reason: typeof v.reason === 'string' ? v.reason.slice(0, 40) : undefined,
-        sliceName: typeof v.sliceName === 'string' ? v.sliceName.slice(0, 60) : '',
-      }
-    })
-
-  return {
-    slices,
-    defaultLenMin,
-    pauses,
-    roundElapsedMs: 0,
-    currentIndex,
-    rotationDeg: -sliceAngle(slices.length) * currentIndex,
-    pinned: false,
-    phase: 'idle',
-    roundStartedAt: null,
-    justFinished: null,
-    roundsToday: Math.max(0, Math.floor(num(o.roundsToday, 0))),
-    dayStartedAt: num(o.dayStartedAt, now),
   }
 }
 

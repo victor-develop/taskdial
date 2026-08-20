@@ -15,9 +15,7 @@ import {
   elapsedMs,
   fmtClock,
   fmtDur,
-  load,
-  parseSnapshot,
-  reducer,
+  model,
   rings,
   roundMs,
   save,
@@ -64,7 +62,7 @@ function exportSnapshot(state: State) {
 }
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, 0, () => load(Date.now()))
+  const [state, dispatch] = useReducer(model.reducer, 0, model.load)
   const [now, setNow] = useState(() => Date.now())
   const [sheet, setSheet] = useState<'none' | 'settings' | 'summary' | 'insights'>('none')
   const [pipWin, setPipWin] = useState<Window | null>(null)
@@ -93,7 +91,7 @@ export default function App() {
   useEffect(() => {
     if (state.phase === 'running' && remaining <= 0) {
       dingRoundOver()
-      dispatch({ type: 'complete', at: Date.now() })
+      dispatch({ type: 'complete' })
     }
   }, [state.phase, remaining])
 
@@ -122,8 +120,8 @@ export default function App() {
         e.target.blur()
       }
       if (state.phase === 'idle') dispatch({ type: 'start' })
-      if (state.phase === 'paused') dispatch({ type: 'resume', at: Date.now() })
-      if (state.phase === 'awaiting') dispatch({ type: 'confirm', at: Date.now() })
+      if (state.phase === 'paused') dispatch({ type: 'resume' })
+      if (state.phase === 'awaiting') dispatch({ type: 'confirm' })
     }
     const docs = [document, pipWin?.document].filter(Boolean) as Document[]
     docs.forEach((d) => d.addEventListener('keydown', onKey))
@@ -153,7 +151,7 @@ export default function App() {
 
   async function importSnapshot(file: File) {
     try {
-      const next = parseSnapshot(await file.text(), Date.now())
+      const next = model.parseSnapshot(await file.text())
       dispatch({ type: 'replace', state: next })
       setIoMsg(`已导入 ${next.slices.length} 片`)
     } catch (e) {
@@ -178,7 +176,7 @@ export default function App() {
             {state.phase === 'running' && (
               <button
                 className="icon danger"
-                onClick={() => dispatch({ type: 'pause', at: Date.now() })}
+                onClick={() => dispatch({ type: 'pause' })}
                 title="紧急暂停"
               >
                 ⏸
@@ -264,7 +262,7 @@ export default function App() {
               onChange={(e) => dispatch({ type: 'setPauseReason', reason: e.target.value })}
             />
             <div className="btns">
-              <button className="primary" onClick={() => dispatch({ type: 'resume', at: Date.now() })}>
+              <button className="primary" onClick={() => dispatch({ type: 'resume' })}>
                 继续 ⏎
               </button>
             </div>
@@ -296,7 +294,7 @@ export default function App() {
               <span className="len-chip">⏱ {current.lenMin}m</span>
             </p>
             <div className="btns">
-              <button className="primary" onClick={() => dispatch({ type: 'confirm', at: Date.now() })}>
+              <button className="primary" onClick={() => dispatch({ type: 'confirm' })}>
                 开始 ⏎
               </button>
               <button onClick={() => dispatch({ type: 'skip' })} disabled={state.pinned}>
@@ -406,7 +404,7 @@ export default function App() {
           <Insights pauses={state.pauses} now={now} onClose={() => setSheet('none')} />
         )}
 
-        {sheet === 'summary' && <Summary state={state} onBack={() => setSheet('settings')} onFinish={() => { dispatch({ type: 'finishDay', at: Date.now() }); setSheet('none') }} />}
+        {sheet === 'summary' && <Summary state={state} onBack={() => setSheet('settings')} onFinish={() => { dispatch({ type: 'finishDay' }); setSheet('none') }} />}
     </div>
   )
 }
