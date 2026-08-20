@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useRef, useState, type CSSProperties } from 'react'
 import { autoSizeWindow } from './autosize'
+import { listenIntents, loadSavedState, openInsights, pushState } from './bridge'
 import Dial from './Dial'
-import Insights from './Insights'
 import Runner from './Runner'
 import { openPip, pipSupported } from './pip'
 import {
@@ -64,14 +64,54 @@ function exportSnapshot(state: State) {
 export default function App() {
   const [state, dispatch] = useReducer(model.reducer, 0, model.load)
   const [now, setNow] = useState(() => Date.now())
-  const [sheet, setSheet] = useState<'none' | 'settings' | 'summary' | 'insights'>('none')
+  const [sheet, setSheet] = useState<'none' | 'settings' | 'summary'>('none')
   const [pipWin, setPipWin] = useState<Window | null>(null)
   const [ioMsg, setIoMsg] = useState<string | null>(null)
   const [openLen, setOpenLen] = useState<string | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => save(state), [state])
+  // server 的 intent 处理要拿到「此刻」的状态，不能拿闭包里那份旧的
+  const stateRef = useRef(state)
+
+  // Rust 那份 state.json 到手之前先别往回推，免得旧的 localStorage
+  // 抢在文件加载完成前把它盖掉
+  const syncReady = useRef(false)
+
+  useEffect(() => {
+    stateRef.current = state
+    save(state)
+    if (syncReady.current) pushState(state)
+  }, [state])
+
+  // 启动时从 Rust 管的存档文件恢复；没有文件（首次升级）就把
+  // localStorage 那份推过去完成迁移
+  useEffect(() => {
+    void loadSavedState().then((saved) => {
+      syncReady.current = true
+      if (saved) {
+        stateRef.current = saved
+        dispatch({ type: 'replace', state: saved })
+      } else {
+        pushState(stateRef.current)
+      }
+    })
+  }, [])
+
+  // server 的写请求（POST /control/* …）会转成 intent 发进来，
+  // 跑同一份 reducer，窗口里立刻能看到变化
+  useEffect(
+    () =>
+      listenIntents(
+        () => stateRef.current,
+        (next) => {
+          // 立刻写 ref：连着来两个 intent 时，第二个不能拿到重渲染前的旧状态
+          stateRef.current = next
+          dispatch({ type: 'replace', state: next })
+        },
+      ),
+    [],
+  )
 
   // 窗口高度跟着内容走，见 autosize.ts
   useEffect(() => (cardRef.current ? autoSizeWindow(cardRef.current) : undefined), [])
@@ -182,7 +222,7 @@ export default function App() {
                 ⏸
               </button>
             )}
-            <button className="icon" onClick={() => setSheet('insights')} title="暂停报告">
+            <button className="icon" onClick={openInsights} title="暂停报告（浏览器打开）">
               ▤
             </button>
             {pipSupported() && !pipWin && (
@@ -398,10 +438,6 @@ export default function App() {
               <button onClick={() => setSheet('summary')}>收工</button>
             </div>
           </div>
-        )}
-
-        {sheet === 'insights' && (
-          <Insights pauses={state.pauses} now={now} onClose={() => setSheet('none')} />
         )}
 
         {sheet === 'summary' && <Summary state={state} onBack={() => setSheet('settings')} onFinish={() => { dispatch({ type: 'finishDay' }); setSheet('none') }} />}

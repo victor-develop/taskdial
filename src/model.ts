@@ -284,9 +284,9 @@ export function createModel(env: Env) {
     }
   }
 
-  function load(): State {
+  /** 从一段存档文本恢复。localStorage 和 Rust 管的 state.json 走同一条路。 */
+  function restore(raw: string | null): State {
     try {
-      const raw = localStorage.getItem(KEY)
       if (!raw) return initialState()
       const parsed = JSON.parse(raw) as Partial<State> & LegacyFields
       const s = migrate({ ...initialState(), ...parsed } as State, parsed)
@@ -301,6 +301,10 @@ export function createModel(env: Env) {
     } catch {
       return initialState()
     }
+  }
+
+  function load(): State {
+    return restore(localStorage.getItem(KEY))
   }
 
   /**
@@ -368,7 +372,7 @@ export function createModel(env: Env) {
     }
   }
 
-  return { initialState, makeSlice, reducer, load, save, parseSnapshot }
+  return { initialState, makeSlice, reducer, load, restore, save, parseSnapshot }
 }
 
 export type Model = ReturnType<typeof createModel>
