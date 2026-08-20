@@ -33,6 +33,20 @@ body.in-pip .card {
   border: none;
 }
 
+/* 窗口正好就是卡片那么大时（Tauri 无边框窗口），铺满，别留边和滚动条 */
+@media (max-width: 320px) {
+  html,
+  body {
+    overflow: hidden;
+  }
+  .card {
+    width: 100vw;
+    min-height: 100vh;
+    border: none;
+    border-radius: 0;
+  }
+}
+
 /* 圆盘搬走之后，原来那个 tab 留一行说明 */
 #away {
   display: none;

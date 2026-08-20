@@ -2,22 +2,43 @@
 
 固定时间片的任务轮转器。一个圆分成 N 片，每片是一个正在推进的任务；片长到点，盘转到下一片，等你确认再开始计时。
 
+- 当前任务名在最上面，带片号色标和累计时长
+- 底部一只像素小狗跟着本轮进度从左跑到右，到点坐下等你确认
+- 漏斗按本轮剩余时间漏沙
+
 ## 跑起来
 
+### 桌面 app（Tauri，推荐）
+
 ```bash
-cd ~/temp/dial && npm run dev
+npm run tauri dev
 ```
 
-打开 http://localhost:5183 ，点右上角 **⧉** 把圆盘丢进 Document Picture-in-Picture 小窗 —— 那个窗口是系统级置顶的，浮在别的窗口上面。
+打包成 `.app` / `.dmg`：
 
-PiP 只有 Chromium 系支持（Chrome / Edge / Arc）。Safari、Firefox 里 ⧉ 按钮不会出现，页面本身照常能用。
+```bash
+npm run tauri build
+```
+
+产物在 `src-tauri/target/release/bundle/`。窗口是无边框、置顶、不可缩放的，拖顶上那条状态栏移动。
+
+### 浏览器 + PiP（不装 app 时的临时方案）
+
+```bash
+npm run dev
+```
+
+打开 http://localhost:5183 ，点右上角 **⧉** 把圆盘丢进 Document Picture-in-Picture 小窗，
+那个窗口是系统级置顶的。只有 Chromium 系支持；Safari、Firefox 里 ⧉ 按钮不会出现，页面本身照常能用。
 
 ## 存档
 
-存在浏览器 localStorage，跟 dev server 进程无关 —— 杀了重开数据还在。
+存在 webview 的 localStorage。Tauri 里按 app identifier 存，跟端口无关，怎么重启都在。
+浏览器模式下跟 dev server 进程无关 —— 杀了重开数据还在。
 
-端口在 `vite.config.ts` 里锁死了 5183 + `strictPort`。**别改**：localStorage 按 origin 分桶，
+浏览器模式下端口在 `vite.config.ts` 里锁死了 5183 + `strictPort`。**别改**：localStorage 按 origin 分桶，
 换个端口就等于换了个空桶，看起来像数据丢了。端口被占时 Vite 会直接报错退出，不会静默顺延到别的端口。
+（Tauri 里没有这个问题 —— 前端是从内置协议加载的，没有端口。）
 
 会丢的只有一种情况：正在跑但没确认的那一轮，隔了超过两个片长才回来 —— 那一轮直接作废，不给补记。
 
@@ -63,11 +84,15 @@ PiP 只有 Chromium 系支持（Chrome / Edge / Arc）。Safari、Firefox 里 �
 - `src/model.ts` — 状态机、年轮换算、localStorage 存档
 - `src/Dial.tsx` — SVG 盘面，扇环 path 和转盘动画
 - `src/App.tsx` — 计时循环、确认弹窗、设置、收工总结
+- `src/Runner.tsx` — 像素小狗和漏斗，精灵图是字符串矩阵压成的 path
 - `src/pip.ts` — Document PiP，把 `#root` 整个搬进小窗（不重挂载，状态不丢）
+- `src-tauri/` — 桌面外壳，窗口配置在 `tauri.conf.json`
 
 搬的必须是 React 的**根容器本身**。React 把事件委托挂在根容器上，只搬里面某个子节点的话，
 PiP 窗里的事件冒泡不到那个容器，所有按钮都会失效。所以 `index.html` 里 `#root` 外面还包了个 `#home` 当窝。
 
 ## 之后
 
-如果这套节奏用下来是对的，把这份前端原样塞进 Tauri 外壳就是正式 app：文件持久化、开机自启、菜单栏图标、窗口位置记忆。前端不用改。
+- 存档从 localStorage 换成 JSON 文件（能备份、能进 git）
+- 开机自启、菜单栏图标、窗口位置记忆
+- 收工总结做成一张能看的图
