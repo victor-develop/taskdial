@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useRef, useState, type CSSProperties } from 'react'
+import { autoSizeWindow } from './autosize'
 import Dial from './Dial'
 import Runner from './Runner'
 import { openPip, pipSupported } from './pip'
@@ -63,8 +64,12 @@ export default function App() {
   const [pipWin, setPipWin] = useState<Window | null>(null)
   const [ioMsg, setIoMsg] = useState<string | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => save(state), [state])
+
+  // 窗口高度跟着内容走，见 autosize.ts
+  useEffect(() => (cardRef.current ? autoSizeWindow(cardRef.current) : undefined), [])
 
   // 计时只在跑的时候走；时间一律拿 Date.now() 现算，后台降频也不会走慢
   useEffect(() => {
@@ -151,7 +156,7 @@ export default function App() {
   }
 
   return (
-      <div className="card">
+      <div className="card" ref={cardRef}>
         {/* 无边框窗口靠这块拖动；在浏览器里这个属性没有副作用 */}
         <header data-tauri-drag-region>
           <span className="today" data-tauri-drag-region>

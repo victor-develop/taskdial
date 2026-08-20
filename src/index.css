@@ -32,6 +32,10 @@ body.in-pip .card {
   border-radius: 0;
   border: none;
 }
+/* PiP 窗口是固定尺寸的，撑不满就把底下那组压到底部 */
+body.in-pip .runner {
+  margin-top: auto;
+}
 
 /* 窗口正好就是卡片那么大时（Tauri 无边框窗口），铺满，别留边和滚动条 */
 @media (max-width: 260px) {
@@ -39,9 +43,14 @@ body.in-pip .card {
   body {
     overflow: hidden;
   }
+  /* 窗口高度是跟着内容调的，过渡的那一下让空隙落在下面，别上下平分 */
+  body {
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 0;
+  }
   .card {
     width: 100vw;
-    min-height: 100vh;
     border: none;
     border-radius: 0;
   }
@@ -62,7 +71,6 @@ body.away #away {
   display: flex;
   flex-direction: column;
   width: 240px;
-  min-height: 397px;
   padding: 7px 10px 9px;
   background: var(--card);
   border: 1px solid var(--line);
@@ -236,8 +244,7 @@ button.icon:disabled {
   display: block;
   width: 100%;
   height: auto;
-  /* 吃掉多余空间，把跑道/底栏/弹窗整组压到底部 */
-  margin-top: auto;
+  margin-top: 6px;
   shape-rendering: crispEdges; /* 像素图别被抗锯齿糊掉 */
 }
 
