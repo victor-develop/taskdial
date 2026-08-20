@@ -12,3 +12,6 @@ src-tauri/gen
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# 本地 worktree，不进版本库
+.claude/worktrees/
