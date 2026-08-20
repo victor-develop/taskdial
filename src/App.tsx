@@ -187,7 +187,8 @@ export default function App() {
           <span className="badge">{shownIndex + 1}</span>
           <span className="task">{shown.name}</span>
           {state.pinned && <span className="lock">🔒</span>}
-          {state.phase === 'awaiting' && <span className="plus">+{shown.lenMin}m</span>}
+          {/* 不带加号：右边那个累计已经把这一轮算进去了，写「+5m」会读成还要再加一次 */}
+          {state.phase === 'awaiting' && <span className="plus">{shown.lenMin}m</span>}
           <span className="dur">{fmtDur(shownMs)}</span>
         </h1>
 
