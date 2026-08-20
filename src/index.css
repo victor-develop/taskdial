@@ -1,0 +1,412 @@
+:root {
+  --bg: #101216;
+  --card: #16191f;
+  --line: #262b33;
+  --fg: #e8ebef;
+  --dim: #8b94a3;
+  --accent: #5ad1c0;
+  color-scheme: dark;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* 搬进 PiP 小窗之后，卡片直接铺满整个窗口 */
+body.in-pip #root,
+body.in-pip .card {
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  border: none;
+}
+
+/* 圆盘搬走之后，原来那个 tab 留一行说明 */
+#away {
+  display: none;
+  font-size: 13px;
+  color: var(--dim);
+}
+body.away #away {
+  display: block;
+}
+
+.card {
+  position: relative;
+  width: 280px;
+  padding: 10px 14px 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  user-select: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--dim);
+  height: 20px;
+}
+
+.tools {
+  display: flex;
+  gap: 2px;
+}
+
+button.icon {
+  background: none;
+  border: none;
+  color: var(--dim);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 6px;
+  line-height: 1;
+}
+button.icon:hover:not(:disabled) {
+  background: #ffffff12;
+  color: var(--fg);
+}
+button.icon:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* ── 圆盘 ── */
+
+.dial {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.pointer {
+  fill: var(--accent);
+}
+.pointer.pinned {
+  fill: #f5a623;
+}
+
+.slice-bg {
+  fill: #1e222a;
+}
+.slice-edge {
+  fill: none;
+  stroke: #0d0f13;
+  stroke-width: 1.2;
+}
+.slice.current .slice-edge {
+  stroke: #ffffff40;
+  stroke-width: 1.6;
+}
+
+/* 转盘：把下一片转到指针底下 */
+.spin {
+  transition: transform 0.62s cubic-bezier(0.22, 1, 0.3, 1);
+}
+
+.notch {
+  stroke: #d8c9a4;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.slice-num {
+  fill: #ffffff85;
+  font-size: 13px;
+  font-weight: 600;
+  stroke: #0d0f13;
+  stroke-width: 2.5;
+  stroke-opacity: 0.45;
+  paint-order: stroke;
+}
+.slice.current .slice-num {
+  fill: #fff;
+}
+
+.hub {
+  fill: #101318;
+  stroke: var(--line);
+}
+.hub-main {
+  fill: var(--fg);
+  font-size: 17px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.hub-sub {
+  fill: var(--dim);
+  font-size: 9px;
+}
+
+/* ── 底部信息 ── */
+
+footer {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.name .lock {
+  margin-right: 4px;
+  font-size: 10px;
+}
+
+.dur,
+.hint {
+  color: var(--dim);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+
+.ticks {
+  display: flex;
+  gap: 3px;
+}
+.ticks i {
+  width: 8px;
+  height: 4px;
+  border-radius: 1px;
+  background: #2c323c;
+}
+.ticks i.on {
+  background: var(--accent);
+}
+
+/* ── 弹出层 ── */
+
+.sheet {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  padding: 10px 12px;
+  background: #1c2129f2;
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.sheet-title {
+  margin: 0;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.plus {
+  color: var(--accent);
+  flex: none;
+}
+.sheet-sub {
+  margin: 3px 0 0;
+  font-size: 11px;
+  color: var(--dim);
+}
+
+.btns {
+  display: flex;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.btns button {
+  flex: 1;
+  padding: 6px 4px;
+  font-size: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #242a33;
+  color: var(--fg);
+  cursor: pointer;
+}
+.btns button:hover:not(:disabled) {
+  background: #2d3540;
+}
+.btns button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.btns button.primary {
+  flex: 2;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #06120f;
+  font-weight: 600;
+}
+.btns button.on {
+  border-color: #f5a623;
+  color: #f5a623;
+}
+
+/* ── 设置 / 收工 面板 ── */
+
+.panel {
+  position: absolute;
+  inset: 0;
+  background: var(--card);
+  padding: 10px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.len {
+  font-size: 12px;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.len input {
+  width: 52px;
+}
+
+.panel input {
+  background: #1f242c;
+  border: 1px solid var(--line);
+  color: var(--fg);
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.panel input:focus {
+  outline: 1px solid var(--accent);
+}
+
+.slices,
+.bars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.slices li,
+.bars li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.slices li input {
+  flex: 1;
+  min-width: 0;
+}
+
+.idx {
+  width: 14px;
+  font-size: 11px;
+  color: var(--dim);
+  flex: none;
+}
+
+.bar-name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.bar-name .name {
+  font-size: 11px;
+  color: var(--dim);
+}
+.bar-name .bar {
+  flex: none;
+  width: 100%;
+}
+
+.bar {
+  flex: 1;
+  height: 8px;
+  background: #23282f;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.big {
+  margin: 2px 0 0;
+  font-size: 28px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.io-msg {
+  margin: 0;
+  font-size: 11px;
+  color: var(--dim);
+}
+
+.panel-foot {
+  display: flex;
+  gap: 6px;
+}
+.panel-foot button {
+  flex: 1;
+  padding: 6px;
+  font-size: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #242a33;
+  color: var(--fg);
+  cursor: pointer;
+}
+.panel-foot button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.panel-foot button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #06120f;
+  font-weight: 600;
+}

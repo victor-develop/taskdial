@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>轮盘</title>
+  </head>
+  <body>
+    <!-- #root 会被整个搬进 PiP 小窗再搬回来，所以「家」得在 root 外面 -->
+    <div id="home">
+      <p id="away">圆盘在浮窗里 · 关掉那个小窗就回来</p>
+      <div id="root"></div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
