@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>taskdial</title>
+<style>
+  :root {
+    --bg: #101216;
+    --card: #16191f;
+    --line: #262b33;
+    --fg: #e8ebef;
+    --dim: #8b94a3;
+    --accent: #5ad1c0;
+    color-scheme: dark;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px;
+  }
+  main { width: 100%; max-width: 640px; }
+  h1 { font-size: 26px; margin: 0; letter-spacing: -0.5px; }
+  h1 span { color: var(--accent); }
+  .sub { color: var(--dim); font-size: 14px; margin: 6px 0 28px; line-height: 1.6; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-top: 16px;
+  }
+  .card h2 {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { display: flex; gap: 10px; padding: 6px 0; font-size: 14px; align-items: baseline; }
+  .m {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    color: var(--accent);
+    width: 52px;
+    flex: none;
+  }
+  .p { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+  .p a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .p a:hover { border-color: var(--accent); }
+  .d { color: var(--dim); font-size: 13px; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    background: #1e232b;
+    border-radius: 6px;
+    padding: 2px 6px;
+  }
+  pre {
+    background: #0c0e12;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    overflow-x: auto;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .note { color: var(--dim); font-size: 13px; line-height: 1.6; }
+</style>
+</head>
+<body>
+<main>
+  <h1>task<span>dial</span></h1>
+  <p class="sub">
+    常驻置顶的任务轮盘 —— 一次只喂一片时间，年轮记录每片长了多少。<br />
+    这里是它的本地 HTTP API：人看 <a href="/insights" style="color:var(--accent)">/insights</a>，agent 看 <a href="/skills" style="color:var(--accent)">/skills</a>。
+  </p>
+
+  <div class="card">
+    <h2>只读（窗口关着也能用）</h2>
+    <ul>
+      <li><span class="m">GET</span><span class="p"><a href="/insights">/insights</a></span><span class="d">暂停报告网页</span></li>
+      <li><span class="m">GET</span><span class="p"><a href="/health">/health</a></span><span class="d">ok / version / phase / uptime</span></li>
+      <li><span class="m">GET</span><span class="p"><a href="/skills">/skills</a></span><span class="d">给 agent 的能力清单（JSON；<a href="/skills?format=md">markdown 版</a>）</span></li>
+      <li><span class="m">GET</span><span class="p"><a href="/control/state">/control/state</a></span><span class="d">当前完整状态</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>控制（依赖 app 窗口活着，不在时 503）</h2>
+    <ul>
+      <li><span class="m">POST</span><span class="p">/control/slices</span><span class="d">加一片 {name, lenMin}</span></li>
+      <li><span class="m">PATCH</span><span class="p">/control/slices/:id</span><span class="d">改名 / 改片长</span></li>
+      <li><span class="m">DELETE</span><span class="p">/control/slices/:id</span><span class="d">删一片</span></li>
+      <li><span class="m">POST</span><span class="p">/control/pause</span><span class="d">暂停 {reason?}</span></li>
+      <li><span class="m">POST</span><span class="p">/control/resume</span><span class="d">继续</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>试一下</h2>
+    <pre>curl http://127.0.0.1:7717/control/state
+curl -X POST http://127.0.0.1:7717/control/slices -d '{"name":"写文档","lenMin":25}'
+curl -X POST http://127.0.0.1:7717/control/pause -d '{"reason":"会议"}'</pre>
+    <p class="note">
+      默认只绑 <code>127.0.0.1:7717</code>，没有 token。绑定地址和端口在 app 配置目录的
+      <code>server.json</code> 里改；放开绑定意味着同网段任何人都能改状态，想清楚再动。
+    </p>
+  </div>
+</main>
+</body>
+</html>
