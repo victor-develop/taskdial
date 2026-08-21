@@ -144,6 +144,37 @@ pub fn host_allowed(config: &ServerConfig, host: Option<&str>) -> bool {
         || host == format!("[::1]:{port}")
 }
 
+#[derive(PartialEq, Debug)]
+enum Format {
+    Html,
+    Json,
+    Markdown,
+}
+
+/// `?format=md|markdown|json`，或者 Accept 头。默认 HTML。
+fn wants(req: &Request, query: &str) -> Format {
+    let q = |k: &str| query.split('&').any(|p| p == format!("format={k}"));
+    if q("md") || q("markdown") {
+        return Format::Markdown;
+    }
+    if q("json") {
+        return Format::Json;
+    }
+    match header_value(req, "accept") {
+        Some(a) if a.contains("text/markdown") => Format::Markdown,
+        Some(a) if a.contains("application/json") && !a.contains("text/html") => Format::Json,
+        _ => Format::Html,
+    }
+}
+
+/// 墙上时间（毫秒）
+fn now_ms() -> i64 {
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_millis() as i64)
+        .unwrap_or(0)
+}
+
 fn is_write(method: &Method) -> bool {
     matches!(method, Method::Post | Method::Patch | Method::Delete | Method::Put)
 }
@@ -269,7 +300,21 @@ fn handle(mut req: Request, app: &AppHandle, shared: &Shared) {
 
     match (&method, path.as_str()) {
         (Method::Get, "/") => respond_html(req, include_str!("../web/landing.html")),
-        (Method::Get, "/insights") => respond_html(req, include_str!("../web/insights.html")),
+        (Method::Get, "/insights") => {
+            // 网页、markdown、结构化 JSON 三种形态，聚合是同一份（insights.rs）
+            let report =
+                || crate::insights::build_report(shared.snapshot_value().as_ref(), now_ms());
+            match wants(&req, &query) {
+                Format::Markdown => {
+                    respond(req, 200, "text/markdown; charset=utf-8", crate::insights::to_markdown(&report()))
+                }
+                Format::Json => {
+                    let value = serde_json::to_value(report()).unwrap_or(Value::Null);
+                    respond_json(req, 200, &value)
+                }
+                Format::Html => respond_html(req, include_str!("../web/insights.html")),
+            }
+        }
 
         (Method::Get, "/health") => {
             let phase = shared
@@ -290,12 +335,7 @@ fn handle(mut req: Request, app: &AppHandle, shared: &Shared) {
         }
 
         (Method::Get, "/skills") => {
-            let want_md = query.contains("format=md")
-                || query.contains("format=markdown")
-                || header_value(&req, "accept")
-                    .map(|a| a.contains("text/markdown"))
-                    .unwrap_or(false);
-            if want_md {
+            if wants(&req, &query) == Format::Markdown {
                 respond(req, 200, "text/markdown; charset=utf-8", skills_markdown(shared));
             } else {
                 respond_json(req, 200, &skills_json(shared));
@@ -376,7 +416,7 @@ fn skills_json(shared: &Shared) -> Value {
         },
         "endpoints": [
             { "method": "GET",    "path": "/",                   "desc": "landing page（HTML）" },
-            { "method": "GET",    "path": "/insights",           "desc": "暂停报告网页（HTML）" },
+            { "method": "GET",    "path": "/insights",           "desc": "暂停报告网页（HTML）；?format=md 出 markdown 方便 AI 分析，?format=json 出结构化聚合" },
             { "method": "GET",    "path": "/health",             "desc": "{ok, version, phase, uptime, window}" },
             { "method": "GET",    "path": "/skills",             "desc": "本清单。?format=md 或 Accept: text/markdown 拿 markdown 版" },
             { "method": "GET",    "path": "/control/state",      "desc": "当前完整状态（JSON）" },

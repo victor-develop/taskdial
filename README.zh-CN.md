@@ -42,6 +42,39 @@ npm run dev
 
 打开 http://localhost:5183 ，点右上角 **⧉** 把圆盘丢进 Document Picture-in-Picture 小窗，那个窗口是系统级置顶的。只有 Chromium 系支持；Safari、Firefox 里 ⧉ 按钮不会出现，页面本身照常能用。
 
+## 本地 HTTP API
+
+app 内置一个只绑 `127.0.0.1:7717` 的服务，让 agent 能读状态、改任务片。
+
+```
+GET    /                      landing page
+GET    /insights              暂停报告 —— HTML，?format=md 出 markdown，?format=json 出结构化聚合
+GET    /health                {ok, version, phase, uptime, window}
+GET    /skills                能力清单（JSON，?format=md 出 markdown）
+GET    /control/state         当前完整状态
+POST   /control/slices        加一片            {name, lenMin}
+PATCH  /control/slices/:id    改名 / 改片长
+DELETE /control/slices/:id    删一片
+POST   /control/pause         {reason?}
+POST   /control/resume
+```
+
+**状态机只有一份。** 写请求不在 Rust 里复刻规则，而是转成 intent 交给窗口里那份 `model.reducer` 处理，所以边界跟 app 里完全一致（第 9 片返回 422，`lenMin: 9999` 夹成 180）。代价是写操作依赖窗口活着，不在时返回 503；只读端点不受影响。
+
+`/insights?format=md` 是专门给 AI 吃的：聚合好、只列非零时段、没有 JSON 噪音。聚合实现在 `src-tauri/src/insights.rs`，三种形态共用同一份 —— 网页以前在浏览器里自己算一遍，那正是同一份报告长出两套算法的经典路径。
+
+### 安全
+
+默认只绑 loopback。校验 `Host` 头挡 DNS rebinding（网页可以把域名解析到 127.0.0.1 来打你的写接口），带 `Origin` 的写请求一律拒，不发任何 CORS 头。端口被占直接报错退出，不静默换端口 —— 换了 agent 就打空了。
+
+配置在 app 配置目录下的 `server.json`：
+
+```json
+{ "enabled": true, "bind": "127.0.0.1", "port": 7717 }
+```
+
+`bind` 可以放开，而且没有 token —— 也就是说**同网段任何人都能改你的状态，不只是读**。所以默认值保持 loopback，放开必须是你显式改配置。
+
 ## 存档
 
 存在 webview 的 localStorage。Tauri 里按 app identifier 存，跟端口无关，怎么重启都在。浏览器模式下跟 dev server 进程无关 —— 杀了重开数据还在。

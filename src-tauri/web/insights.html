@@ -86,29 +86,12 @@
 <body>
 <main>
   <h1>暂停报告</h1>
-  <p class="sub">近 7 天的暂停记录 · <a href="/">taskdial</a> · <a href="/skills?format=md">API 清单</a></p>
+  <p class="sub">近 7 天的暂停记录 · <a href="/">taskdial</a> · <a href="/insights?format=md">markdown 版</a> · <a href="/skills?format=md">API 清单</a></p>
   <div id="out"><p class="empty">加载中…</p></div>
 </main>
 <script>
-  const MS_MIN = 60000
-  const DAY = 86400000
-  const BUCKETS = 24 // app 窗口里 240px 只塞得下 12 根柱子，这里宽度管够，一小时一根
-
-  const fmtDur = (ms) => {
-    const m = Math.round(ms / MS_MIN)
-    return m < 60 ? m + 'm' : Math.floor(m / 60) + 'h' + (m % 60 ? (m % 60) + 'm' : '')
-  }
-  const clockOf = (at) =>
-    new Date(at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })
-  const dayLabel = (at, now) => {
-    const d0 = new Date(now).setHours(0, 0, 0, 0)
-    if (at >= d0) return '今天'
-    if (at >= d0 - DAY) return '昨天'
-    return new Date(at).toLocaleDateString([], { month: 'numeric', day: 'numeric' })
-  }
-  // 还停着的那条按「到现在」算时长
-  const lengthOf = (p, now) => Math.max(0, (p.endedAt ?? now) - p.at)
-
+  // 聚合全在服务端（src-tauri/src/insights.rs）算好，这里只负责画。
+  // 以前这段自己算一遍，跟 ?format=md 那份会漂 —— 同一个报告不该有两套算法。
   const el = (tag, cls, text) => {
     const n = document.createElement(tag)
     if (cls) n.className = cls
@@ -116,39 +99,32 @@
     return n
   }
 
-  function render(state) {
+  function render(r) {
     const out = document.getElementById('out')
     out.textContent = ''
-    const now = Date.now()
-    const pauses = Array.isArray(state.pauses) ? state.pauses : []
-    const week = pauses.filter((p) => p.at > now - 7 * DAY)
 
-    if (week.length === 0) {
-      out.append(el('p', 'empty', '近 7 天没有暂停过。'))
+    if (r.count === 0) {
+      out.append(el('p', 'empty', `近 ${r.windowDays} 天没有暂停过。`))
       return
     }
 
-    const today = week.filter((p) => p.at >= new Date(now).setHours(0, 0, 0, 0))
-    const weekMs = week.reduce((a, p) => a + lengthOf(p, now), 0)
-
     const head = el('div')
-    const big = el('p', 'big', String(week.length))
+    const big = el('p', 'big', String(r.count))
     big.append(el('small', '', '次'))
     head.append(big)
-    head.append(el('p', 'stats', `近 7 天 · 共 ${fmtDur(weekMs)} · 今天 ${today.length} 次`))
+    head.append(
+      el('p', 'stats', `近 ${r.windowDays} 天 · 共 ${r.total} · 今天 ${r.todayCount} 次`),
+    )
     out.append(head)
 
-    // 什么时候暂停：24 个一小时的桶
-    const counts = Array.from({ length: BUCKETS }, () => 0)
-    week.forEach((p) => { counts[new Date(p.at).getHours()]++ })
-    const peak = Math.max(1, ...counts)
+    const peak = Math.max(1, ...r.hours.map((h) => h.count))
     const hoursCard = el('div', 'card')
     hoursCard.append(el('span', 'block-title', '什么时候暂停'))
     const bars = el('div', 'hours')
-    counts.forEach((n, i) => {
-      const bar = el('i', n === peak && n > 0 ? 'peak' : '')
-      bar.style.height = Math.max(2, (n / peak) * 64) + 'px'
-      bar.title = `${i}:00–${i + 1}:00 · ${n} 次`
+    r.hours.forEach((h) => {
+      const bar = el('i', h.count === peak && h.count > 0 ? 'peak' : '')
+      bar.style.height = Math.max(2, (h.count / peak) * 64) + 'px'
+      bar.title = `${h.hour}:00–${h.hour + 1}:00 · ${h.count} 次`
       bars.append(bar)
     })
     hoursCard.append(bars)
@@ -157,17 +133,11 @@
     hoursCard.append(axis)
     out.append(hoursCard)
 
-    // 最常见的原因
-    const byReason = new Map()
-    week.forEach((p) => {
-      if (p.reason) byReason.set(p.reason, (byReason.get(p.reason) ?? 0) + 1)
-    })
-    const top = [...byReason.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)
-    if (top.length > 0) {
+    if (r.reasons.length > 0) {
       const card = el('div', 'card')
       card.append(el('span', 'block-title', '最常见'))
       const chips = el('div', 'reasons')
-      top.forEach(([reason, n]) => {
+      r.reasons.forEach(([reason, n]) => {
         const chip = el('span', 'reason-chip', reason + ' ')
         chip.append(el('b', '', String(n)))
         chips.append(chip)
@@ -176,15 +146,13 @@
       out.append(card)
     }
 
-    // 最近的记录
     const card = el('div', 'card')
     card.append(el('span', 'block-title', '最近'))
     const table = el('table')
-    // reducer 存的是新的在前，但导入的存档不保证 —— 这里自己排，别信来路
-    ;[...week].sort((a, b) => b.at - a.at).slice(0, 100).forEach((p) => {
+    r.recent.forEach((p) => {
       const tr = el('tr')
-      tr.append(el('td', 'when', `${dayLabel(p.at, now)} ${clockOf(p.at)}`))
-      tr.append(el('td', 'len', fmtDur(lengthOf(p, now)) + (p.endedAt == null ? ' ⏸' : '')))
+      tr.append(el('td', 'when', `${p.day} ${p.clock}`))
+      tr.append(el('td', 'len', p.duration + (p.open ? ' ⏸' : '')))
       const why = el('td', 'why')
       if (p.reason) {
         why.append(document.createTextNode(p.reason + ' '))
@@ -199,10 +167,9 @@
     out.append(card)
   }
 
-  fetch('/control/state')
+  fetch('/insights?format=json')
     .then(async (r) => {
-      if (r.status === 404) throw new Error('还没有数据 —— app 窗口至少打开过一次才有存档。')
-      if (!r.ok) throw new Error('读状态失败（HTTP ' + r.status + '）')
+      if (!r.ok) throw new Error('读报告失败（HTTP ' + r.status + '）')
       return r.json()
     })
     .then(render)

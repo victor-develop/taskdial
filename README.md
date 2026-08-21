@@ -42,6 +42,39 @@ npm run dev
 
 Open http://localhost:5183 and hit **⧉** in the top right to move the dial into a Document Picture-in-Picture window, which floats above other windows at the OS level. Chromium only — in Safari and Firefox the ⧉ button doesn't appear and the page works normally otherwise.
 
+## Local HTTP API
+
+The app runs a small server on `127.0.0.1:7717` so an agent can read state and edit slices.
+
+```
+GET    /                      landing page
+GET    /insights              pause report — HTML, or ?format=md for markdown, ?format=json for the raw aggregate
+GET    /health                {ok, version, phase, uptime, window}
+GET    /skills                capability manifest (JSON, ?format=md for markdown)
+GET    /control/state         full current state
+POST   /control/slices        add a slice        {name, lenMin}
+PATCH  /control/slices/:id    rename / change length
+DELETE /control/slices/:id    remove a slice
+POST   /control/pause         {reason?}
+POST   /control/resume
+```
+
+**There is one state machine.** Writes are not reimplemented in Rust — they're forwarded to the window as an intent and run through the same `model.reducer`, so the limits match the app exactly (a 9th slice gets 422, `lenMin: 9999` clamps to 180). The cost is that writes need the window alive; otherwise 503. Read endpoints work regardless.
+
+`?format=md` on `/insights` exists for feeding the report to an AI: pre-aggregated, non-zero hour buckets only, no JSON noise. The aggregation lives in `src-tauri/src/insights.rs` and is the single source for all three formats — the page used to compute it again in the browser, which is exactly how two views of the same report drift apart.
+
+### Security
+
+Loopback only by default. The `Host` header is checked to block DNS rebinding (any web page can point a domain at 127.0.0.1 and hit the write endpoints), writes carrying an `Origin` are rejected outright, and no CORS headers are ever sent. A taken port is a hard error, not a silent move to the next one — a moved port means the agent talks to nothing.
+
+Config lives in `server.json` in the app config directory:
+
+```json
+{ "enabled": true, "bind": "127.0.0.1", "port": 7717 }
+```
+
+Opening `bind` up works, and there is no token — so **anyone on the network could change your state, not just read it**. That's why the default stays loopback and opening up has to be your explicit edit.
+
 ## Storage
 
 State lives in the webview's localStorage. Under Tauri it's keyed by the app identifier, so it has nothing to do with ports and survives any restart. In browser mode it's independent of the dev server process — kill it, reopen, the data is still there.

@@ -1,3 +1,4 @@
+mod insights;
 mod server;
 
 use std::sync::Arc;
