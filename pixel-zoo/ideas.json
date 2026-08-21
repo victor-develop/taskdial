@@ -1,0 +1,7279 @@
+{
+  "total": 485,
+  "ideas": [
+    {
+      "slug": "pets-dachshund-sausage",
+      "runner": "腊肠犬",
+      "goal": "香肠",
+      "locomotion": "跑，超长身体贴地，短腿高频倒",
+      "pairing": "身体本身就是香肠形，追同类",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-cat-yarn-ball",
+      "runner": "家猫",
+      "goal": "毛线球",
+      "locomotion": "跑，背弓起落，尾巴竖起摆动",
+      "pairing": "猫玩线球，圆球任意角度都成立",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-cat-laser-dot",
+      "runner": "猫（伏击）",
+      "goal": "激光点",
+      "locomotion": "弹跳，压低潜行后突然扑出",
+      "pairing": "猫扑红点，光点是纯圆点",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-rabbit-carrot",
+      "runner": "兔子",
+      "goal": "胡萝卜",
+      "locomotion": "跳，后腿蹬地，双耳后压再弹起",
+      "pairing": "兔吃萝卜，最直白的一对",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-hamster-ball-seed",
+      "runner": "仓鼠球",
+      "goal": "葵花籽",
+      "locomotion": "滚，球体滚动，里面小影子换脚",
+      "pairing": "仓鼠跑球去拿存粮种子",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-guinea-pig-cucumber",
+      "runner": "豚鼠",
+      "goal": "黄瓜片",
+      "locomotion": "跑，无尾面包块小步碎跑",
+      "pairing": "豚鼠最爱黄瓜片，圆片好转",
+      "legible": "low",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-mouse-cheese",
+      "runner": "小白鼠",
+      "goal": "奶酪块",
+      "locomotion": "跑，贴地窜，一像素长尾拖后",
+      "pairing": "鼠偷奶酪，经典组合",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-hedgehog-apple",
+      "runner": "刺猬",
+      "goal": "苹果",
+      "locomotion": "跑，圆背带锯齿刺，小步急走",
+      "pairing": "民间形象：刺猬背苹果",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-ferret-jingle-ball",
+      "runner": "雪貂",
+      "goal": "铃铛球",
+      "locomotion": "弹跳，长筒身体拱起再弹平",
+      "pairing": "雪貂扑滚响球玩",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-chinchilla-raisin",
+      "runner": "龙猫",
+      "goal": "葡萄干",
+      "locomotion": "跳，原地爆米花式小蹦前进",
+      "pairing": "龙猫零食就是葡萄干",
+      "legible": "low",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-goldfish-flake",
+      "runner": "金鱼",
+      "goal": "鱼食粒",
+      "locomotion": "游，扇尾左右摆，身体轻微起伏",
+      "pairing": "金鱼追食粒，颗粒是圆点",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-tadpole-algae",
+      "runner": "蝌蚪",
+      "goal": "水藻团",
+      "locomotion": "游，圆头带细尾高频抽动",
+      "pairing": "蝌蚪啃水藻，藻团任意角度都是团",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-axolotl-shrimp",
+      "runner": "六角恐龙",
+      "goal": "小虾",
+      "locomotion": "游，四条小腿摊开，尾鳍缓摆",
+      "pairing": "钝口螈吃活虾",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-duck-bread-cube",
+      "runner": "家鸭",
+      "goal": "面包块",
+      "locomotion": "游，浮在水线上，头前后一点一点",
+      "pairing": "喂鸭子面包，方块好转",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-tortoise-strawberry",
+      "runner": "陆龟",
+      "goal": "草莓",
+      "locomotion": "爬，圆壳几乎不动，四腿极慢交替",
+      "pairing": "龟最爱草莓，慢慢磨到终点",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-bearded-dragon-blueberry",
+      "runner": "鬃狮蜥",
+      "goal": "蓝莓",
+      "locomotion": "爬，身体扁平摊开，粗尾左右扫",
+      "pairing": "鬃狮蜥吃浆果，蓝莓是纯圆",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-chameleon-cricket",
+      "runner": "变色龙",
+      "goal": "蟋蟀",
+      "locomotion": "爬，一步一停，尾巴卷成小圈",
+      "pairing": "变色龙弹舌抓蟋蟀",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-tarantula-beetle",
+      "runner": "宠物蜘蛛",
+      "goal": "甲虫",
+      "locomotion": "爬，八条腿放射状交替快走",
+      "pairing": "蜘蛛捕甲虫，甲虫是椭圆",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-scorpion-mealworm",
+      "runner": "宠物蝎",
+      "goal": "面包虫",
+      "locomotion": "爬，双钳前伸，尾巴上翘卷起",
+      "pairing": "蝎子吃面包虫",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-hermit-crab-shell",
+      "runner": "寄居蟹",
+      "goal": "螺壳",
+      "locomotion": "爬，背着壳歪着走，节奏一顿一顿",
+      "pairing": "寄居蟹换新壳",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-goat-tin-can",
+      "runner": "山羊",
+      "goal": "铁罐",
+      "locomotion": "爬，踩石头往上蹦跳式攀",
+      "pairing": "山羊什么都啃，连罐子也啃",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-python-egg",
+      "runner": "球蟒",
+      "goal": "蛋",
+      "locomotion": "蠕动，S 形波从头传到尾",
+      "pairing": "蛇吞蛋，蛋各角度都是蛋",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-silkworm-mulberry-leaf",
+      "runner": "蚕",
+      "goal": "桑叶",
+      "locomotion": "蠕动，一节一节推，头部先探",
+      "pairing": "蚕只吃桑叶",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-snail-lettuce",
+      "runner": "蜗牛",
+      "goal": "生菜叶",
+      "locomotion": "滑，壳不动身体前伸，极慢匀速",
+      "pairing": "蜗牛啃菜叶，螺壳剪影极强",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-sugar-glider-grape",
+      "runner": "蜜袋鼯",
+      "goal": "葡萄",
+      "locomotion": "滑，四肢摊成膜，斜线滑翔下坠",
+      "pairing": "蜜袋鼯抱着葡萄啃",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-budgie-millet",
+      "runner": "虎皮鹦鹉",
+      "goal": "小米穗",
+      "locomotion": "飞，快频扑翅，长尾拖在后面",
+      "pairing": "鹦鹉啄谷穗",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-pigeon-envelope",
+      "runner": "家鸽",
+      "goal": "信封",
+      "locomotion": "飞，宽翅慢拍，直线平飞",
+      "pairing": "信鸽送信，信封是方形",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-cricket-soybean",
+      "runner": "蟋蟀",
+      "goal": "黄豆",
+      "locomotion": "跳，后腿折起蓄力再远距离弹",
+      "pairing": "蟋蟀啃豆子",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-frog-lily-pad",
+      "runner": "宠物蛙",
+      "goal": "荷叶",
+      "locomotion": "跳，蹲成一团再蹬直，落地摊开",
+      "pairing": "蛙跳回荷叶，圆叶怎么转都圆",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-sheepdog-frisbee",
+      "runner": "牧羊犬",
+      "goal": "飞盘",
+      "locomotion": "跳，助跑后腾空张嘴接",
+      "pairing": "接飞盘，圆盘完美对称",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-greyhound-ring-toy",
+      "runner": "灵缇",
+      "goal": "圆环玩具",
+      "locomotion": "跑，深胸细腰，大幅伸展式冲刺",
+      "pairing": "竞速犬冲向圆环，环形任意角度都认",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-hen-corn",
+      "runner": "母鸡",
+      "goal": "玉米棒",
+      "locomotion": "跑，胖身翘尾，脖子一伸一缩",
+      "pairing": "鸡啄玉米",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-goose-bread-slice",
+      "runner": "大白鹅",
+      "goal": "面包片",
+      "locomotion": "跑，长脖前伸压低，大步冲",
+      "pairing": "鹅抢面包，凶得很",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-turkey-pumpkin",
+      "runner": "火鸡",
+      "goal": "南瓜",
+      "locomotion": "跑，尾羽展成扇形，摇晃前进",
+      "pairing": "火鸡啄南瓜，南瓜近似圆",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-quail-cherry",
+      "runner": "鹌鹑",
+      "goal": "樱桃",
+      "locomotion": "跑，圆球身体贴地快速小碎步",
+      "pairing": "鹌鹑啄小果子",
+      "legible": "low",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-pig-truffle",
+      "runner": "家猪",
+      "goal": "松露",
+      "locomotion": "跑，桶身矮腿，拱鼻贴地小跑",
+      "pairing": "猪拿鼻子找松露，松露是不规则球",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-sheep-hay-bale",
+      "runner": "绵羊",
+      "goal": "干草捆",
+      "locomotion": "跑，蓬松团身体在细腿上颠",
+      "pairing": "羊奔向草捆，方捆好转",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-cow-salt-lick",
+      "runner": "奶牛",
+      "goal": "盐砖",
+      "locomotion": "跑，长身重步，尾巴垂着甩",
+      "pairing": "牛舔盐砖，立方体各角度一致",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-horse-sugar-cube",
+      "runner": "马",
+      "goal": "方糖",
+      "locomotion": "跑，四拍奔驰，鬃毛尾巴向后飘",
+      "pairing": "给马喂方糖",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-camel-water-drop",
+      "runner": "骆驼",
+      "goal": "水滴",
+      "locomotion": "跑，双峰起伏，长腿同侧摆动",
+      "pairing": "骆驼找水，水滴形状够独特",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": false
+    },
+    {
+      "slug": "pets-alpaca-oat-cookie",
+      "runner": "羊驼",
+      "goal": "燕麦饼",
+      "locomotion": "跑，长脖子直立，蓬身小步弹",
+      "pairing": "羊驼讨零食饼，圆饼对称",
+      "legible": "med",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "pets-ostrich-coin",
+      "runner": "鸵鸟",
+      "goal": "硬币",
+      "locomotion": "跑，长腿大跨，长脖子前后晃",
+      "pairing": "鸵鸟爱捡亮东西，硬币是圆盘",
+      "legible": "high",
+      "theme": "pets",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-armadillo-beetle",
+      "runner": "犰狳",
+      "goal": "甲虫",
+      "locomotion": "装甲球滚动，停下弓背露前爪",
+      "pairing": "犰狳刨土翻甲虫吃",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-rhino-mudball",
+      "runner": "犀牛",
+      "goal": "泥球",
+      "locomotion": "低头小跑，鼻角先行冲刺",
+      "pairing": "犀牛爱泡泥，冲向一团泥",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-elephant-peanut",
+      "runner": "大象",
+      "goal": "花生",
+      "locomotion": "四腿重步跑，长鼻前后甩",
+      "pairing": "大象最爱花生",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-giraffe-leafball",
+      "runner": "长颈鹿",
+      "goal": "叶球",
+      "locomotion": "长颈前倾慢跑，颈随步伐晃",
+      "pairing": "长颈鹿伸颈吃树冠叶球",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-kangaroo-glove",
+      "runner": "袋鼠",
+      "goal": "拳击手套",
+      "locomotion": "双后腿大跳，长尾平衡",
+      "pairing": "袋鼠拳击，抢一只手套",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-sloth-blossom",
+      "runner": "树懒",
+      "goal": "木槿花",
+      "locomotion": "倒挂横向慢爬，四肢交替",
+      "pairing": "树懒慢慢挪去吃一朵花",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-fruit-bat-fig",
+      "runner": "果蝠",
+      "goal": "无花果",
+      "locomotion": "扇翅飞行，停下倒吊收翅",
+      "pairing": "果蝠专挑无花果",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-whale-krill",
+      "runner": "鲸鱼",
+      "goal": "磷虾",
+      "locomotion": "游动，尾鳍上下摆，偶尔喷气",
+      "pairing": "鲸张嘴滤食磷虾",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-dolphin-hoop",
+      "runner": "海豚",
+      "goal": "跳圈",
+      "locomotion": "跃出水面画弧，入水再跃",
+      "pairing": "海豚跳圈是拿手戏",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-seal-fish",
+      "runner": "海豹",
+      "goal": "小鱼",
+      "locomotion": "陆上蠕动，胸腹拱起挪身",
+      "pairing": "海豹追一条鱼",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-otter-urchin",
+      "runner": "水獭",
+      "goal": "海胆",
+      "locomotion": "仰泳，肚皮朝上划水",
+      "pairing": "水獭仰躺砸开海胆",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-beaver-log",
+      "runner": "河狸",
+      "goal": "圆木",
+      "locomotion": "游动，扁尾左右拍水",
+      "pairing": "河狸拖圆木筑坝",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-squirrel-acorn",
+      "runner": "松鼠",
+      "goal": "橡果",
+      "locomotion": "小跳前进，大尾随起落扫动",
+      "pairing": "松鼠囤橡果",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-flying-squirrel-pinecone",
+      "runner": "鼯鼠",
+      "goal": "松果",
+      "locomotion": "展膜滑翔，方形轮廓缓降",
+      "pairing": "滑到另一棵松树取松果",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-wolf-moon",
+      "runner": "灰狼",
+      "goal": "月牙",
+      "locomotion": "低头长距奔跑，尾巴平伸",
+      "pairing": "狼跑向月亮嚎叫",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-fox-vole",
+      "runner": "狐狸",
+      "goal": "田鼠",
+      "locomotion": "垂直扑跳扎地，再起跳",
+      "pairing": "狐狸雪下扑田鼠",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-bear-honeycomb",
+      "runner": "棕熊",
+      "goal": "蜂巢",
+      "locomotion": "厚重四腿跑，肩背起伏",
+      "pairing": "熊掏蜂巢吃蜜",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-panda-bamboo",
+      "runner": "熊猫",
+      "goal": "竹节",
+      "locomotion": "翻滚前进，滚累了坐下",
+      "pairing": "熊猫抱着竹节啃",
+      "legible": "low",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-koala-eucalyptus",
+      "runner": "考拉",
+      "goal": "尤加利叶",
+      "locomotion": "抱树干往上爬，四肢抓握",
+      "pairing": "考拉只吃尤加利叶",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-pangolin-anthill",
+      "runner": "穿山甲",
+      "goal": "蚁丘",
+      "locomotion": "抱树爬，长尾勾住枝条",
+      "pairing": "穿山甲舔蚁丘",
+      "legible": "low",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-anteater-ant",
+      "runner": "食蚁兽",
+      "goal": "蚂蚁",
+      "locomotion": "小跑，管吻贴地，大尾拖后",
+      "pairing": "食蚁兽长舌卷蚂蚁",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-monkey-banana",
+      "runner": "猴子",
+      "goal": "香蕉",
+      "locomotion": "跳跃前进，长尾向上卷",
+      "pairing": "猴子抢香蕉",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-gorilla-drum",
+      "runner": "大猩猩",
+      "goal": "手鼓",
+      "locomotion": "拳步爬行，肩高于臀",
+      "pairing": "大猩猩拍胸像敲鼓",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-porcupine-branch",
+      "runner": "豪猪",
+      "goal": "树枝",
+      "locomotion": "低身小跑，背刺随步抖",
+      "pairing": "豪猪磨牙啃树枝",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-capybara-orange",
+      "runner": "水豚",
+      "goal": "橘子",
+      "locomotion": "浮水游，只露头顶",
+      "pairing": "水豚头上顶橘子",
+      "legible": "low",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-deer-mushroom",
+      "runner": "麋鹿",
+      "goal": "蘑菇",
+      "locomotion": "腾空大跳，四腿收拢",
+      "pairing": "鹿在林间找蘑菇",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-boar-truffle",
+      "runner": "野猪",
+      "goal": "松露",
+      "locomotion": "冲刺跑，吻部贴地拱",
+      "pairing": "野猪用鼻子刨松露",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-mole-worm",
+      "runner": "鼹鼠",
+      "goal": "蚯蚓",
+      "locomotion": "土中蠕动，前爪轮流挖",
+      "pairing": "鼹鼠吃蚯蚓",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-walrus-clam",
+      "runner": "海象",
+      "goal": "蛤蜊",
+      "locomotion": "蠕动挪身，獠牙插地拖行",
+      "pairing": "海象撬蛤蜊吃",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-skunk-egg",
+      "runner": "臭鼬",
+      "goal": "鸟蛋",
+      "locomotion": "碎步跑，蓬尾竖成拱",
+      "pairing": "臭鼬偷鸟蛋",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-cheetah-lightning",
+      "runner": "猎豹",
+      "goal": "闪电",
+      "locomotion": "超长步幅冲刺，脊背弓伸",
+      "pairing": "猎豹就是速度，追闪电",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-lion-crown",
+      "runner": "狮子",
+      "goal": "王冠",
+      "locomotion": "沉稳跑，鬃毛圆头随步晃",
+      "pairing": "百兽之王追王冠",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-ibex-saltblock",
+      "runner": "岩羊",
+      "goal": "盐块",
+      "locomotion": "岩间连续蹦跳，落点极小",
+      "pairing": "岩羊爱舔盐块",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-jerboa-seed",
+      "runner": "跳鼠",
+      "goal": "种子",
+      "locomotion": "双足弹跳，长尾拖成一条线",
+      "pairing": "跳鼠搬种子回洞",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-platypus-crayfish",
+      "runner": "鸭嘴兽",
+      "goal": "小龙虾",
+      "locomotion": "水下游，扁尾拍水，喙前伸",
+      "pairing": "鸭嘴兽泥里捞小龙虾",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-wombat-cube",
+      "runner": "袋熊",
+      "goal": "方块",
+      "locomotion": "方身小跑，四腿短促",
+      "pairing": "袋熊拉方块屎，追个方块",
+      "legible": "low",
+      "theme": "wild-mammal",
+      "flagged": true
+    },
+    {
+      "slug": "wild-mammal-bison-haybale",
+      "runner": "野牛",
+      "goal": "干草捆",
+      "locomotion": "低头狂奔，肩隆是最高点",
+      "pairing": "野牛冲向干草捆",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-hippo-watermelon",
+      "runner": "河马",
+      "goal": "西瓜",
+      "locomotion": "水里半浮走，张开大嘴",
+      "pairing": "河马一口咬开西瓜",
+      "legible": "high",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "wild-mammal-meerkat-scorpion",
+      "runner": "狐獴",
+      "goal": "蝎子",
+      "locomotion": "小跑，停下立起张望",
+      "pairing": "狐獴专治蝎子",
+      "legible": "med",
+      "theme": "wild-mammal",
+      "flagged": false
+    },
+    {
+      "slug": "bird-penguin-fish",
+      "runner": "企鹅",
+      "goal": "小鱼",
+      "locomotion": "滑：肚皮贴冰滑行，停下直立张鳍",
+      "pairing": "企鹅下水就是为了叼鱼",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-ostrich-egg",
+      "runner": "鸵鸟",
+      "goal": "鸟蛋",
+      "locomotion": "跑：长腿大步，脖子前伸压低",
+      "pairing": "回巢护自己的巨蛋",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-flamingo-shrimp",
+      "runner": "火烈鸟",
+      "goal": "小虾",
+      "locomotion": "跑：高抬长腿涉水，停下单腿收颈",
+      "pairing": "吃虾吃出的红色",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-pelican-crab",
+      "runner": "鹈鹕",
+      "goal": "螃蟹",
+      "locomotion": "滑：贴水面滑翔，喉袋鼓着",
+      "pairing": "大喉袋兜住整只螃蟹",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-owl-mouse",
+      "runner": "猫头鹰",
+      "goal": "老鼠",
+      "locomotion": "飞：无声滑翔，停下头扭九十度",
+      "pairing": "夜猎的经典一对",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-woodpecker-ant",
+      "runner": "啄木鸟",
+      "goal": "蚂蚁",
+      "locomotion": "爬：尾撑树皮，一顿一顿往前挪",
+      "pairing": "凿开树皮就为吃虫蚁",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-hummingbird-flower",
+      "runner": "蜂鸟",
+      "goal": "花朵",
+      "locomotion": "飞：悬停加瞬间短冲，翅膀糊成一团",
+      "pairing": "悬停在花前吸蜜",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-toucan-berry",
+      "runner": "巨嘴鸟",
+      "goal": "浆果",
+      "locomotion": "跳：枝上双脚跳，大喙带头下压",
+      "pairing": "大喙专为摘果子",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-peacock-gem",
+      "runner": "孔雀",
+      "goal": "宝石",
+      "locomotion": "跑：拖着尾小跑，停下开屏",
+      "pairing": "爱亮的，宝石配开屏",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-swan-bagel",
+      "runner": "天鹅",
+      "goal": "面包圈",
+      "locomotion": "游：身体几乎不动，脚在水下划",
+      "pairing": "人喂天鹅面包的老画面",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-duck-snail",
+      "runner": "鸭子",
+      "goal": "蜗牛",
+      "locomotion": "游：屁股翘起，间歇一头扎进水里",
+      "pairing": "鸭子翻泥找螺吃",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-rooster-clock",
+      "runner": "公鸡",
+      "goal": "闹钟",
+      "locomotion": "跑：挺胸阔步，停下昂头打鸣",
+      "pairing": "公鸡就是活闹钟",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-chick-corn",
+      "runner": "小鸡",
+      "goal": "玉米",
+      "locomotion": "弹跳：整只圆球一蹦一蹦",
+      "pairing": "小鸡奔向一粒玉米",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-kiwi-beetle",
+      "runner": "几维鸟",
+      "goal": "甲虫",
+      "locomotion": "跑：无颈圆身碎步，长喙贴地探",
+      "pairing": "长喙插土里翻虫",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-roadrunner-lizard",
+      "runner": "走鹃",
+      "goal": "蜥蜴",
+      "locomotion": "跑：长尾拉平，双腿快到糊成一团",
+      "pairing": "沙地上追蜥蜴的快脚鸟",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-heron-frog",
+      "runner": "苍鹭",
+      "goal": "青蛙",
+      "locomotion": "跑：慢速高抬腿潜行，停下缩颈",
+      "pairing": "浅水边等蛙的杀手",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-eagle-snake",
+      "runner": "老鹰",
+      "goal": "盘蛇",
+      "locomotion": "飞：平展双翼滑过，停下收翼抓地",
+      "pairing": "鹰抓蛇，盘着更好抓",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-vulture-skull",
+      "runner": "秃鹫",
+      "goal": "头骨",
+      "locomotion": "飞：起伏盘旋，停下驼背蹲立",
+      "pairing": "秃鹫守着一堆骨",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-seagull-fries",
+      "runner": "海鸥",
+      "goal": "薯条",
+      "locomotion": "飞：折角窄翼低掠，急停抢食",
+      "pairing": "海边抢薯条的惯犯",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-puffin-urchin",
+      "runner": "海雀",
+      "goal": "海胆",
+      "locomotion": "飞：短翅疯狂扑打，落地站得笔直",
+      "pairing": "潜水找海底食物",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-albatross-squid",
+      "runner": "信天翁",
+      "goal": "鱿鱼",
+      "locomotion": "飞：翅膀几乎不动的超长滑翔",
+      "pairing": "远洋鸟主食是鱿鱼",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-swallow-dragonfly",
+      "runner": "燕子",
+      "goal": "蜻蜓",
+      "locomotion": "飞：折线急转，忽高忽低",
+      "pairing": "空中追虫的对手戏",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-pigeon-envelope",
+      "runner": "鸽子",
+      "goal": "信封",
+      "locomotion": "飞：稳定直线，落地点头踱步",
+      "pairing": "信鸽送信，人人都懂",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-magpie-ring",
+      "runner": "喜鹊",
+      "goal": "戒指",
+      "locomotion": "跳：长尾一翘一翘，双脚并跳",
+      "pairing": "喜鹊偷亮闪闪的东西",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-parrot-cracker",
+      "runner": "鹦鹉",
+      "goal": "饼干",
+      "locomotion": "爬：用喙勾住再挪爪，横向攀过去",
+      "pairing": "要饼干的那只鹦鹉",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-dodo-acorn",
+      "runner": "渡渡鸟",
+      "goal": "橡果",
+      "locomotion": "跑：笨重左右摇晃小跑",
+      "pairing": "胖鸟捡硬壳果子",
+      "legible": "high",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-cormorant-eel",
+      "runner": "鸬鹚",
+      "goal": "鳗鱼",
+      "locomotion": "游：半潜只露头颈，停下张翅晾干",
+      "pairing": "鸬鹚下水专吞长鱼",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-spoonbill-spoon",
+      "runner": "琵鹭",
+      "goal": "汤勺",
+      "locomotion": "跑：涉水前行，勺喙左右扫",
+      "pairing": "勺子嘴的鸟去拿勺子",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-falcon-stopwatch",
+      "runner": "游隼",
+      "goal": "秒表",
+      "locomotion": "飞：收翼成箭形直线俯冲",
+      "pairing": "最快的鸟配计时器",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-cassowary-fig",
+      "runner": "鹤鸵",
+      "goal": "无花果",
+      "locomotion": "跑：低头前倾冲撞式狂奔",
+      "pairing": "雨林大鸟吞整颗果",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-robin-worm",
+      "runner": "知更鸟",
+      "goal": "蚯蚓",
+      "locomotion": "跳：跳两下停一下，停时挺胸",
+      "pairing": "早起的鸟有虫吃",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-fluffball-suet",
+      "runner": "圆胖山雀",
+      "goal": "板油球",
+      "locomotion": "滚：整只像球一样滚，停下露喙",
+      "pairing": "冬天圆成球去啃油球",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-nestling-caterpillar",
+      "runner": "光秃雏鸟",
+      "goal": "肉虫",
+      "locomotion": "蠕动：一拱一拱前挪，大嘴张着",
+      "pairing": "没毛的雏鸟只想吃虫",
+      "legible": "low",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-sparrow-crumb",
+      "runner": "麻雀",
+      "goal": "面包屑",
+      "locomotion": "跳：双脚极小幅快跳，走一步就停",
+      "pairing": "街边啄面包屑的常客",
+      "legible": "low",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-quail-grasshopper",
+      "runner": "鹌鹑",
+      "goal": "蚱蜢",
+      "locomotion": "跑：低身疾走，头上羽饰前后弹",
+      "pairing": "草丛里追蹦虫",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-weaver-yarn",
+      "runner": "织巢鸟",
+      "goal": "线团",
+      "locomotion": "爬：沿草茎抓着往前攀，喙叼草",
+      "pairing": "会编巢的鸟要线团",
+      "legible": "low",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-kingfisher-droplet",
+      "runner": "翠鸟",
+      "goal": "水滴",
+      "locomotion": "飞：短悬停后垂直俯冲入水",
+      "pairing": "入水那一下溅出水珠",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-stork-bundle",
+      "runner": "白鹳",
+      "goal": "布包裹",
+      "locomotion": "飞：长腿后拖的平稳滑翔",
+      "pairing": "送包裹的鹳，老段子",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": false
+    },
+    {
+      "slug": "bird-shoebill-turtle",
+      "runner": "鲸头鹳",
+      "goal": "乌龟",
+      "locomotion": "跑：静立良久再慢步逼近",
+      "pairing": "鞋型大喙能咬开龟",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-crow-walnut",
+      "runner": "乌鸦",
+      "goal": "核桃",
+      "locomotion": "跑：地面小跑，头一伸一伸",
+      "pairing": "乌鸦会砸开核桃吃",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-bowerbird-cap",
+      "runner": "园丁鸟",
+      "goal": "瓶盖",
+      "locomotion": "跳：叼着东西一小跳一小跳",
+      "pairing": "收集小物件装饰求偶台",
+      "legible": "low",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "bird-oystercatcher-oyster",
+      "runner": "蛎鹬",
+      "goal": "牡蛎",
+      "locomotion": "跑：滩涂上直线快走，喙前伸",
+      "pairing": "名字就写着专撬牡蛎",
+      "legible": "med",
+      "theme": "bird",
+      "flagged": true
+    },
+    {
+      "slug": "sea-dolphin-hoop",
+      "runner": "海豚",
+      "goal": "呼啦圈",
+      "locomotion": "游：贴水面起伏，定点跃出弧线",
+      "pairing": "海豚跳圈是马戏经典画面",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-shark-surfboard",
+      "runner": "鲨鱼",
+      "goal": "冲浪板",
+      "locomotion": "游：背鳍破水直线巡航，停时鳍轻摆",
+      "pairing": "鲨鱼盯冲浪板，一眼就懂的梗",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-narwhal-icecube",
+      "runner": "独角鲸",
+      "goal": "冰块",
+      "locomotion": "游：斜举长牙前顶，尾鳍上下摆",
+      "pairing": "独角鲸用牙顶开浮冰",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-manta-sanddollar",
+      "runner": "蝠鲼",
+      "goal": "沙钱",
+      "locomotion": "飞：水下振双翼滑翔，停时悬停",
+      "pairing": "蝠鲼贴沙翻找沙钱海胆",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-sunfish-sun",
+      "runner": "翻车鱼",
+      "goal": "太阳",
+      "locomotion": "游：竖圆盘身侧向歪摆，慢推",
+      "pairing": "太阳鱼浮上水面晒太阳",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-swordfish-target",
+      "runner": "剑鱼",
+      "goal": "靶心",
+      "locomotion": "游：低身冲刺，长吻前指",
+      "pairing": "尖吻找靶子，天生要扎中",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-hammerhead-hammer",
+      "runner": "锤头鲨",
+      "goal": "锤子",
+      "locomotion": "游：T形头左右扫，身体S摆",
+      "pairing": "锤头配锤子，同款脑袋",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-anglerfish-bulb",
+      "runner": "鮟鱇鱼",
+      "goal": "灯泡",
+      "locomotion": "游：大头缓推，头顶钓竿垂晃",
+      "pairing": "自带小灯的鱼想换个亮灯泡",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-pufferfish-balloon",
+      "runner": "河豚",
+      "goal": "气球",
+      "locomotion": "弹跳：鼓成球体一跳一顿",
+      "pairing": "两个都是鼓起来的东西",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-flyingfish-paperplane",
+      "runner": "飞鱼",
+      "goal": "纸飞机",
+      "locomotion": "飞：掠水滑翔，落水甩尾再起",
+      "pairing": "两个滑翔选手比谁飘更远",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-eel-amphora",
+      "runner": "海鳗",
+      "goal": "陶罐",
+      "locomotion": "蠕动：细长身左右波浪推进",
+      "pairing": "海鳗爱钻沉船陶罐当巢",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-seahorse-seagrass",
+      "runner": "海马",
+      "goal": "海草卷",
+      "locomotion": "游：竖直身，上下浮沉小步漂",
+      "pairing": "海马要缠住草茎才停得住",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-squid-inkbottle",
+      "runner": "鱿鱼",
+      "goal": "墨水瓶",
+      "locomotion": "游：喷射突进后收拢，一冲一停",
+      "pairing": "喷墨的家伙去补墨水",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-nautilus-compass",
+      "runner": "鹦鹉螺",
+      "goal": "罗盘",
+      "locomotion": "游：卷壳缓漂，触手束前伸收缩",
+      "pairing": "活体潜艇找导航仪",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-octopus-crab",
+      "runner": "章鱼",
+      "goal": "螃蟹",
+      "locomotion": "爬：触手轮换蹬地，头囊起伏",
+      "pairing": "章鱼最爱的猎物就是蟹",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-crab-starfish",
+      "runner": "螃蟹",
+      "goal": "海星",
+      "locomotion": "爬：横行，八腿交替，双钳举起",
+      "pairing": "潮池里蟹拖海星回洞",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-lobster-fishbone",
+      "runner": "龙虾",
+      "goal": "鱼骨",
+      "locomotion": "爬：长身低伏，大钳前探试探",
+      "pairing": "龙虾清残骸，鱼骨是加餐",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-hermitcrab-shell",
+      "runner": "寄居蟹",
+      "goal": "空螺壳",
+      "locomotion": "爬：背着壳歪着走，停时缩进壳",
+      "pairing": "长大了要换个更大的壳",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-mantisshrimp-glove",
+      "runner": "螳螂虾",
+      "goal": "拳击手套",
+      "locomotion": "弹跳：短促蹬水前窜，前肢猛弹",
+      "pairing": "海里最狠的拳手要副手套",
+      "legible": "low",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-urchin-kelp",
+      "runner": "海胆",
+      "goal": "海带",
+      "locomotion": "滚：刺球整体翻滚，停时刺竖起",
+      "pairing": "海胆啃海带是真事",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-starfish-mussel",
+      "runner": "海星",
+      "goal": "贻贝",
+      "locomotion": "爬：五臂轮流前搭，整体挪动",
+      "pairing": "海星撬开贝壳吃肉",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-jellyfish-moon",
+      "runner": "水母",
+      "goal": "月亮",
+      "locomotion": "游：伞盖脉动收放，触手随后飘",
+      "pairing": "月水母朝着月亮漂",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-turtle-jelly",
+      "runner": "海龟",
+      "goal": "水母",
+      "locomotion": "游：前鳍同步划水，脖子前伸",
+      "pairing": "海龟专吃水母",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-horseshoecrab-ammonite",
+      "runner": "马蹄蟹",
+      "goal": "菊石化石",
+      "locomotion": "爬：半圆壳贴沙推进，尖尾拖痕",
+      "pairing": "活化石去认亲，找远古菊石",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-penguin-egg",
+      "runner": "企鹅",
+      "goal": "鸟蛋",
+      "locomotion": "滑：肚皮贴地滑行，双蹼后推",
+      "pairing": "企鹅赶回去把蛋垫回脚上",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-otter-urchin",
+      "runner": "海獺",
+      "goal": "海胆",
+      "locomotion": "游：仰泳，肚皮朝天，后蹼摆",
+      "pairing": "海獺躺着砸开海胆",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-pelican-bucket",
+      "runner": "鹈鹕",
+      "goal": "鱼桶",
+      "locomotion": "飞：贴水面掠过，大喙前压",
+      "pairing": "大喉袋要装满一桶鱼",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-duck-bread",
+      "runner": "野鸭",
+      "goal": "面包片",
+      "locomotion": "游：水面划水，脑袋一点一点",
+      "pairing": "鸭子追人扔的面包",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-swan-lily",
+      "runner": "天鹅",
+      "goal": "睡莲",
+      "locomotion": "游：长颈前伸，身体平稳滑过水面",
+      "pairing": "天鹅停在睡莲边是定格画面",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-frog-fly",
+      "runner": "青蛙",
+      "goal": "苍蝇",
+      "locomotion": "跳：屈腿蓄力后大跳，落地压扁",
+      "pairing": "青蛙吐舌抓苍蝇",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-beaver-log",
+      "runner": "河狸",
+      "goal": "木棍",
+      "locomotion": "游：身体半沉推进，扁尾拍水",
+      "pairing": "河狸搬木头筑坝",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-platypus-shrimp",
+      "runner": "鸭嘴兽",
+      "goal": "小虾",
+      "locomotion": "游：四蹼交替划，扁喙左右扫",
+      "pairing": "鸭嘴兽在河底扫出小虾",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-crocodile-toothbrush",
+      "runner": "鳄鱼",
+      "goal": "牙刷",
+      "locomotion": "游：只露背脊眼鼻，长尾左右摆",
+      "pairing": "满口牙的家伙需要刷牙",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-manatee-lettuce",
+      "runner": "海牛",
+      "goal": "生菜",
+      "locomotion": "游：圆胖身缓摆桨形尾，慢速前推",
+      "pairing": "海牛啃菜叶是它的招牌",
+      "legible": "low",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-diver-chest",
+      "runner": "潜水员",
+      "goal": "宝箱",
+      "locomotion": "游：侧身蛙蹬，长脚蹼上下摆",
+      "pairing": "潜水员下水就是找宝箱",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-mermaid-comb",
+      "runner": "美人鱼",
+      "goal": "梳子",
+      "locomotion": "游：上身直立，鱼尾上下摆推进",
+      "pairing": "美人鱼梳头是老套路",
+      "legible": "med",
+      "theme": "sea",
+      "flagged": true
+    },
+    {
+      "slug": "sea-submarine-wheel",
+      "runner": "小潜艇",
+      "goal": "舵轮",
+      "locomotion": "游：下潜浮出起伏，尾部螺旋桨转",
+      "pairing": "潜艇打捞沉船的舵轮",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "sea-sailboat-anchor",
+      "runner": "帆船",
+      "goal": "船锚",
+      "locomotion": "滑：水面平移，帆随风前后晃",
+      "pairing": "船到终点要抛锚停住",
+      "legible": "high",
+      "theme": "sea",
+      "flagged": false
+    },
+    {
+      "slug": "bug-ant-sugar-cube",
+      "runner": "蚂蚁",
+      "goal": "方糖",
+      "locomotion": "爬，六足小步急走，触角抖",
+      "pairing": "蚂蚁搬糖，最常见的觅食画面",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-leafcutter-ant-fungus-ball",
+      "runner": "切叶蚁",
+      "goal": "菌球",
+      "locomotion": "爬，头顶大叶片晃动前进",
+      "pairing": "切叶蚁运叶回巢喂菌圃",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-dung-beetle-ball",
+      "runner": "蜣螂",
+      "goal": "粪球",
+      "locomotion": "滚，倒立后腿推球滚动",
+      "pairing": "屎壳郎推粪球，球任何角度都是球",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-honeybee-honeycomb-cell",
+      "runner": "蜜蜂",
+      "goal": "蜂巢格",
+      "locomotion": "飞，短翅高频振，走S小抖",
+      "pairing": "蜜蜂回巢，六边形旋转仍是六边形",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-wasp-paper-nest",
+      "runner": "胡蜂",
+      "goal": "纸巢球",
+      "locomotion": "飞，直线冲刺带急停",
+      "pairing": "胡蜂守卫圆纸巢",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-butterfly-flower",
+      "runner": "蝴蝶",
+      "goal": "花朵",
+      "locomotion": "飞，大翅上下扇，忽高忽低",
+      "pairing": "蝶采花，花瓣放射旋转不失形",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-moth-lightbulb",
+      "runner": "飞蛾",
+      "goal": "灯泡",
+      "locomotion": "飞，三角翼直冲，撞歪再飞",
+      "pairing": "飞蛾扑灯，语义最直接",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-firefly-star",
+      "runner": "萤火虫",
+      "goal": "星星",
+      "locomotion": "飞，尾端亮点一闪一闪飘",
+      "pairing": "发光虫追星光，同一类发光体",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-dragonfly-lilypad",
+      "runner": "蜻蜓",
+      "goal": "睡莲叶",
+      "locomotion": "飞，长腹平举，悬停后突进",
+      "pairing": "蜻蜓点水停莲叶，圆叶抗旋转",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-mayfly-hourglass",
+      "runner": "蜉蝣",
+      "goal": "沙漏",
+      "locomotion": "飞，垂尾丝，忽上忽下漂",
+      "pairing": "朝生暮死，追时间沙漏",
+      "legible": "low",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-mosquito-blood-drop",
+      "runner": "蚊子",
+      "goal": "血滴",
+      "locomotion": "飞，细身斜挂，游移逼近",
+      "pairing": "蚊子只想要一口血",
+      "legible": "low",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-housefly-donut",
+      "runner": "苍蝇",
+      "goal": "甜甜圈",
+      "locomotion": "飞，短促折线冲，突然停住",
+      "pairing": "苍蝇扑甜食，圆环任意角度可认",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-cicada-sun",
+      "runner": "知了",
+      "goal": "太阳",
+      "locomotion": "爬，宽身贴树干短距挪动",
+      "pairing": "夏日烈阳里的蝉鸣",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-grasshopper-leaf",
+      "runner": "蝗虫",
+      "goal": "叶片",
+      "locomotion": "跳，后腿折叠蓄力再弹远",
+      "pairing": "蝗虫啃叶子，吃货追粮",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-mantis-curled-grub",
+      "runner": "螳螂",
+      "goal": "蜷曲幼虫",
+      "locomotion": "爬，立胸前臂折叠，走一步顿一下",
+      "pairing": "螳螂捕猎，螺旋蜷体旋转不变",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-caterpillar-apple",
+      "runner": "毛毛虫",
+      "goal": "苹果",
+      "locomotion": "蠕动，体节波浪推进拱背",
+      "pairing": "虫钻苹果，圆果抗旋转",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-inchworm-tape-reel",
+      "runner": "尺蠛",
+      "goal": "卷尺盘",
+      "locomotion": "蠕动，一拱一伸量着走",
+      "pairing": "量尺虫要真尺子，双关",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-grub-tuber",
+      "runner": "蛴螬",
+      "goal": "圆块根",
+      "locomotion": "蠕动，C形肥身侧躬前挪",
+      "pairing": "白幼虫啃地下根",
+      "legible": "low",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-centipede-egg-cluster",
+      "runner": "蜈蚣",
+      "goal": "卵团",
+      "locomotion": "爬，长身多足波浪疾行",
+      "pairing": "蜈蚣护卵回巢",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-pillbug-rotten-leaf",
+      "runner": "鼠妇",
+      "goal": "腐叶球",
+      "locomotion": "滚，蜷成球滚动，停下摊成弓背",
+      "pairing": "潮虫吃腐叶，团起来最好认",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-cockroach-cookie",
+      "runner": "蟑螂",
+      "goal": "饼干",
+      "locomotion": "跑，扁身贴地超快窜，急停",
+      "pairing": "蟑螂扑饼干渣，圆饼抗旋转",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-stinkbug-berry",
+      "runner": "盾蝽",
+      "goal": "浆果",
+      "locomotion": "爬，盾形宽肩慢挪",
+      "pairing": "蝽用口针吸果汁",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-longhorn-beetle-log-slice",
+      "runner": "天牛",
+      "goal": "圆木截面",
+      "locomotion": "爬，两长触角前伸左右摆",
+      "pairing": "天牛钻木头，年轮圈抗旋转",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-rhino-beetle-sap-drop",
+      "runner": "独角仙",
+      "goal": "树液滴",
+      "locomotion": "爬，前角高举，重步硬推",
+      "pairing": "兜虫抢树液，角是它的标志",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-stag-beetle-crown",
+      "runner": "锹甲",
+      "goal": "王冠",
+      "locomotion": "爬，大颚张开一路挤过去",
+      "pairing": "甲虫之王去拿王冠",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-weevil-acorn",
+      "runner": "象鼻虫",
+      "goal": "橡果",
+      "locomotion": "爬，长喙下垂，梨身小步摇",
+      "pairing": "象鼻虫在坚果里产卵",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-mole-cricket-root",
+      "runner": "蝼蛄",
+      "goal": "块茎",
+      "locomotion": "爬，铲状前足边挖边推进",
+      "pairing": "蝼蛄地下啃作物根",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-stick-insect-twig",
+      "runner": "竹节虫",
+      "goal": "树枝",
+      "locomotion": "爬，细长身缓移，偶尔僵住装枝",
+      "pairing": "伪装成枝的虫回到真枝上",
+      "legible": "low",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-water-strider-ripple",
+      "runner": "水黾",
+      "goal": "涟漪圈",
+      "locomotion": "滑，长足撑水面一划一滑",
+      "pairing": "水面滑行者追它自己的水纹",
+      "legible": "low",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-diving-beetle-bubble",
+      "runner": "龙虱",
+      "goal": "气泡",
+      "locomotion": "游，桨足划水，一顿一进",
+      "pairing": "水甲虫要带气泡下潜",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-water-flea-algae-ball",
+      "runner": "水蚤",
+      "goal": "藻球",
+      "locomotion": "弹跳，水中一跳一沉的顿进",
+      "pairing": "滤食藻类，独眼小圆点",
+      "legible": "low",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-flea-fur-ball",
+      "runner": "跳蚤",
+      "goal": "绒毛球",
+      "locomotion": "弹跳，压扁蓄力弹很高很远",
+      "pairing": "跳蚤要钻回毛皮里",
+      "legible": "low",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-jumping-spider-fly",
+      "runner": "跳蛛",
+      "goal": "苍蝇",
+      "locomotion": "跳，短距蹲伏后猛扑",
+      "pairing": "跳蛛扑苍蝇，捕猎链清楚",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-orb-spider-web",
+      "runner": "圆蛛",
+      "goal": "蛛网",
+      "locomotion": "爬，圆腹八足高抬慢走",
+      "pairing": "蜘蛛回网，放射网抗旋转",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-scorpion-stone",
+      "runner": "蝎子",
+      "goal": "圆石",
+      "locomotion": "爬，钳前伸尾上翘，走走停停",
+      "pairing": "天亮前钻回石头底下",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-crab-scallop",
+      "runner": "螃蟹",
+      "goal": "扇贝",
+      "locomotion": "爬，横着走，双钳一开一合",
+      "pairing": "蟹夹开贝壳吃肉",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-fiddler-crab-sand-ball",
+      "runner": "招潮蟹",
+      "goal": "泥球",
+      "locomotion": "跑，侧向疾跑，大钳高举",
+      "pairing": "招潮蟹搓泥球堆洞口",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-shrimp-seaweed-ball",
+      "runner": "对虾",
+      "goal": "藻球",
+      "locomotion": "游，弓身摆尾一弹一弹前进",
+      "pairing": "虾啃海藻团",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "bug-mantis-shrimp-clam",
+      "runner": "螳螂虾",
+      "goal": "蛤蜊",
+      "locomotion": "游，长身平推，前爪突然弹出",
+      "pairing": "螳螂虾一拳砸开蛤壳",
+      "legible": "med",
+      "theme": "bug",
+      "flagged": true
+    },
+    {
+      "slug": "bug-horseshoe-crab-full-moon",
+      "runner": "马蹄蟹",
+      "goal": "满月",
+      "locomotion": "爬，圆盾贴沙推行，尖尾拖出痕",
+      "pairing": "满月大潮上岸产卵",
+      "legible": "high",
+      "theme": "bug",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-tortoise-strawberry",
+      "runner": "乌龟",
+      "goal": "草莓",
+      "locomotion": "爬，四条短腿慢挪，龟壳整体上下微晃",
+      "pairing": "龟啃草莓，圆果配圆壳",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-snake-egg",
+      "runner": "长蛇",
+      "goal": "鸟蛋",
+      "locomotion": "蠕动，身体走 S 波，头始终贴地前伸",
+      "pairing": "蛇偷鸟蛋，最经典的一口",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-chameleon-dragonfly",
+      "runner": "变色龙",
+      "goal": "蜻蜓",
+      "locomotion": "爬，一步一顿，卷尾在身后打圈",
+      "pairing": "弹舌头抓蜻蜓",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-trex-meat",
+      "runner": "霸王龙",
+      "goal": "肉块",
+      "locomotion": "跑，两腿大步，尾巴平举配重",
+      "pairing": "大肉食龙只想要肉",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-triceratops-cone",
+      "runner": "三角龙",
+      "goal": "球果",
+      "locomotion": "跑，四腿沉重小步，头低着顶",
+      "pairing": "低头拱开球果吃",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-brachiosaurus-treetop",
+      "runner": "腕龙",
+      "goal": "树冠叶",
+      "locomotion": "跑，慢重踩步，长颈随步子起伏",
+      "pairing": "长颈龙去够最高的树冠",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-stegosaurus-fernbud",
+      "runner": "剑龙",
+      "goal": "蕨芽",
+      "locomotion": "跑，背脊锯齿随步伐波动，尾尖翘",
+      "pairing": "低矮植食龙啃蕨芽",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-pterosaur-fish",
+      "runner": "翼龙",
+      "goal": "小鱼",
+      "locomotion": "飞，双翼上下扇，身体略起落",
+      "pairing": "海边翼龙俯冲抓鱼",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-plesiosaur-squid",
+      "runner": "蛇颈龙",
+      "goal": "乌贼",
+      "locomotion": "游，四片桨鳍划水，长颈前探",
+      "pairing": "长颈海龙咬乌贼",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-crocodile-lilypad",
+      "runner": "鳄鱼",
+      "goal": "睡莲叶",
+      "locomotion": "滑，肚皮贴地推行，尾巴左右扫",
+      "pairing": "鳄鱼往有睡莲的水塘滑",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-axolotl-shrimp",
+      "runner": "美西螈",
+      "goal": "小虾",
+      "locomotion": "游，尾鳍摆动，鳃羽在头侧抖",
+      "pairing": "水底螈吃小虾",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-glidinglizard-leaf",
+      "runner": "飞蜥",
+      "goal": "落叶",
+      "locomotion": "滑，侧膜张开平飘，身体不动",
+      "pairing": "滑翔蜥和落叶一起飘",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-gecko-mosquito",
+      "runner": "壁虎",
+      "goal": "蚊子",
+      "locomotion": "爬，四肢外张贴地快挪，身体压扁",
+      "pairing": "壁虎守着蚊子吃",
+      "legible": "low",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-basilisk-waterdrop",
+      "runner": "双冠蜥",
+      "goal": "水滴",
+      "locomotion": "跑，直立两腿疾踏，尾巴高高翘起",
+      "pairing": "水上疾跑蜥追一滴水",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-frilledlizard-beetle",
+      "runner": "伞蜥",
+      "goal": "甲虫",
+      "locomotion": "跑，两腿直立奔，停下时颈伞撑开",
+      "pairing": "伞蜥追地上的甲虫",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-komodo-skull",
+      "runner": "科莫多龙",
+      "goal": "头骨",
+      "locomotion": "爬，粗壮身体左右摇摆前推",
+      "pairing": "巨蜥找腐骨，闻着味走",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-hornedlizard-ant",
+      "runner": "角蜥",
+      "goal": "蚂蚁",
+      "locomotion": "爬，扁圆身体贴地窜，停下就装死",
+      "pairing": "角蜥一天吃几百只蚂蚁",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-iguana-flower",
+      "runner": "鬣蜥",
+      "goal": "花朵",
+      "locomotion": "爬，背脊锯齿起伏，喉袋随步子晃",
+      "pairing": "鬣蜥爱吃花瓣",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-tadpole-algaeball",
+      "runner": "蝌蚪",
+      "goal": "绿藻球",
+      "locomotion": "游，圆头不动，细尾左右快摆",
+      "pairing": "蝌蚪啃水藻球",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-cobra-mouse",
+      "runner": "眼镜蛇",
+      "goal": "老鼠",
+      "locomotion": "蠕动前行，停下时立起撑开颈兜",
+      "pairing": "眼镜蛇捕鼠",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-sidewinder-scorpion",
+      "runner": "响尾蛇",
+      "goal": "蝎子",
+      "locomotion": "滑，身体成侧行环，斜着往右挪",
+      "pairing": "沙漠蛇追蝎子",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-raptor-nest",
+      "runner": "迅猛龙",
+      "goal": "蛋窝",
+      "locomotion": "跑，低伏小步快踏，尾巴笔直平伸",
+      "pairing": "小型猎食龙偷蛋窝",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-ankylosaur-stone",
+      "runner": "甲龙",
+      "goal": "圆石",
+      "locomotion": "跑，矮宽龟背贴地推进，尾锤甩动",
+      "pairing": "吞圆石当胃石磨食",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-hadrosaur-berries",
+      "runner": "副栉龙",
+      "goal": "浆果串",
+      "locomotion": "跑，两腿奔跑，后掠头冠压低",
+      "pairing": "鸭嘴龙够高处浆果",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-spinosaurus-crab",
+      "runner": "棘龙",
+      "goal": "螃蟹",
+      "locomotion": "游，背帆露出水面，长尾左右划",
+      "pairing": "半水生龙翻螃蟹吃",
+      "legible": "high",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-mosasaur-ammonite",
+      "runner": "沧龙",
+      "goal": "菊石",
+      "locomotion": "游，鱼雷身躯，桨状尾大幅摆",
+      "pairing": "沧龙专咬菊石壳",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-snappingturtle-worm",
+      "runner": "鳄龟",
+      "goal": "蠕虫",
+      "locomotion": "爬，锯齿壳沉重前挪，长尾拖地",
+      "pairing": "鳄龟用舌头拟蠕虫诱食",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-flyingfrog-moth",
+      "runner": "飞蛙",
+      "goal": "飞蛾",
+      "locomotion": "滑，四脚蹼张成 X 形平飘",
+      "pairing": "滑翔蛙半空咬飞蛾",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-ornithomimus-snail",
+      "runner": "似鸟龙",
+      "goal": "蜗牛",
+      "locomotion": "跑，长腿高频快跑，长颈前伸",
+      "pairing": "杂食快跑龙捡蜗牛",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-pachycephalosaur-nut",
+      "runner": "肿头龙",
+      "goal": "坚果",
+      "locomotion": "跑，圆顶头低下冲刺，停下摆撞击姿",
+      "pairing": "用厚头盖骨撞开坚果",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-skink-sun",
+      "runner": "石龙子",
+      "goal": "太阳",
+      "locomotion": "滑，圆筒身体扭动，短腿几乎不见",
+      "pairing": "冷血蜥追着太阳晒背",
+      "legible": "low",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-seasnake-coral",
+      "runner": "海蛇",
+      "goal": "珊瑚球",
+      "locomotion": "游，垂直波浪摆动，尾端扁成桨",
+      "pairing": "海蛇回珊瑚礁的家",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-python-bird",
+      "runner": "蟒蛇",
+      "goal": "小鸟",
+      "locomotion": "蠕动，粗身缓推，停下盘成一圈",
+      "pairing": "树蟒等鸟落下",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-ichthyosaur-starfish",
+      "runner": "鱼龙",
+      "goal": "海星",
+      "locomotion": "游，背鳍加月牙尾，身体几乎不弯",
+      "pairing": "鱼龙在海底翻海星",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-dimetrodon-spider",
+      "runner": "异齿龙",
+      "goal": "蜘蛛",
+      "locomotion": "爬，四肢外撑摇摆，背帆高耸不动",
+      "pairing": "帆背兽扑大蜘蛛",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-therizinosaurus-honeycomb",
+      "runner": "镰刀龙",
+      "goal": "蜂巢",
+      "locomotion": "跑，前肢大爪弧线摆，身体前倾",
+      "pairing": "长爪龙掏蜂巢",
+      "legible": "low",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-snakeneckturtle-eggcluster",
+      "runner": "蛇颈龟",
+      "goal": "蛙卵团",
+      "locomotion": "游，壳身不动，长颈像蛇一样前甩",
+      "pairing": "长颈龟吸食蛙卵",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-flyingsnake-treefrog",
+      "runner": "金花蛇",
+      "goal": "树蛙",
+      "locomotion": "滑，扁成带状，空中保持 S 形起伏",
+      "pairing": "滑翔蛇滑向树蛙",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": false
+    },
+    {
+      "slug": "reptile-armadillolizard-cricket",
+      "runner": "犰狳蜥",
+      "goal": "蟋蟀",
+      "locomotion": "滚，咬尾成球滚动，停下松开露头",
+      "pairing": "咬尾成球的蜥去追蟋蟀",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "reptile-softshellturtle-clam",
+      "runner": "软壳龟",
+      "goal": "河蚌",
+      "locomotion": "游，扁软壳如薄饼，长鼻管向前伸",
+      "pairing": "软壳龟挖泥里的河蚌",
+      "legible": "med",
+      "theme": "reptile",
+      "flagged": true
+    },
+    {
+      "slug": "myth-loong-orb",
+      "runner": "东方龙",
+      "goal": "宝珠",
+      "locomotion": "蠕动前进,长身上下波浪起伏,停时盘起",
+      "pairing": "龙戏珠,横竖斜都还是珠",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-wyvern-egg",
+      "runner": "飞龙",
+      "goal": "龙蛋",
+      "locomotion": "飞行,蝠翼大幅扇动,停时收翼落地",
+      "pairing": "飞龙护蛋,守巢本能",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-phoenix-sun",
+      "runner": "凤凰",
+      "goal": "太阳",
+      "locomotion": "飞行,长尾拖曳飘动,停时展翼站立",
+      "pairing": "浴火重生,朝太阳飞",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-unicorn-star",
+      "runner": "独角兽",
+      "goal": "星星",
+      "locomotion": "奔跑,四蹄小步,停时前蹄刨地",
+      "pairing": "额上有星,追星顺理",
+      "legible": "low",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-centaur-bullseye",
+      "runner": "半人马",
+      "goal": "靶心",
+      "locomotion": "奔跑,上身直立不晃,停时踏步",
+      "pairing": "半人马是射手,追靶心",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-mermaid-pearlshell",
+      "runner": "美人鱼",
+      "goal": "珠贝",
+      "locomotion": "游动,尾鳍上下摆,停时竖直悬停",
+      "pairing": "人鱼寻珠贝,海里的宝",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-cyclops-boulder",
+      "runner": "独眼巨人",
+      "goal": "巨石",
+      "locomotion": "奔跑,沉重大跨步,停时驻足喘气",
+      "pairing": "巨人搬巨石,力气的证明",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-minotaur-yarnball",
+      "runner": "牛头怪",
+      "goal": "线团",
+      "locomotion": "奔跑,低头冲刺,停时刨蹄",
+      "pairing": "迷宫怪追线团,线是出路",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-griffin-coin",
+      "runner": "狮鹫",
+      "goal": "金币",
+      "locomotion": "飞行,四足收在腹下,停时落地收翼",
+      "pairing": "狮鹫守金,追金币天性",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-sphinx-scroll",
+      "runner": "斯芬克斯",
+      "goal": "卷轴",
+      "locomotion": "奔跑,狮身平稳,停时蹲坐",
+      "pairing": "出谜的兽,卷轴装谜题",
+      "legible": "low",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-treant-acorn",
+      "runner": "树精",
+      "goal": "橡果",
+      "locomotion": "奔跑,树干左右摇晃,停时扎根不动",
+      "pairing": "树精找橡果,种子是后代",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-gnome-gem",
+      "runner": "尖帽地精",
+      "goal": "宝石",
+      "locomotion": "奔跑,尖帽随步点头,停时叉腰",
+      "pairing": "地精挖矿,宝石是收成",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-fairy-flower",
+      "runner": "小仙子",
+      "goal": "花朵",
+      "locomotion": "飞行,快速抖翅,停时空中悬停",
+      "pairing": "仙子采花,花朵是家",
+      "legible": "low",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-ghost-jackolantern",
+      "runner": "幽灵",
+      "goal": "南瓜灯",
+      "locomotion": "滑行漂浮,下摆飘动,停时上下浮沉",
+      "pairing": "幽灵提南瓜灯,夜里搭配",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-skeleton-skull",
+      "runner": "骷髅",
+      "goal": "头骨",
+      "locomotion": "奔跑,骨架僵直摆臂,停时原地打颤",
+      "pairing": "骷髅找自己丢掉的头骨",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-werewolf-fullmoon",
+      "runner": "狼人",
+      "goal": "满月",
+      "locomotion": "奔跑,前倾半立,停时仰头长嗥",
+      "pairing": "狼人被满月牵着走",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-giantbat-crescent",
+      "runner": "巨蝠",
+      "goal": "月牙",
+      "locomotion": "飞行,双翼上下拍,停时倒挂晃动",
+      "pairing": "夜蝠追月牙,夜行标志",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-ninetailfox-mask",
+      "runner": "九尾狐",
+      "goal": "狐面具",
+      "locomotion": "奔跑,九尾扇形摆动,停时尾竖起",
+      "pairing": "狐妖换面具,变形的道具",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-mummy-bandageroll",
+      "runner": "木乃伊",
+      "goal": "绷带卷",
+      "locomotion": "僵直小步跑,绷带拖地,停时前伸双臂",
+      "pairing": "散了的木乃伊要缠回去",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-troll-barrel",
+      "runner": "山怪",
+      "goal": "酒桶",
+      "locomotion": "奔跑,驼背重踏,停时弯腰喘气",
+      "pairing": "山怪追酒桶,力气配酒量",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-medusa-bronzemirror",
+      "runner": "蛇发女妖",
+      "goal": "铜镜",
+      "locomotion": "滑行,蛇尾盘曲推进,停时立起盘尾",
+      "pairing": "蛇妖与镜子,自己的目光",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-moonrabbit-ricecake",
+      "runner": "月兔",
+      "goal": "年糕",
+      "locomotion": "跳跃,双耳后压,停时耳竖起蹲坐",
+      "pairing": "月兔捣年糕,追圆饼合理",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-kappa-cucumber",
+      "runner": "河童",
+      "goal": "黄瓜",
+      "locomotion": "爬行,四肢贴地小跑,停时蹲下",
+      "pairing": "河童最爱黄瓜,民俗直给",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-yeti-snowflake",
+      "runner": "雪怪",
+      "goal": "雪花",
+      "locomotion": "奔跑,宽肩左右摇摆,停时拍胸",
+      "pairing": "雪怪是雪山主人,追雪花",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-lakeserpent-fish",
+      "runner": "湖怪",
+      "goal": "鱼",
+      "locomotion": "游动,三个驼峰依次出水,停时静浮",
+      "pairing": "湖怪追鱼,水里觅食",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-kraken-shipwheel",
+      "runner": "巨章鱼",
+      "goal": "舵轮",
+      "locomotion": "爬行,触手交替拖身,停时触手卷曲",
+      "pairing": "章鱼要舵轮,沉船战利品",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-thunderbird-lightning",
+      "runner": "雷鸟",
+      "goal": "闪电",
+      "locomotion": "飞行,巨翼缓慢拍打,停时滑翔悬停",
+      "pairing": "雷鸟身带雷,追闪电",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-salamander-flame",
+      "runner": "火蜥蜴",
+      "goal": "火焰",
+      "locomotion": "爬行,躯干左右摆动,停时贴地不动",
+      "pairing": "火蜥蜴生于火,追火焰",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-sandworm-hourglass",
+      "runner": "沙虫",
+      "goal": "沙漏",
+      "locomotion": "蠕动,体节推进钻沙,停时半身立起",
+      "pairing": "沙虫与沙漏,沙里的时间",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-golem-corestone",
+      "runner": "石傀儡",
+      "goal": "核石",
+      "locomotion": "奔跑,硬直踏步震地,停时僵立",
+      "pairing": "傀儡找核石,身体的心",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-scarecrow-heart",
+      "runner": "稻草人",
+      "goal": "心",
+      "locomotion": "奔跑,四肢松垮乱摆,停时随风晃",
+      "pairing": "草人缺心,想要一颗心",
+      "legible": "low",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-wheelspirit-lantern",
+      "runner": "车轮妖",
+      "goal": "灯笼",
+      "locomotion": "滚动前进,停时原地小幅左右摆",
+      "pairing": "轮妖夜行,提灯照路",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-nekomata-bell",
+      "runner": "猫又",
+      "goal": "铃铛",
+      "locomotion": "奔跑,弓背双尾摆动,停时舔爪",
+      "pairing": "猫又追铃铛,猫的本能",
+      "legible": "low",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-goldtoad-coin",
+      "runner": "金蟾",
+      "goal": "铜钱",
+      "locomotion": "跳跃,蹲身短促连跳,停时鼓腮",
+      "pairing": "金蟾吐钱,追铜钱直给",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-cerberus-key",
+      "runner": "三头犬",
+      "goal": "钥匙",
+      "locomotion": "奔跑,三头齐前伸,停时低头嗅",
+      "pairing": "守门犬叼钥匙,门的搭配",
+      "legible": "low",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-satyr-grapes",
+      "runner": "半羊人",
+      "goal": "葡萄",
+      "locomotion": "跳跃,羊腿弹地前进,停时后腿点地",
+      "pairing": "羊人跟着酒神,葡萄是酒",
+      "legible": "low",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-broomwitch-cauldron",
+      "runner": "扫帚女巫",
+      "goal": "铁锅",
+      "locomotion": "飞行,骑帚倾斜前冲,停时悬停",
+      "pairing": "女巫回锅熬药,锅是主场",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-spiderspirit-web",
+      "runner": "蜘蛛精",
+      "goal": "蛛网",
+      "locomotion": "爬行,八足波浪交替,停时抬起前足",
+      "pairing": "蜘蛛回网,家就是网",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-centipede-pill",
+      "runner": "蜈蚣精",
+      "goal": "丹药",
+      "locomotion": "蠕动,体节波加密足划动,停时卷起",
+      "pairing": "蜈蚣精修仙,要吞丹药",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "myth-carpspirit-lotus",
+      "runner": "鲤鱼精",
+      "goal": "莲花",
+      "locomotion": "跳跃,跃出水面走弧线,停时甩尾",
+      "pairing": "鲤鱼跃莲池,水生搭配",
+      "legible": "high",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-pegasus-cloud",
+      "runner": "天马",
+      "goal": "云朵",
+      "locomotion": "飞行,翼拍配前蹄踏空,停时悬停",
+      "pairing": "天马踏云,云就是路",
+      "legible": "med",
+      "theme": "myth",
+      "flagged": false
+    },
+    {
+      "slug": "myth-waterspirit-droplet",
+      "runner": "水妖",
+      "goal": "水滴",
+      "locomotion": "弹跳,整体压扁再弹起,停时颤动",
+      "pairing": "水妖是水做的,追水滴",
+      "legible": "low",
+      "theme": "myth",
+      "flagged": true
+    },
+    {
+      "slug": "robot-boxbot-gear",
+      "runner": "方壳机器人",
+      "goal": "齿轮",
+      "locomotion": "跑：直角摆臂，落地有顿感",
+      "pairing": "机器人靠齿轮驱动，捡零件",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-tread-hauler-battery",
+      "runner": "履带搬运车",
+      "goal": "电池",
+      "locomotion": "滑：履带匀速平移，停下轻晃",
+      "pairing": "车没电了，去充电",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-orb-roller-ball-bearing",
+      "runner": "球形巡检机器人",
+      "goal": "钢珠",
+      "locomotion": "滚：整球滚动，停下微摆",
+      "pairing": "圆球和滚珠同一形状家族",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-quadcopter-propeller",
+      "runner": "四轴飞行器",
+      "goal": "螺旋桨",
+      "locomotion": "飞：低空平移，上下浮动",
+      "pairing": "掉了一片桨，要捡回来",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-hexbot-hex-nut",
+      "runner": "六足工程机器人",
+      "goal": "六角螺母",
+      "locomotion": "爬：六腿交替，身体压低",
+      "pairing": "六足对六角，形状呼应",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-snakebot-cable-coil",
+      "runner": "蛇形管道机器人",
+      "goal": "电缆卷",
+      "locomotion": "蠕动：S 形波推进",
+      "pairing": "管道机器人要拖电缆走",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-pogo-hopper-spring",
+      "runner": "单腿弹跳机器人",
+      "goal": "弹簧",
+      "locomotion": "弹跳：压缩再弹起",
+      "pairing": "弹跳全靠这根弹簧",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-vacuum-dustball",
+      "runner": "扫地机器人",
+      "goal": "灰尘团",
+      "locomotion": "滑：贴地平移，停下转圈",
+      "pairing": "扫地机就是要吸灰",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-forklift-crate",
+      "runner": "叉车机器人",
+      "goal": "货箱",
+      "locomotion": "滑：低速前进，叉子微抬",
+      "pairing": "叉车天生去搬箱子",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-clockwork-mouse-windup-key",
+      "runner": "发条铁皮鼠",
+      "goal": "发条钥匙",
+      "locomotion": "跑：小步急跑，越跑越慢",
+      "pairing": "发条快松了，要上劲",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-plugbot-socket",
+      "runner": "插头机器人",
+      "goal": "插座",
+      "locomotion": "跑：拖着一条线跑",
+      "pairing": "插头找插座，天经地义",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-armcart-bolt",
+      "runner": "机械臂台车",
+      "goal": "螺栓",
+      "locomotion": "滑：车身滑行，臂前后摆",
+      "pairing": "机械臂就是拧螺栓的",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-biped-mech-piston",
+      "runner": "重型双足机甲",
+      "goal": "活塞",
+      "locomotion": "跑：厚重两足，落地重顿",
+      "pairing": "液压腿坏了要换活塞",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-hoverdisc-magnet",
+      "runner": "悬浮圆盘机器人",
+      "goal": "马蹄磁铁",
+      "locomotion": "飞：贴地悬浮，上下微浮",
+      "pairing": "磁悬浮离不开磁铁",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-solar-rover-sunstar",
+      "runner": "太阳能探测车",
+      "goal": "星形太阳",
+      "locomotion": "滑：六轮缓行，顶板微张",
+      "pairing": "太阳能车追着阳光走",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-lampbot-bulb",
+      "runner": "台灯机器人",
+      "goal": "灯泡",
+      "locomotion": "跳：底座蹦跳，灯头点头",
+      "pairing": "灯泡烧了，要换新的",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-tinman-oilcan",
+      "runner": "铁皮人偶",
+      "goal": "油壶",
+      "locomotion": "跑：关节僵硬的大步",
+      "pairing": "生锈了，急需上油",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-toasterbot-bread-slice",
+      "runner": "烤面包机器人",
+      "goal": "面包片",
+      "locomotion": "跳：矮身连跳，顶盖弹动",
+      "pairing": "烤面包机当然要面包",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-unicycle-balancer-gyro-top",
+      "runner": "独轮平衡机器人",
+      "goal": "陀螺",
+      "locomotion": "滑：单轮前行，身体前倾",
+      "pairing": "两者都靠旋转保持平衡",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-molebot-auger",
+      "runner": "钻地机器人",
+      "goal": "螺旋钻头",
+      "locomotion": "蠕动：半埋在地里推进",
+      "pairing": "钻地机器人要换钻头",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-crabbot-rivet",
+      "runner": "螃蟹机器人",
+      "goal": "铆钉",
+      "locomotion": "爬：宽身横向侧爬",
+      "pairing": "铁钳配铆钉，钳住就打",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-blimpbot-gas-cylinder",
+      "runner": "飞艇机器人",
+      "goal": "气瓶",
+      "locomotion": "飞：椭圆机身缓慢漂移",
+      "pairing": "飞艇没气了要补气",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-cube-flipper-dice",
+      "runner": "方块翻滚机器人",
+      "goal": "骰子",
+      "locomotion": "滚：一格一格棱翻",
+      "pairing": "会翻面的方块对骰子",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-subprobe-bubble",
+      "runner": "潜水探测机器人",
+      "goal": "气泡",
+      "locomotion": "游：桨叶推进，轻微起伏",
+      "pairing": "潜水器一路吐气泡",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-mechfish-metal-lure",
+      "runner": "机械鱼",
+      "goal": "金属鱼饵",
+      "locomotion": "游：尾鳍摆动向前",
+      "pairing": "鱼追饵，机械鱼也一样",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-steam-loco-coal",
+      "runner": "蒸汽机车机器人",
+      "goal": "煤块",
+      "locomotion": "滑：沿轨滑行，烟囱冒烟",
+      "pairing": "蒸汽车烧煤才跑得动",
+      "legible": "high",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-rocketleg-fuel-drum",
+      "runner": "火箭腿机器人",
+      "goal": "燃料桶",
+      "locomotion": "飞：喷射短跳，脚不沾地",
+      "pairing": "燃料见底了要加油",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-satbot-solar-panel",
+      "runner": "小卫星机器人",
+      "goal": "太阳能板",
+      "locomotion": "飞：平稳漂移，微微自转",
+      "pairing": "卫星丢了一块板要找回",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-suctionbot-suction-cup",
+      "runner": "壁面吸盘机器人",
+      "goal": "吸盘",
+      "locomotion": "爬：吸-放交替，扁身贴地",
+      "pairing": "吸盘掉了就爬不动",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-chainworm-chain-link",
+      "runner": "链节蠕虫机器人",
+      "goal": "链条节",
+      "locomotion": "蠕动：分节伸缩前推",
+      "pairing": "身体断了一节要接上",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-tirebot-pressure-gauge",
+      "runner": "轮胎机器人",
+      "goal": "气压表",
+      "locomotion": "滚：整胎滚动，节奏起伏",
+      "pairing": "胎压不够，去找气压表",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-cassette-bot-tape-reel",
+      "runner": "磁带播放机器人",
+      "goal": "磁带盘",
+      "locomotion": "滑：扁平机身低速滑行",
+      "pairing": "播放器缺一盘磁带",
+      "legible": "low",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-mechdog-remote",
+      "runner": "四足机械狗",
+      "goal": "遥控器",
+      "locomotion": "跑：四足小跑，尾巴翘",
+      "pairing": "机械狗追着主控遥控器",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-clockbot-pendulum-weight",
+      "runner": "座钟机器人",
+      "goal": "摆锤",
+      "locomotion": "滑：底座滑行，钟摆左右晃",
+      "pairing": "钟少了摆锤就停摆",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-handbot-rubik-cube",
+      "runner": "五指机械手",
+      "goal": "魔方",
+      "locomotion": "爬：五指交替像蜘蛛爬",
+      "pairing": "机械手就是去拧魔方的",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-eyedrone-lens",
+      "runner": "独眼摄像无人机",
+      "goal": "镜头",
+      "locomotion": "飞：悬浮平移，眼球转动",
+      "pairing": "摄像机器人要装镜头",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-vendbot-coin",
+      "runner": "售货机器人",
+      "goal": "硬币",
+      "locomotion": "滑：厚身机箱缓慢平移",
+      "pairing": "投币才出货，先找硬币",
+      "legible": "low",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-fusebox-bot-fuse",
+      "runner": "配电箱机器人",
+      "goal": "保险丝",
+      "locomotion": "跑：矮胖机箱短腿快步",
+      "pairing": "跳闸了，去换保险丝",
+      "legible": "low",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-stopwatch-bot-hourglass",
+      "runner": "秒表机器人",
+      "goal": "沙漏",
+      "locomotion": "跑：圆头细腿匀速小跑",
+      "pairing": "计时的追计时的，同族",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-magnet-crane-scrap-block",
+      "runner": "电磁吊车",
+      "goal": "废铁块",
+      "locomotion": "滑：车身滑行，吊盘垂摆",
+      "pairing": "电磁吊就是吸废铁的",
+      "legible": "med",
+      "theme": "robot",
+      "flagged": false
+    },
+    {
+      "slug": "robot-printbot-paper-roll",
+      "runner": "打印机器人",
+      "goal": "纸卷",
+      "locomotion": "滑：扁长机身滑行吐纸",
+      "pairing": "打印机没纸了要补卷",
+      "legible": "low",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "robot-welder-bot-spark",
+      "runner": "焊接机器人",
+      "goal": "火花",
+      "locomotion": "爬：低身四点爬，头部点动",
+      "pairing": "焊接就是要冒火花",
+      "legible": "low",
+      "theme": "robot",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-steam-loco-coal",
+      "runner": "蒸汽机车",
+      "goal": "煤块",
+      "locomotion": "滚，轮转车身微颠，停下喷气",
+      "pairing": "机车烧煤才有劲",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-tram-lightning",
+      "runner": "有轨电车",
+      "goal": "闪电",
+      "locomotion": "滚，匀速平移，停时轻抖一格",
+      "pairing": "电车靠电吃饭",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-doubledecker-clock",
+      "runner": "双层巴士",
+      "goal": "时钟",
+      "locomotion": "滚，高车身左右晃着走",
+      "pairing": "公交追时刻表",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-f1-checker",
+      "runner": "方程赛车",
+      "goal": "格子方块",
+      "locomotion": "滚，贴地极速，停下尾翼颤",
+      "pairing": "赛车冲格子旗终点",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-pickup-crate",
+      "runner": "皮卡车",
+      "goal": "木箱",
+      "locomotion": "滚，车斗上下弹一格",
+      "pairing": "皮卡就为拉货",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-semi-container",
+      "runner": "半挂卡车",
+      "goal": "集装箱",
+      "locomotion": "滚，长车身分段起伏",
+      "pairing": "挂车找柜子挂",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-tanker-drum",
+      "runner": "油罐车",
+      "goal": "油桶",
+      "locomotion": "滚，圆罐轻晃像装了液体",
+      "pairing": "罐车要装油",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-mixer-brick",
+      "runner": "搅拌车",
+      "goal": "砖块",
+      "locomotion": "滚，斜滚筒持续自转",
+      "pairing": "搅拌车供料给砌砖",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-firetruck-drop",
+      "runner": "消防车",
+      "goal": "水滴",
+      "locomotion": "滚，快跑，停下顶灯闪",
+      "pairing": "消防车追水源",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-dozer-boulder",
+      "runner": "推土机",
+      "goal": "巨石",
+      "locomotion": "爬，履带碾进，铲刀压地",
+      "pairing": "推土机要推走大石",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-excavator-nugget",
+      "runner": "挖掘机",
+      "goal": "金块",
+      "locomotion": "爬，走两步吊臂点一下",
+      "pairing": "挖机挖出金子",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-tank-hexnut",
+      "runner": "坦克",
+      "goal": "六角螺母",
+      "locomotion": "爬，低速履带推进，炮塔微转",
+      "pairing": "钢铁家伙要拧紧螺母",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-roller-pancake",
+      "runner": "压路机",
+      "goal": "煎饼",
+      "locomotion": "滚，前大滚筒缓慢压过",
+      "pairing": "压路机专找东西压平",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-motorcycle-gear",
+      "runner": "摩托车",
+      "goal": "齿轮",
+      "locomotion": "滚，前轮偶尔翘起再落地",
+      "pairing": "机械怪物要齿轮",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-bicycle-chainlink",
+      "runner": "自行车",
+      "goal": "链条环",
+      "locomotion": "滚，车架随踩踏节奏起伏",
+      "pairing": "链子掉了要捡回来",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-wheelbarrow-pumpkin",
+      "runner": "独轮手推车",
+      "goal": "南瓜",
+      "locomotion": "滚，单轮前倾，停下车身放平",
+      "pairing": "手推车运园子收成",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-skateboard-bearing",
+      "runner": "滑板",
+      "goal": "轴承",
+      "locomotion": "滑，板尾一压一抬地溜",
+      "pairing": "滑板缺个轮轴承",
+      "legible": "low",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-sled-snowflake",
+      "runner": "雪橇",
+      "goal": "雪花",
+      "locomotion": "滑，前翘滑板贴雪面顺溜",
+      "pairing": "雪橇要雪才能滑",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-hovercraft-lifering",
+      "runner": "气垫船",
+      "goal": "救生圈",
+      "locomotion": "滑，悬空一像素，裙边鼓动",
+      "pairing": "水上跑的要救生圈",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-sailboat-compass",
+      "runner": "帆船",
+      "goal": "罗盘",
+      "locomotion": "游，船体起伏，帆随风鼓",
+      "pairing": "帆船靠罗盘找方向",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-tugboat-anchor",
+      "runner": "拖船",
+      "goal": "锚",
+      "locomotion": "游，矮胖船身破浪，停下漂",
+      "pairing": "拖船回港要抛锚",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-submarine-starfish",
+      "runner": "潜艇",
+      "goal": "海星",
+      "locomotion": "游，平稳潜行，偶吐气泡",
+      "pairing": "潜艇下潜看海底生物",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-kayak-paddle",
+      "runner": "皮划艇",
+      "goal": "双叶桨",
+      "locomotion": "游，艇身左右摆着划",
+      "pairing": "划艇丢了桨要追回",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-balloon-sandbag",
+      "runner": "热气球",
+      "goal": "沙袋",
+      "locomotion": "飞，缓慢横移，上下浮沉",
+      "pairing": "热气球靠沙袋配重",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-airship-propeller",
+      "runner": "飞艇",
+      "goal": "螺旋桨",
+      "locomotion": "飞，长身平推，尾翼轻摆",
+      "pairing": "飞艇要桨才推得动",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-biplane-cloud",
+      "runner": "双翼机",
+      "goal": "云朵",
+      "locomotion": "飞，机头一点一点上下晃",
+      "pairing": "老飞机穿云玩",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-helicopter-hook",
+      "runner": "直升机",
+      "goal": "吊钩",
+      "locomotion": "飞，机身悬停微振，横向推进",
+      "pairing": "直升机吊运要挂钩",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-rocket-star",
+      "runner": "火箭",
+      "goal": "星星",
+      "locomotion": "飞，尾焰喷射，停下悬浮抖",
+      "pairing": "火箭奔星星",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-ufo-crystal",
+      "runner": "飞碟",
+      "goal": "能量水晶",
+      "locomotion": "飞，碟身平滑漂移，上下浮",
+      "pairing": "飞碟来取能量水晶",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-rover-meteorite",
+      "runner": "月球车",
+      "goal": "陨石",
+      "locomotion": "滚，慢速，车身随坑地倾斜",
+      "pairing": "月球车采集陨石样本",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-cablecar-pulley",
+      "runner": "缆车",
+      "goal": "滑轮",
+      "locomotion": "滑，悬挂厢体前移，停下摆荡",
+      "pairing": "缆车靠滑轮吊着走",
+      "legible": "low",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-maglev-magnet",
+      "runner": "磁悬浮列车",
+      "goal": "磁铁",
+      "locomotion": "滑，悬空无接触，极速直线",
+      "pairing": "磁悬浮靠磁力浮起",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-toytrain-block",
+      "runner": "积木小火车",
+      "goal": "积木方块",
+      "locomotion": "蠕动，车厢一节节推着前进",
+      "pairing": "积木火车要拼块",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-pogo-spring",
+      "runner": "弹簧单跷",
+      "goal": "弹簧",
+      "locomotion": "弹跳，一跳一落，停下原地颤",
+      "pairing": "跷杆缺根弹簧",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-monstertruck-tire",
+      "runner": "怪兽卡车",
+      "goal": "轮胎",
+      "locomotion": "跳，大轮腾空落地砸出震动",
+      "pairing": "怪兽车爱大轮胎",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-escooter-battery",
+      "runner": "电动滑板车",
+      "goal": "电池",
+      "locomotion": "滚，立柱轻晃，两小轮匀速",
+      "pairing": "没电的车找电池",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "vehicle-snowmobile-icecube",
+      "runner": "雪地摩托",
+      "goal": "冰块",
+      "locomotion": "滑，前滑橇抬头，后履带甩雪",
+      "pairing": "雪地车要冰雪路面",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-tractor-haybale",
+      "runner": "拖拉机",
+      "goal": "干草捆",
+      "locomotion": "滚，后大轮慢转，车头点头",
+      "pairing": "拖拉机拉草捆",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-forklift-pallet",
+      "runner": "叉车",
+      "goal": "托盘",
+      "locomotion": "滚，走时叉子上下微调",
+      "pairing": "叉车专叉托盘",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-drone-parcel",
+      "runner": "无人机",
+      "goal": "包裹",
+      "locomotion": "飞，机身前倾平移，悬停微抖",
+      "pairing": "无人机送包裹",
+      "legible": "high",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-raft-log",
+      "runner": "木筏",
+      "goal": "原木",
+      "locomotion": "游，扁筏随浪上下漂",
+      "pairing": "木筏要圆木才拼得成",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": false
+    },
+    {
+      "slug": "vehicle-solarcar-sun",
+      "runner": "太阳能车",
+      "goal": "太阳",
+      "locomotion": "滚，超扁车身贴地平滑滑行",
+      "pairing": "太阳能车追太阳",
+      "legible": "med",
+      "theme": "vehicle",
+      "flagged": true
+    },
+    {
+      "slug": "food-mouse-cheese",
+      "runner": "老鼠",
+      "goal": "芝士块",
+      "locomotion": "小步快跑,长尾左右摆",
+      "pairing": "老鼠偷芝士,最老的梗",
+      "legible": "high",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-squirrel-peanut",
+      "runner": "松鼠",
+      "goal": "花生",
+      "locomotion": "跳,弓背蹬地,大尾上翘",
+      "pairing": "松鼠囤坚果",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-bee-honeycomb",
+      "runner": "蜜蜂",
+      "goal": "蜂巢块",
+      "locomotion": "飞,身体上下抖,翅两帧交替",
+      "pairing": "蜜蜂回巢交蜜",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-hen-wheat",
+      "runner": "母鸡",
+      "goal": "麦穗",
+      "locomotion": "跑,头前后啄式点动",
+      "pairing": "母鸡啄谷粒",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-pig-corn",
+      "runner": "猪",
+      "goal": "玉米棒",
+      "locomotion": "小跑,厚身短腿,鼻子前伸",
+      "pairing": "猪吃玉米,喂食日常",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-penguin-fish",
+      "runner": "企鹅",
+      "goal": "鱼",
+      "locomotion": "肚皮贴地滑,鳍拍两下",
+      "pairing": "企鹅抓鱼",
+      "legible": "high",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-bear-honeypot",
+      "runner": "熊",
+      "goal": "蜂蜜罐",
+      "locomotion": "慢跑,身体大幅上下起伏",
+      "pairing": "熊偷蜂蜜",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-duck-peapod",
+      "runner": "鸭子",
+      "goal": "豌豆荚",
+      "locomotion": "水面游,身体前后小幅点动",
+      "pairing": "鸭子爱吃豌豆",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-crab-lemonslice",
+      "runner": "螃蟹",
+      "goal": "柠檬片",
+      "locomotion": "横向爬,身体左右轮流微抬",
+      "pairing": "吃蟹要挤柠檬",
+      "legible": "high",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-shrimp-onigiri",
+      "runner": "虾",
+      "goal": "饭团",
+      "locomotion": "游,尾部快速收展,身体弓起",
+      "pairing": "虾上饭团变寿司",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-octopus-clam",
+      "runner": "章鱼",
+      "goal": "蛤蜊",
+      "locomotion": "爬,触手轮流前伸,头部起伏",
+      "pairing": "章鱼撬贝壳吃",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-toast-butter",
+      "runner": "吐司片",
+      "goal": "黄油块",
+      "locomotion": "小跳,落地时上缘抖一下",
+      "pairing": "吐司要抹黄油",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-friedegg-pan",
+      "runner": "荷包蛋",
+      "goal": "平底锅",
+      "locomotion": "滑行,边缘像液体一样晃",
+      "pairing": "蛋要回锅里",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-doughball-rollingpin",
+      "runner": "面团球",
+      "goal": "擂面杖",
+      "locomotion": "滚,滚动时被压扁又弹圆",
+      "pairing": "面团等着被擂开",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-spaghetti-fork",
+      "runner": "意面条",
+      "goal": "叉子",
+      "locomotion": "蠕动,整条身体波浪推进",
+      "pairing": "面条自己找叉子卷",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-sausage-bun",
+      "runner": "香肠",
+      "goal": "热狗面包",
+      "locomotion": "蠕动,两端交替拱起",
+      "pairing": "香肠要钻进面包",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-dumpling-steamer",
+      "runner": "饺子",
+      "goal": "蒸笼",
+      "locomotion": "原地小弹跳,褶边跟着抖",
+      "pairing": "饺子跳回蒸笼",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-icecreamscoop-cone",
+      "runner": "冰淇淋球",
+      "goal": "甜筒",
+      "locomotion": "滚,每滚一圈掉一滴",
+      "pairing": "球要回甜筒上",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-donut-mug",
+      "runner": "甜甜圈",
+      "goal": "咖啡杯",
+      "locomotion": "立起来滚,中间孔一直可见",
+      "pairing": "甜甜圈配咖啡",
+      "legible": "high",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-pumpkin-pieslice",
+      "runner": "南瓜",
+      "goal": "派角",
+      "locomotion": "滚,棱线转动,顶部梗甩动",
+      "pairing": "南瓜的下一站是派",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-jelly-spoon",
+      "runner": "果冻",
+      "goal": "勺子",
+      "locomotion": "弹跳,落地整体颤动两帧",
+      "pairing": "果冻要被勺子挖",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-fork-meatball",
+      "runner": "叉子",
+      "goal": "肉丸",
+      "locomotion": "跑,叉齿当腿交替迈步",
+      "pairing": "叉子扎肉丸",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-cleaver-onion",
+      "runner": "菜刀",
+      "goal": "洋葱",
+      "locomotion": "刀刃贴地滑,刀身轻微前倾",
+      "pairing": "刀去切洋葱",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-spatula-burger",
+      "runner": "锅铲",
+      "goal": "汉堡",
+      "locomotion": "滑,铲面贴地,柄尾上下摆",
+      "pairing": "锅铲翻汉堡",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-whisk-egg",
+      "runner": "打蛋器",
+      "goal": "鸡蛋",
+      "locomotion": "滚,钢丝球部分整体翻转",
+      "pairing": "打蛋器找蛋打",
+      "legible": "low",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-teapot-teabag",
+      "runner": "茶壶",
+      "goal": "茶包",
+      "locomotion": "跳,壶嘴随落地上下点头",
+      "pairing": "茶壶接茶包",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-mug-coffeebean",
+      "runner": "咖啡杯",
+      "goal": "咖啡豆",
+      "locomotion": "滑,杯内液面左右晃动",
+      "pairing": "空杯子要咖啡豆",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-chopsticks-sushi",
+      "runner": "筷子",
+      "goal": "寿司卷",
+      "locomotion": "两根交替迈步,像踩高跷",
+      "pairing": "筷子夹寿司",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-ovenmitt-cookie",
+      "runner": "隔热手套",
+      "goal": "饼干",
+      "locomotion": "五指爬行,手掌拱起前推",
+      "pairing": "手套端刚出炉的饼干",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-chefhat-pot",
+      "runner": "厨师帽",
+      "goal": "汤锅",
+      "locomotion": "跳,顶部褶皱落地时压扁",
+      "pairing": "厨师帽守着汤锅",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-saltshaker-tomato",
+      "runner": "盐瓶",
+      "goal": "番茄",
+      "locomotion": "跳,每次落地漏几粒盐",
+      "pairing": "番茄要撒盐",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-hedgehog-mushroom",
+      "runner": "刺猬",
+      "goal": "蘑菇",
+      "locomotion": "小跑,背刺轮廓上下起伏",
+      "pairing": "刺猬找蘑菇",
+      "legible": "high",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-cow-milkjug",
+      "runner": "奶牛",
+      "goal": "奶罐",
+      "locomotion": "慢跑,身体沉,乳房跟着晃",
+      "pairing": "牛奶来自奶牛",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-cornkernel-popcorn",
+      "runner": "玉米粒",
+      "goal": "爆米花",
+      "locomotion": "弹跳,越跳越高",
+      "pairing": "玉米粒想变爆米花",
+      "legible": "low",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "food-garlic-baguetteslice",
+      "runner": "蒜头",
+      "goal": "法棍片",
+      "locomotion": "滚,顶部干梗一圈甩动",
+      "pairing": "蒜配面包=蒜香面包",
+      "legible": "med",
+      "theme": "food",
+      "flagged": false
+    },
+    {
+      "slug": "food-tongs-icecube",
+      "runner": "食物夹",
+      "goal": "冰块",
+      "locomotion": "跑,两片夹臂开合当腿",
+      "pairing": "夹子去夹冰块",
+      "legible": "med",
+      "theme": "food",
+      "flagged": true
+    },
+    {
+      "slug": "desk-duck-bug",
+      "runner": "橡皮鸭",
+      "goal": "虫子",
+      "locomotion": "水面漂着游，身体左右摆",
+      "pairing": "橡皮鸭调试法，专治 bug",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-spider-web",
+      "runner": "蜘蛛",
+      "goal": "蛛网",
+      "locomotion": "八腿交替爬，身体贴地起伏",
+      "pairing": "爬虫程序回自己的网",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-snail-spinner",
+      "runner": "蜗牛",
+      "goal": "加载圈",
+      "locomotion": "壳不动，身体伸缩往前拱",
+      "pairing": "慢得像永远转的加载圈",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-chip-fan",
+      "runner": "处理器芯片",
+      "goal": "散热风扇",
+      "locomotion": "两排针脚当腿，像甲虫爬",
+      "pairing": "芯片烫了就扑向风扇",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-mouse-cursor",
+      "runner": "有线鼠标",
+      "goal": "光标箭头",
+      "locomotion": "贴桌面滑，尾巴线来回甩",
+      "pairing": "鼠标追自己的光标",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-paperplane-clip",
+      "runner": "纸飞机",
+      "goal": "回形针",
+      "locomotion": "滑翔，上下轻微起伏",
+      "pairing": "纸和回形针本来一家",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-pigeon-envelope",
+      "runner": "信鸽",
+      "goal": "信封",
+      "locomotion": "扇翅飞，身体一顿一顿",
+      "pairing": "送信的鸽子扑向信封",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-owl-moon",
+      "runner": "猫头鹰",
+      "goal": "月牙",
+      "locomotion": "宽翼慢扇，几乎不起伏",
+      "pairing": "夜猫子加班追月亮",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-rocket-check",
+      "runner": "小火箭",
+      "goal": "对勾",
+      "locomotion": "尾焰喷射，平直冲刺",
+      "pairing": "上线成功那一下",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-drone-battery",
+      "runner": "四轴无人机",
+      "goal": "电池",
+      "locomotion": "悬停微颤，水平平移",
+      "pairing": "无人机永远在找电",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-book-glasses",
+      "runner": "厚书",
+      "goal": "眼镜",
+      "locomotion": "书页当翅膀扇动前飞",
+      "pairing": "啃文档得有眼镜",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-scissors-tape",
+      "runner": "剪刀",
+      "goal": "胶带卷",
+      "locomotion": "两片刀刃当腿开合迈步",
+      "pairing": "剪刀和胶带一起干活",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-tape-box",
+      "runner": "胶带卷",
+      "goal": "纸箱",
+      "locomotion": "整圈滚，滚一圈露一次胶头",
+      "pairing": "胶带滚去封箱",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-gear-nut",
+      "runner": "齿轮",
+      "goal": "六角螺母",
+      "locomotion": "沿齿一格一格滚",
+      "pairing": "齿轮找螺母上轴",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-battery-bolt",
+      "runner": "电池",
+      "goal": "闪电",
+      "locomotion": "横躺滚，正负极交替朝上",
+      "pairing": "电池追一道电",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-stopwatch-hourglass",
+      "runner": "秒表",
+      "goal": "沙漏",
+      "locomotion": "圆身滚动，顶上按钮转圈",
+      "pairing": "两个都是计时的",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-bulb-switch",
+      "runner": "灯泡",
+      "goal": "开关",
+      "locomotion": "泡头着地弹起，螺口朝上",
+      "pairing": "灯泡要开关才亮",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-lamp-bulb",
+      "runner": "台灯",
+      "goal": "灯泡",
+      "locomotion": "底座蹦跳，灯罩点头",
+      "pairing": "台灯缺个灯泡",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-pencil-eraser",
+      "runner": "铅笔",
+      "goal": "橡皮",
+      "locomotion": "笔尖点地弹，像单脚跳",
+      "pairing": "写错了要橡皮",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-stapler-staple",
+      "runner": "订书机",
+      "goal": "订书钉",
+      "locomotion": "张嘴咬地，一口一口前挪",
+      "pairing": "订书机吃钉子",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-clip-magnet",
+      "runner": "回形针",
+      "goal": "马蹄磁铁",
+      "locomotion": "拱起再伸直，尺蠓式前进",
+      "pairing": "铁回形针被磁铁吸",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-cable-power",
+      "runner": "电源线",
+      "goal": "电源符号",
+      "locomotion": "整条蛇形摆动，插头当头",
+      "pairing": "线在找电",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-plug-socket",
+      "runner": "插头",
+      "goal": "插座",
+      "locomotion": "两脚并跳，线尾在后甩",
+      "pairing": "插头找插座",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-usb-folder",
+      "runner": "U盘",
+      "goal": "文件夹",
+      "locomotion": "贴桌面滑，金属头朝前",
+      "pairing": "U盘装文件",
+      "legible": "low",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-keyboard-keycap",
+      "runner": "机械键盘",
+      "goal": "键帽",
+      "locomotion": "整块板贴地一寸一寸挪",
+      "pairing": "键盘掉了个键帽",
+      "legible": "low",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-extinguisher-flame",
+      "runner": "灭火器",
+      "goal": "火苗",
+      "locomotion": "底座滑行，软管在前摇",
+      "pairing": "线上着火要救火",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-chair-cushion",
+      "runner": "办公椅",
+      "goal": "靠垫",
+      "locomotion": "脚轮滑行，椅背轻晃",
+      "pairing": "椅子缺个靠垫",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-bin-paperball",
+      "runner": "垃圾桶",
+      "goal": "纸团",
+      "locomotion": "整桶起跳前移，盖子颠",
+      "pairing": "垃圾桶追废纸团",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-router-wifi",
+      "runner": "路由器",
+      "goal": "无线信号",
+      "locomotion": "机身低伏挪，两根天线晃",
+      "pairing": "路由器追信号",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-scanner-qr",
+      "runner": "扫码枪",
+      "goal": "二维码",
+      "locomotion": "枪口朝前平移，握把在后",
+      "pairing": "扫码枪要码扫",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-octopus-ink",
+      "runner": "章鱼",
+      "goal": "墨水瓶",
+      "locomotion": "触手轮流搭地拽身体",
+      "pairing": "章鱼要自己的墨",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-ant-breadcrumb",
+      "runner": "蚂蚁",
+      "goal": "面包屑",
+      "locomotion": "六腿快跑，触角前探",
+      "pairing": "面包屑导航，蚂蚁搬屑",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-noodle-fork",
+      "runner": "泡面桶",
+      "goal": "叉子",
+      "locomotion": "桶身上下弹，盖子翘着抖",
+      "pairing": "加班泡面得有叉子",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-screwdriver-screw",
+      "runner": "螺丝刀",
+      "goal": "十字螺丝",
+      "locomotion": "刀头点地弹，握把朝上",
+      "pairing": "螺丝刀配螺丝",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-cloud-server",
+      "runner": "云",
+      "goal": "服务器机箱",
+      "locomotion": "整团平飘，鼓包轮廓起伏",
+      "pairing": "上云也得有机器",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-punch-confetti",
+      "runner": "打孔器",
+      "goal": "圆纸屑",
+      "locomotion": "压柄一压一弹地往前跳",
+      "pairing": "打孔器掉的圆屑",
+      "legible": "low",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-sticky-pin",
+      "runner": "便利贴",
+      "goal": "图钉",
+      "locomotion": "薄片贴地滑，一角翘起抖",
+      "pairing": "便利贴要钉住",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-headphones-note",
+      "runner": "耳机",
+      "goal": "音符",
+      "locomotion": "头梁弹跳，两耳罩交替落地",
+      "pairing": "写代码要戴耳机",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "desk-crab-binderclip",
+      "runner": "螃蟹",
+      "goal": "长尾夹",
+      "locomotion": "横着侧向爬，双钳一开一合",
+      "pairing": "钳子和夹子是同类",
+      "legible": "high",
+      "theme": "desk",
+      "flagged": true
+    },
+    {
+      "slug": "desk-stamp-doc",
+      "runner": "印章",
+      "goal": "文件",
+      "locomotion": "章面砸地弹起，握柄朝上",
+      "pairing": "文件等着盖章",
+      "legible": "med",
+      "theme": "desk",
+      "flagged": false
+    },
+    {
+      "slug": "cosmic-comet-icecrystal",
+      "runner": "彗星",
+      "goal": "冰晶",
+      "locomotion": "飞，圆头拖尾，尾巴逐帧摆动",
+      "pairing": "彗星本体是脏雪球，要补冰",
+      "legible": "high",
+      "theme": "cosmic",
+      "flagged": false
+    },
+    {
+      "slug": "cosmic-crescent-star",
+      "runner": "月牙",
+      "goal": "星星",
+      "locomotion": "滑，弧线上下漂移，停时微沉",
+      "pairing": "月亮和星星本来就成对",
+      "legible": "high",
+      "theme": "cosmic",
+      "flagged": true
+    },
+    {
+      "slug": "cosmic-saturn-ring",
+      "runner": "土星",
+      "goal": "光环",
+      "locomotion": "滚，球体带残环一起转",
+      "pairing": "丢了环的行星去捡环",
+      "legible": "med",
+      "theme": "cosmic",
+      "flagged": true
+    },
+    {
+      "slug": "cosmic-asteroid-crater",
+      "runner": "小行星",
+      "goal": "陨石坑",
+      "locomotion": "滚，不规则翻滚，落地弹一下",
+      "pairing": "石头找自己该砸的坑",
+      "legible": "med",
+      "theme": "cosmic",
+      "flagged": true
+    },
+    {
+      "slug": "cosmic-rocket-moon",
+      "runner": "火箭",
+      "goal": "月球",
+      "locomotion": "飞，水平前冲，尾焰逐帧脉冲",
+      "pairing": "火箭的目的地就是月球",
+      "legible": "high",
+      "theme": "cosmic",
+      "flagged": true
+    },
+    {
+      "slug": "cosmic-satellite-signal",
+      "runner": "卫星",
+      "goal": "电波圈",
+      "locomotion": "飞，平移，太阳板轻微扇动",
+      "pairing": "卫星要接上信号",
+      "legible": "med",
+      "theme": "cosmic",
+      "flagged": false
+    },
+    {
+      "slug": "cosmic-rover-rock",
+      "runner": "探测车",
+      "goal": "岩石样本",
+      "locomotion": "爬，轮子颠簸，车身上下抖",
+      "pairing": "巡视车出门就是去采样",
+      "legible": "med",
+      "theme": "cosmic",
+      "flagged": false
+    },
+    {
+      "slug": "cosmic-astronaut-globe",
+      "runner": "宇航员",
+      "goal": "星球",
+      "locomotion": "游，零重力划水，四肢慢摆",
+      "pairing": "太空人想回到星球上",
+      "legible": "med",
+      "theme": "cosmic",
+      "flagged": true
+    },
+    {
+      "slug": "cosmic-saucer-portal",
+      "runner": "飞碟",
+      "goal": "星门环",
+      "locomotion": "飞，平移无起伏，只上下微颤",
+      "pairing": "飞碟要穿门回家",
+      "legible": "high",
+      "theme": "cosmic",
+      "flagged": false
+    },
+    {
+      "slug": "cosmic-star-blackhole",
+      "runner": "小星星",
+      "goal": "黑洞",
+      "locomotion": "跳，尖角落地弹起，翻半圈",
+      "pairing": "星星被黑洞拽过去",
+      "legible": "high",
+      "theme": "cosmic",
+      "flagged": true
+    },
+    {
+      "slug": "cosmic-nebula-protostar",
+      "runner": "星云",
+      "goal": "新星核",
+      "locomotion": "蠕动，团块前后拉伸推进",
+      "pairing": "星云塌缩要凝出一个核",
+      "legible": "low",
+      "theme": "cosmic",
+      "flagged": true
+    },
+    {
+      "slug": "cosmic-solarsail-starburst",
+      "runner": "太阳帆",
+      "goal": "星芒",
+      "locomotion": "滑，帆面绷紧，本体缓慢平移",
+      "pairing": "帆靠光推，追一束光",
+      "legible": "low",
+      "theme": "cosmic",
+      "flagged": true
+    },
+    {
+      "slug": "cosmic-capsule-parachute",
+      "runner": "返回舱",
+      "goal": "降落伞",
+      "locomotion": "滑，钟形舱体左右摇摆下坠",
+      "pairing": "返回舱下落前得先开伞",
+      "legible": "med",
+      "theme": "cosmic",
+      "flagged": true
+    },
+    {
+      "slug": "wx-thundercloud-bolt",
+      "runner": "雷雨云",
+      "goal": "闪电",
+      "locomotion": "飞，云底翻涌，整体上下浮动",
+      "pairing": "雨云要放出自己的闪电",
+      "legible": "high",
+      "theme": "wx",
+      "flagged": false
+    },
+    {
+      "slug": "wx-bolt-sparkball",
+      "runner": "闪电",
+      "goal": "电火花球",
+      "locomotion": "滑，折线形态逐帧蹿动",
+      "pairing": "闪电扑向放电的火花球",
+      "legible": "high",
+      "theme": "wx",
+      "flagged": true
+    },
+    {
+      "slug": "wx-raindrop-ripple",
+      "runner": "雨滴",
+      "goal": "涟漪圈",
+      "locomotion": "弹跳，落地压扁再拉长弹起",
+      "pairing": "雨滴落水就是要打出涟漪",
+      "legible": "med",
+      "theme": "wx",
+      "flagged": true
+    },
+    {
+      "slug": "wx-umbrella-raindrop",
+      "runner": "雨伞",
+      "goal": "雨滴",
+      "locomotion": "跳，伞面随跳跃开合",
+      "pairing": "伞天生等着接雨滴",
+      "legible": "high",
+      "theme": "wx",
+      "flagged": false
+    },
+    {
+      "slug": "wx-rainboot-splash",
+      "runner": "雨靴",
+      "goal": "水花",
+      "locomotion": "跳，靴筒前倾，落地重踩",
+      "pairing": "雨靴就是要去踩出水花",
+      "legible": "med",
+      "theme": "wx",
+      "flagged": true
+    },
+    {
+      "slug": "wx-snowman-snowflake",
+      "runner": "雪人",
+      "goal": "雪花",
+      "locomotion": "跳，整体压缩再弹起，无腿",
+      "pairing": "雪人靠雪花补身体",
+      "legible": "med",
+      "theme": "wx",
+      "flagged": false
+    },
+    {
+      "slug": "wx-hailstone-icicle",
+      "runner": "冰雹",
+      "goal": "冰锥",
+      "locomotion": "弹跳，砸地高反弹，弧线明显",
+      "pairing": "冰雹和冰锥同源，去合体",
+      "legible": "low",
+      "theme": "wx",
+      "flagged": true
+    },
+    {
+      "slug": "wx-tornado-house",
+      "runner": "龙卷风",
+      "goal": "小房子",
+      "locomotion": "滑，漏斗左右摆，底部扫地",
+      "pairing": "龙卷风奔向要卷走的房子",
+      "legible": "high",
+      "theme": "wx",
+      "flagged": true
+    },
+    {
+      "slug": "wx-kite-cloud",
+      "runner": "风筝",
+      "goal": "云朵",
+      "locomotion": "飞，菱形身斜倾，尾带甩动",
+      "pairing": "风筝一直想飞到云那么高",
+      "legible": "high",
+      "theme": "wx",
+      "flagged": false
+    },
+    {
+      "slug": "wx-paperplane-thermal",
+      "runner": "纸飞机",
+      "goal": "气流螺旋",
+      "locomotion": "飞，滑翔起伏，先抬头再下坠",
+      "pairing": "纸飞机要抓上升气流",
+      "legible": "high",
+      "theme": "wx",
+      "flagged": false
+    },
+    {
+      "slug": "wx-hotairballoon-sun",
+      "runner": "热气球",
+      "goal": "太阳",
+      "locomotion": "飞，缓慢升降，球体轻微鼓缩",
+      "pairing": "热气球靠热往太阳飘",
+      "legible": "high",
+      "theme": "wx",
+      "flagged": false
+    },
+    {
+      "slug": "wx-puddle-drain",
+      "runner": "水洼",
+      "goal": "下水道格栅",
+      "locomotion": "蠕动，扁平体前端拉出再收尾",
+      "pairing": "积水要爬去排水口",
+      "legible": "low",
+      "theme": "wx",
+      "flagged": true
+    },
+    {
+      "slug": "wx-snowflake-snowbank",
+      "runner": "雪花",
+      "goal": "雪团",
+      "locomotion": "飞，飘落式起伏，边缘逐帧转",
+      "pairing": "雪花归队回到雪堆里",
+      "legible": "low",
+      "theme": "wx",
+      "flagged": true
+    },
+    {
+      "slug": "wx-gust-pinwheel",
+      "runner": "阵风",
+      "goal": "风车",
+      "locomotion": "滑，三道卷线整体向前推",
+      "pairing": "风去把风车吹转起来",
+      "legible": "low",
+      "theme": "wx",
+      "flagged": true
+    },
+    {
+      "slug": "geo-cube-squarehole",
+      "runner": "立方体",
+      "goal": "方孔",
+      "locomotion": "滚，四棱角逐帧翻，停时正立",
+      "pairing": "方块只配得上方孔",
+      "legible": "high",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-hexagon-honeycomb",
+      "runner": "六边形",
+      "goal": "蜂窝格",
+      "locomotion": "滚，六个面依次落地，节奏碎",
+      "pairing": "六边形要嵌进蜂窝格",
+      "legible": "med",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-gear-gear",
+      "runner": "齿轮",
+      "goal": "齿轮",
+      "locomotion": "滚，齿沿地面咬合前进",
+      "pairing": "齿轮找能咬上的另一只",
+      "legible": "med",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-spring-nut",
+      "runner": "弹簧",
+      "goal": "螺母",
+      "locomotion": "弹跳，压缩蓄力再伸展窜出",
+      "pairing": "零件回机器，先找螺母",
+      "legible": "high",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-compass-circle",
+      "runner": "圆规",
+      "goal": "圆环",
+      "locomotion": "跑，双腿开合交替像迈步",
+      "pairing": "圆规存在的意义就是画圆",
+      "legible": "med",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-spintop-bullseye",
+      "runner": "陀螺",
+      "goal": "靶心",
+      "locomotion": "滑，身体倾斜旋进，尖端点地",
+      "pairing": "陀螺要停在正中心",
+      "legible": "med",
+      "theme": "geo",
+      "flagged": false
+    },
+    {
+      "slug": "geo-boomerang-xmark",
+      "runner": "回旋镖",
+      "goal": "X 标记",
+      "locomotion": "飞，V 形逐帧旋转前移",
+      "pairing": "回旋镖要回到起飞标记",
+      "legible": "high",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-domino-domino",
+      "runner": "骨牌",
+      "goal": "骨牌",
+      "locomotion": "滚，直立体前倾倾倒再立起",
+      "pairing": "骨牌需要下一块接着倒",
+      "legible": "low",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-hourglass-clockface",
+      "runner": "沙漏",
+      "goal": "时钟表盘",
+      "locomotion": "弹跳，落地时腰身细节压缩",
+      "pairing": "计时的两件东西凑一对",
+      "legible": "high",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-octahedron-crystal",
+      "runner": "八面体",
+      "goal": "水晶",
+      "locomotion": "滚，菱形绕尖角一格一格翻",
+      "pairing": "多面体回到水晶簇上",
+      "legible": "med",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-jigsaw-notch",
+      "runner": "拼图块",
+      "goal": "缺口方块",
+      "locomotion": "滑，凸榫朝前，整体轻微起伏",
+      "pairing": "拼图块去补上那个缺口",
+      "legible": "med",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-squarewave-sinewave",
+      "runner": "方波",
+      "goal": "正弦波",
+      "locomotion": "蠕动，方齿波形逐帧向前推移",
+      "pairing": "方波想被磨成平滑正弦",
+      "legible": "med",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-protractor-anglewedge",
+      "runner": "量角器",
+      "goal": "扇形角",
+      "locomotion": "滑，半圆体沿平边滑，轻晃",
+      "pairing": "量角器专门去量那个角",
+      "legible": "med",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-magnet-paperclip",
+      "runner": "马蹄磁铁",
+      "goal": "回形针",
+      "locomotion": "滑，U 形开口朝前，贴地前移",
+      "pairing": "磁铁吸铁，最爱回形针",
+      "legible": "high",
+      "theme": "geo",
+      "flagged": true
+    },
+    {
+      "slug": "geo-setsquare-rightangle",
+      "runner": "三角尺",
+      "goal": "直角标记",
+      "locomotion": "滑，直角边贴地滑，斜边领前",
+      "pairing": "三角尺去对上那个直角",
+      "legible": "low",
+      "theme": "geo",
+      "flagged": true
+    }
+  ],
+  "flagged": [
+    {
+      "slug": "bug-stick-insect-twig",
+      "issues": [
+        {
+          "slug": "bug-stick-insect-twig",
+          "problem": "跑者是一条细线，目标就是树枝，两者同形；\"僵住装枝\"还等于没有动画帧。",
+          "suggestion": "目标换叶片，停顿姿改成抬起前足才有可读差异。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-gear-gear",
+      "issues": [
+        {
+          "slug": "geo-gear-gear",
+          "problem": "跑者和目标都是带齿圆盘，玩家分不出谁在追谁。",
+          "suggestion": "跑者改成齿轮拟人化(加腿)，或目标换成皮带/链条。"
+        },
+        {
+          "slug": "geo-gear-gear",
+          "problem": "主体=目标，等于没有变形，违背\"A→B\"前提；滚齿动作又与 desk-gear-nut 撞。",
+          "suggestion": "改成齿轮→钥匙孔之类的异物，或删。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-domino-domino",
+      "issues": [
+        {
+          "slug": "geo-domino-domino",
+          "problem": "跑者=目标同形，而且\"倾倒\"之后骨牌躺平就不再像跑者。"
+        },
+        {
+          "slug": "geo-domino-domino",
+          "problem": "主体=目标（骨牌→骨牌），同样没有变形。",
+          "suggestion": "改成骨牌→阶梯/条形码，或删。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-hexagon-honeycomb",
+      "issues": [
+        {
+          "slug": "geo-hexagon-honeycomb",
+          "problem": "六边形跑者和蜂窝格目标是同一个形，11×11 下蜂窝只能画一个格子。",
+          "suggestion": "目标换蜂蜜滴，靠内部有无网格区分不可靠。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-octahedron-crystal",
+      "issues": [
+        {
+          "slug": "geo-octahedron-crystal",
+          "problem": "八面体和水晶都是菱形块，两者剪影一样。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-squarewave-sinewave",
+      "issues": [
+        {
+          "slug": "geo-squarewave-sinewave",
+          "problem": "方波跑者和正弦波目标都是 1px 线状波形，16×10 和 11×11 下互为同物且都糊。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-mechfish-metal-lure",
+      "issues": [
+        {
+          "slug": "robot-mechfish-metal-lure",
+          "problem": "机械鱼和金属鱼饵都是鱼形轮廓，跑者与目标撞形。",
+          "suggestion": "目标换成鱼钩(带明显弯钩)。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-plug-socket",
+      "issues": [
+        {
+          "slug": "desk-plug-socket",
+          "problem": "插头和插座在这个尺寸下都是\"方块+两个点\"，跑者目标同形；还与 robot-plugbot-socket 完全重复。"
+        },
+        {
+          "slug": "desk-plug-socket",
+          "problem": "与 robot-plugbot-socket 同：插头前进+线尾在后甩→插座。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-scanner-qr",
+      "issues": [
+        {
+          "slug": "desk-scanner-qr",
+          "problem": "二维码至少要 21×21 模块，11×11 只能画出噪点方块，不可能读成码。",
+          "suggestion": "换成条形码(几根竖条)或扫描光束。"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-star-blackhole",
+      "issues": [
+        {
+          "slug": "cosmic-star-blackhole",
+          "problem": "黑洞在单色 11×11 就是一个实心圆，和硬币/满月/球完全同形，深色背景上还会直接消失。",
+          "suggestion": "必须靠外圈吸积盘环+中心留空来定义。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-mosquito-blood-drop",
+      "issues": [
+        {
+          "slug": "bug-mosquito-blood-drop",
+          "problem": "蚊子的身份全在几像素细腿和口器上，16×10 下只剩一个带翅的点；血滴又和全集里五个水滴目标同形。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-flea-fur-ball",
+      "issues": [
+        {
+          "slug": "bug-flea-fur-ball",
+          "problem": "跳蚤本体只有 1-2px，没有可辨轮廓；\"弹很高很远\"会直接跳出画框。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-water-flea-algae-ball",
+      "issues": [
+        {
+          "slug": "bug-water-flea-algae-ball",
+          "problem": "水蚤在 16×10 是一个点，藻球是一个团，两边都没有信息量。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-water-strider-ripple",
+      "issues": [
+        {
+          "slug": "bug-water-strider-ripple",
+          "problem": "水黾的辨识点是长足撑出的水面凹陷，1px 细腿单色下几乎看不见。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-firefly-star",
+      "issues": [
+        {
+          "slug": "bug-firefly-star",
+          "problem": "萤火虫的身份是一闪一闪的光，单色剪影只剩一只普通小虫。",
+          "suggestion": "如果允许亮度两级，可用闪烁帧承担识别；否则砍掉。"
+        }
+      ]
+    },
+    {
+      "slug": "food-whisk-egg",
+      "issues": [
+        {
+          "slug": "food-whisk-egg",
+          "problem": "打蛋器靠 1px 钢丝网格才认得出，滚起来就是个团。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-keyboard-keycap",
+      "issues": [
+        {
+          "slug": "desk-keyboard-keycap",
+          "problem": "键盘要一排键帽细节才成立，16×10 下是一块实心板；\"一寸一寸挪\"也没有可读姿态变化。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-chair-cushion",
+      "issues": [
+        {
+          "slug": "desk-chair-cushion",
+          "problem": "办公椅要椅背+气柱+五爪脚轮三层结构，10px 高里塞不下，会读成一块方板。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-therizinosaurus-honeycomb",
+      "issues": [
+        {
+          "slug": "reptile-therizinosaurus-honeycomb",
+          "problem": "镰刀爪只有 1px，剪影退回普通兽脚类；蜂巢靠六边形花纹才成立。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-vulture-skull",
+      "issues": [
+        {
+          "slug": "bird-vulture-skull",
+          "problem": "秃鹫展翼后与老鹰/信天翁同剪影，秃头只有 1px；头骨要眼窝，单色 11×11 挖两个洞会读成奶酪。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-skeleton-skull",
+      "issues": [
+        {
+          "slug": "myth-skeleton-skull",
+          "problem": "骷髅在 16×10 就是火柴人，和稻草人/木乃伊无差别；头骨同样受眼窝限制。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-peacock-gem",
+      "issues": [
+        {
+          "slug": "bird-peacock-gem",
+          "problem": "宝石靠切面明暗，单色 11×11 只是一个多边形团，和水晶/八面体撞。",
+          "suggestion": "开屏帧本身够强，目标换成\"羽眼\"更贴题。"
+        }
+      ]
+    },
+    {
+      "slug": "food-mug-coffeebean",
+      "issues": [
+        {
+          "slug": "food-mug-coffeebean",
+          "problem": "杯内液面晃动只有 1-2px 可用，动作看不出来；咖啡豆旋转后中缝失向，就是个圆。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-punch-confetti",
+      "issues": [
+        {
+          "slug": "desk-punch-confetti",
+          "problem": "打孔器本体没有可辨轮廓(一块带柄的团)，圆纸屑是 2px 点。"
+        }
+      ]
+    },
+    {
+      "slug": "food-teapot-teabag",
+      "issues": [
+        {
+          "slug": "food-teapot-teabag",
+          "problem": "茶包=方片+1px 提线，旋转后线读不出，只剩一个小方块。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-magnet-paperclip",
+      "issues": [
+        {
+          "slug": "geo-magnet-paperclip",
+          "problem": "回形针是嵌套的 1px 细线，11×11 旋转后成一团斜噪线。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-longhorn-beetle-log-slice",
+      "issues": [
+        {
+          "slug": "bug-longhorn-beetle-log-slice",
+          "problem": "圆木截面靠年轮细线，11×11 旋转后只是一个圆；天牛本体也和独角仙/锹甲/甲虫目标互撞。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-budgie-millet",
+      "issues": [
+        {
+          "slug": "pets-budgie-millet",
+          "problem": "虎皮鹦鹉靠花纹，剪影是通用小鸟；小米穗要细颗粒，旋 45° 成一条模糊斜线。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-boomerang-xmark",
+      "issues": [
+        {
+          "slug": "geo-boomerang-xmark",
+          "problem": "X 标记旋 45° 就变成加号，回旋镖 V 形旋转后朝向随机，跑者和目标两头都读不出。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-hourglass-clockface",
+      "issues": [
+        {
+          "slug": "geo-hourglass-clockface",
+          "problem": "沙漏细腰只有 1px，旋 45° 成斜领结；时钟表盘要指针+刻度，11×11 放不下。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-mayfly-hourglass",
+      "issues": [
+        {
+          "slug": "bug-mayfly-hourglass",
+          "problem": "沙漏旋转失义同上；蜉蝣本体与任何小飞虫同剪影，尾丝 1px。"
+        }
+      ]
+    },
+    {
+      "slug": "wx-tornado-house",
+      "issues": [
+        {
+          "slug": "wx-tornado-house",
+          "problem": "小房子旋 45° 后屋顶不在上方，读成方块加一坨三角噪点。",
+          "suggestion": "目标换栅栏板或屋顶瓦片这类旋转后仍可读的碎片。"
+        }
+      ]
+    },
+    {
+      "slug": "wx-hailstone-icicle",
+      "issues": [
+        {
+          "slug": "wx-hailstone-icicle",
+          "problem": "冰雹是无特征圆点；冰锥必须尖朝下才成立，旋转后是随机尖刺。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-scarecrow-heart",
+      "issues": [
+        {
+          "slug": "myth-scarecrow-heart",
+          "problem": "稻草人和骷髅/木乃伊同 humanoid 剪影，\"四肢松垮乱摆\"没有可读步态；心形旋 45° 成团。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-cerberus-key",
+      "issues": [
+        {
+          "slug": "myth-cerberus-key",
+          "problem": "三个头在 16px 宽里合成一个肿块，读成普通狗；钥匙旋转后是带齿短棒，和螺丝刀/棒类混。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-salamander-flame",
+      "issues": [
+        {
+          "slug": "myth-salamander-flame",
+          "problem": "火蜥蜴是通用四足蜥蜴剪影；火焰必须尖朝上，旋 45° 成一团。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-medusa-bronzemirror",
+      "issues": [
+        {
+          "slug": "myth-medusa-bronzemirror",
+          "problem": "铜镜=圆+柄，旋转后柄指向随机，会读成勺子/锅铲/放大镜。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-mouse-cursor",
+      "issues": [
+        {
+          "slug": "desk-mouse-cursor",
+          "problem": "光标箭头旋 45° 变成无向楔形，失去\"指\"的意义；有线鼠标剪影也只是带一条尾巴的团。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-nautilus-compass",
+      "issues": [
+        {
+          "slug": "sea-nautilus-compass",
+          "problem": "罗盘的指针旋转后方向没有意义，剩下同心圆；鹦鹉螺又和蜗牛/菊石同螺壳。"
+        }
+      ]
+    },
+    {
+      "slug": "food-icecreamscoop-cone",
+      "issues": [
+        {
+          "slug": "food-icecreamscoop-cone",
+          "problem": "甜筒旋转后尖端指向随机，读成一个三角块；冰淇淋球本身是纯圆。"
+        }
+      ]
+    },
+    {
+      "slug": "food-jelly-spoon",
+      "issues": [
+        {
+          "slug": "food-jelly-spoon",
+          "problem": "勺子旋转后柄向随机，和铜镜/锅铲混；果冻跑者又是会颤的团，与水妖/史莱姆同。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-tirebot-pressure-gauge",
+      "issues": [
+        {
+          "slug": "robot-tirebot-pressure-gauge",
+          "problem": "气压表指针旋转后无意义；轮胎跑者与齿轮/滑轮/轴承同环形。"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-capsule-parachute",
+      "issues": [
+        {
+          "slug": "cosmic-capsule-parachute",
+          "problem": "降落伞=伞盖+1px 吊绳，旋转后吊绳失义、伞盖成半月团；返回舱又和梯形箱体同形。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-mermaid-comb",
+      "issues": [
+        {
+          "slug": "sea-mermaid-comb",
+          "problem": "梳子是带齿细条，旋 45° 成模糊斜块；美人鱼又和潜水员/宇航员同 humanoid。"
+        }
+      ]
+    },
+    {
+      "slug": "wx-rainboot-splash",
+      "issues": [
+        {
+          "slug": "wx-rainboot-splash",
+          "problem": "水花是不规则尖团，旋转后完全无义；雨靴与杯/桶/靴类块体混。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-cable-power",
+      "issues": [
+        {
+          "slug": "desk-cable-power",
+          "problem": "电源符号旋转后成一个带缺口的环，认不出；电源线跑者又与蛇/蠕虫/面条同 S 波。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-unicycle-balancer-gyro-top",
+      "issues": [
+        {
+          "slug": "robot-unicycle-balancer-gyro-top",
+          "problem": "陀螺必须尖端朝下，旋转后成无向锥体；独轮平衡机器人与电动滑板车同细立柱剪影。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-lion-crown",
+      "issues": [
+        {
+          "slug": "wild-mammal-lion-crown",
+          "problem": "王冠倒过来或斜 45° 就读成一排乱齿；狮子鬃毛在 16×10 也只是一个圆头。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-setsquare-rightangle",
+      "issues": [
+        {
+          "slug": "geo-setsquare-rightangle",
+          "problem": "直角标记是 1px 的 L 形，旋转后成随机折角；三角尺又和甜筒/派角/扇形角同三角块。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-goat-tin-can",
+      "issues": [
+        {
+          "slug": "pets-goat-tin-can",
+          "problem": "\"踩石头往上蹦跳式攀\"需要岩石参照物，跑道里没有，只会看成原地乱蹦。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-ibex-saltblock",
+      "issues": [
+        {
+          "slug": "wild-mammal-ibex-saltblock",
+          "problem": "与山羊完全同剪影，\"岩间蹦跳落点极小\"同样缺参照物；盐块又落进方块目标堆。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-koala-eucalyptus",
+      "issues": [
+        {
+          "slug": "wild-mammal-koala-eucalyptus",
+          "problem": "\"抱树干往上爬\"没有树干可抱，动作退化成原地抓握，且与树懒/穿山甲抱树姿同形。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-pangolin-anthill",
+      "issues": [
+        {
+          "slug": "wild-mammal-pangolin-anthill",
+          "problem": "剪影就是犰狳；抱树爬同样缺树；蚁丘是贴地土堆，旋转后失义。"
+        },
+        {
+          "slug": "wild-mammal-pangolin-anthill",
+          "problem": "写的是抱树爬+长尾勾枝，与同主题 koala、sloth 撞；穿山甲的招牌动作（卷成球）反而没用上。",
+          "suggestion": "改成卷球——但注意别再撞 armadillo 那条。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-sloth-blossom",
+      "issues": [
+        {
+          "slug": "wild-mammal-sloth-blossom",
+          "problem": "倒挂横爬需要上方枝条做参照，没有的话会被读成仰躺爬行。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-mole-worm",
+      "issues": [
+        {
+          "slug": "wild-mammal-mole-worm",
+          "problem": "\"土中蠕动\"意味着跑者被土遮住，看不到剪影；蚯蚓又与蚕/肉虫/面包虫同棒。"
+        },
+        {
+          "slug": "wild-mammal-mole-worm",
+          "problem": "与 robot-molebot-auger、myth-sandworm-hourglass 同：半埋土中推进。",
+          "suggestion": "钻地只留一个，其余改成地面动作。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-molebot-auger",
+      "issues": [
+        {
+          "slug": "robot-molebot-auger",
+          "problem": "同\"半埋在地里\"问题，露出部分只有一块方壳，识别不了。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-crocodile-toothbrush",
+      "issues": [
+        {
+          "slug": "sea-crocodile-toothbrush",
+          "problem": "\"只露背脊眼鼻\"在 16×10 只剩几个点，跑者基本消失。",
+          "suggestion": "让整条鳄鱼贴水线可见，改用水花线暗示半潜。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-cormorant-eel",
+      "issues": [
+        {
+          "slug": "bird-cormorant-eel",
+          "problem": "\"半潜只露头颈\"可见像素太少，且与鹅/天鹅长颈剪影混。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-capybara-orange",
+      "issues": [
+        {
+          "slug": "wild-mammal-capybara-orange",
+          "problem": "\"只露头顶\"是 3px 团；水豚本体又与袋熊/豚鼠/猪同砖形。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-hummingbird-flower",
+      "issues": [
+        {
+          "slug": "bird-hummingbird-flower",
+          "problem": "\"翅膀糊成一团\"等于放弃轮廓，悬停又几乎没有位移，跑者读不出也动不起来。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-shoebill-turtle",
+      "issues": [
+        {
+          "slug": "bird-shoebill-turtle",
+          "problem": "\"静立良久再慢步逼近\"大部分帧是静止的，动画看不出在跑；本体又落进长腿长颈涉水鸟堆。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-vendbot-coin",
+      "issues": [
+        {
+          "slug": "robot-vendbot-coin",
+          "problem": "\"厚身机箱缓慢平移\"是零动画，且与配电箱/打印机/货箱机器人同一个方块。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-maglev-magnet",
+      "issues": [
+        {
+          "slug": "vehicle-maglev-magnet",
+          "problem": "悬空无接触+极速直线=纯平移，没有任何可读动作帧。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-solarcar-sun",
+      "issues": [
+        {
+          "slug": "vehicle-solarcar-sun",
+          "problem": "\"超扁车身贴地平滑\"没有动画，剪影又与滑板/雪橇/木筏同一条扁板。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-cablecar-pulley",
+      "issues": [
+        {
+          "slug": "vehicle-cablecar-pulley",
+          "problem": "悬挂厢体需要上方缆索参照，缺了就是一个漂浮方块；滑轮又落进环形目标堆。"
+        }
+      ]
+    },
+    {
+      "slug": "food-cornkernel-popcorn",
+      "issues": [
+        {
+          "slug": "food-cornkernel-popcorn",
+          "problem": "玉米粒和爆米花都是无特征小团，彼此也不好区分；\"越跳越高\"会跳出画框。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-weaver-yarn",
+      "issues": [
+        {
+          "slug": "bird-weaver-yarn",
+          "problem": "\"沿草茎攀\"缺草茎参照；织巢鸟剪影与麻雀/知更鸟无差别。"
+        }
+      ]
+    },
+    {
+      "slug": "wx-gust-pinwheel",
+      "issues": [
+        {
+          "slug": "wx-gust-pinwheel",
+          "problem": "阵风只有三条卷线，单色下是抽象笔画而非物体，动作也只有平移。"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-solarsail-starburst",
+      "issues": [
+        {
+          "slug": "cosmic-solarsail-starburst",
+          "problem": "太阳帆是一块平板，\"帆面绷紧+缓慢平移\"没有动画；星芒与星星目标同形。"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-nebula-protostar",
+      "issues": [
+        {
+          "slug": "cosmic-nebula-protostar",
+          "problem": "星云没有固定轮廓，拉伸蠕动看起来是变形虫；新星核是一个光点。"
+        }
+      ]
+    },
+    {
+      "slug": "wx-puddle-drain",
+      "issues": [
+        {
+          "slug": "wx-puddle-drain",
+          "problem": "水洼是扁平团，前端拉出再收尾就是变形虫；下水道格栅旋转后仍是方格，两边都无辨识点。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-waterspirit-droplet",
+      "issues": [
+        {
+          "slug": "myth-waterspirit-droplet",
+          "problem": "水妖本身没有轮廓定义，压扁再弹起的动作与果冻/史莱姆完全一样。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-glidinglizard-leaf",
+      "issues": [
+        {
+          "slug": "reptile-glidinglizard-leaf",
+          "problem": "\"身体不动\"等于没有动画；摊平的膜与飞蛙/鼯鼠/蜜袋鼯同一剪影；落叶又和一堆叶片目标撞。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-hornedlizard-ant",
+      "issues": [
+        {
+          "slug": "reptile-hornedlizard-ant",
+          "problem": "头角只有 1px，\"装死\"是静止帧；蚂蚁目标在全集重复四次。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-wolf-moon",
+      "issues": [
+        {
+          "slug": "wild-mammal-wolf-moon",
+          "problem": "狼在 16×10 与狐/狗/郊狼同剪影(题干自己举的例)；月牙目标又重复四次。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-fox-vole",
+      "issues": [
+        {
+          "slug": "wild-mammal-fox-vole",
+          "problem": "同犬科剪影堆，狐狸只能靠尾巴粗细 1px 区分；田鼠又与老鼠目标同团。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-werewolf-fullmoon",
+      "issues": [
+        {
+          "slug": "myth-werewolf-fullmoon",
+          "problem": "狼人与山怪/雪怪/直立熊同为宽肩前倾双足；满月是目标池里信息量最低的纯圆。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-yeti-snowflake",
+      "issues": [
+        {
+          "slug": "myth-yeti-snowflake",
+          "problem": "与山怪/大猩猩剪影一致，\"宽肩摇摆\"不足以区分。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-troll-barrel",
+      "issues": [
+        {
+          "slug": "myth-troll-barrel",
+          "problem": "驼背重踏与雪怪/狼人同簇；酒桶与油桶/燃料桶/纸卷同圆柱。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-mummy-bandageroll",
+      "issues": [
+        {
+          "slug": "myth-mummy-bandageroll",
+          "problem": "木乃伊靠绷带花纹，剪影就是僵直 humanoid，与骷髅/稻草人撞。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-unicorn-star",
+      "issues": [
+        {
+          "slug": "myth-unicorn-star",
+          "problem": "独角只有 1px，剪影是马，与 pets-horse 和天马都撞。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-sphinx-scroll",
+      "issues": [
+        {
+          "slug": "myth-sphinx-scroll",
+          "problem": "狮身+人头在 16×10 只剩狮子；卷轴是圆柱棒，旋转后无向。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-nekomata-bell",
+      "issues": [
+        {
+          "slug": "myth-nekomata-bell",
+          "problem": "双尾在 16px 宽里差 1px，剪影就是猫，与 pets-cat 重复。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-moonrabbit-ricecake",
+      "issues": [
+        {
+          "slug": "myth-moonrabbit-ricecake",
+          "problem": "剪影与 pets-rabbit 完全一样，跳跃+耳后压也同；年糕是白方块。"
+        },
+        {
+          "slug": "myth-moonrabbit-ricecake",
+          "problem": "与 pets-rabbit-carrot 同：双耳后压弹跳、停下耳竖起蹲坐。",
+          "suggestion": "改成月兔举杵捣年糕，动作才和普通兔子分开。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-goldtoad-coin",
+      "issues": [
+        {
+          "slug": "myth-goldtoad-coin",
+          "problem": "剪影就是蛙，与 pets-frog / sea-frog 撞；铜钱是纯圆，方孔 1px 看不见。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-griffin-coin",
+      "issues": [
+        {
+          "slug": "myth-griffin-coin",
+          "problem": "展翼后剪影是大型鸟，与凤凰/雷鸟/飞龙/天马同一簇，鹰头狮身在这个尺寸读不出。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-wyvern-egg",
+      "issues": [
+        {
+          "slug": "myth-wyvern-egg",
+          "problem": "蝠翼剪影与巨蝠/龙类同；蛋在全集出现六次，是最泛的椭圆团。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-satyr-grapes",
+      "issues": [
+        {
+          "slug": "myth-satyr-grapes",
+          "problem": "半羊人与地精/humanoid 同形，羊腿 1px；葡萄与莓/球类目标全撞。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-golem-corestone",
+      "issues": [
+        {
+          "slug": "myth-golem-corestone",
+          "problem": "石傀儡与树精/方壳机器人同为块状 humanoid；核石与巨石/圆石/陨石/岩石重复。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-lakeserpent-fish",
+      "issues": [
+        {
+          "slug": "myth-lakeserpent-fish",
+          "problem": "三个驼峰在 16px 宽里每个只有 2px，出水动作糊成波纹；剪影与东方龙/海蛇同。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-fairy-flower",
+      "issues": [
+        {
+          "slug": "myth-fairy-flower",
+          "problem": "小仙子是一个点状 humanoid 加抖翅糊团；花朵目标在四条 idea 里重复。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-centipede-pill",
+      "issues": [
+        {
+          "slug": "myth-centipede-pill",
+          "problem": "与 bug-centipede-egg-cluster 同一条多足波浪剪影；丹药是小圆。"
+        },
+        {
+          "slug": "myth-centipede-pill",
+          "problem": "与 bug-centipede-egg-cluster 同：长身多足波浪疾行。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-sugar-glider-grape",
+      "issues": [
+        {
+          "slug": "pets-sugar-glider-grape",
+          "problem": "摊膜滑翔与鼯鼠/飞蜥/飞蛙完全同形，四者只能靠尾巴细节区分。"
+        },
+        {
+          "slug": "pets-sugar-glider-grape",
+          "problem": "与 wild-mammal-flying-squirrel-pinecone 同：四肢摊成膜、斜线滑翔下坠。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-flyingfrog-moth",
+      "issues": [
+        {
+          "slug": "reptile-flyingfrog-moth",
+          "problem": "四脚蹼张成 X 与飞蜥/鼯鼠/蜜袋鼯同一\"摊平膜\"剪影。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-raptor-nest",
+      "issues": [
+        {
+          "slug": "reptile-raptor-nest",
+          "problem": "与霸王龙/似鸟龙/肿头龙/副栉龙同为双足+平伸尾，兽脚类在 16×10 只有一个剪影；蛋窝是一堆椭圆团。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-ornithomimus-snail",
+      "issues": [
+        {
+          "slug": "reptile-ornithomimus-snail",
+          "problem": "同兽脚类剪影堆，\"长腿高频\"与迅猛龙动作无差别。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-pachycephalosaur-nut",
+      "issues": [
+        {
+          "slug": "reptile-pachycephalosaur-nut",
+          "problem": "同兽脚类堆，圆顶头只有 1px 差异；坚果是无特征团块。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-dimetrodon-spider",
+      "issues": [
+        {
+          "slug": "reptile-dimetrodon-spider",
+          "problem": "背帆与棘龙重复，四肢外撑与科莫多/鬣蜥同；蜘蛛目标已被四条蛛类 idea 占用。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-mosasaur-ammonite",
+      "issues": [
+        {
+          "slug": "reptile-mosasaur-ammonite",
+          "problem": "沧龙与鱼龙同为鱼雷身+桨尾；菊石与鹦鹉螺/蜗牛壳同螺形。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-softshellturtle-clam",
+      "issues": [
+        {
+          "slug": "reptile-softshellturtle-clam",
+          "problem": "软壳龟是薄饼形，与海龟/蝠鲼/翻车鱼同；长鼻管 1px 看不见。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-sidewinder-scorpion",
+      "issues": [
+        {
+          "slug": "reptile-sidewinder-scorpion",
+          "problem": "与蛇/眼镜蛇/蟒/海蛇/金花蛇同为 S 波，\"侧行斜挪\"在 16px 宽里读不出方向差异。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-skink-sun",
+      "issues": [
+        {
+          "slug": "reptile-skink-sun",
+          "problem": "\"短腿几乎不见\"等于蛇/蠕虫剪影；太阳目标重复四次。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-gecko-mosquito",
+      "issues": [
+        {
+          "slug": "reptile-gecko-mosquito",
+          "problem": "壁虎与石龙子/角蜥/伞蜥同为四肢外张扁蜥；蚊子在 11×11 是灰尘点。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-armadillolizard-cricket",
+      "issues": [
+        {
+          "slug": "reptile-armadillolizard-cricket",
+          "problem": "咬尾成球与犰狳/鼠妇同一颗滚动球；蟋蟀与蚱蜢/蝗虫目标同形。"
+        },
+        {
+          "slug": "reptile-armadillolizard-cricket",
+          "problem": "与 wild-mammal-armadillo-beetle 同：咬尾/卷成球滚动，停下松开露头。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-sparrow-crumb",
+      "issues": [
+        {
+          "slug": "bird-sparrow-crumb",
+          "problem": "麻雀是最通用小鸟剪影，与知更鸟/织巢鸟/鹌鹑/山雀全撞；面包屑是 2px 点。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-nestling-caterpillar",
+      "issues": [
+        {
+          "slug": "bird-nestling-caterpillar",
+          "problem": "光秃雏鸟本身就是一个无特征团加张嘴，没有可辨轮廓；肉虫与毛毛虫/蚕/蚯蚓同棒。"
+        },
+        {
+          "slug": "bird-nestling-caterpillar",
+          "problem": "同蠕虫群：一拱一拱前挪；\"大嘴张着\"在 16×10 下几帧就看不出。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-fluffball-suet",
+      "issues": [
+        {
+          "slug": "bird-fluffball-suet",
+          "problem": "整只滚动会读成一个球而不是鸟；板油球也是纯圆，跑者目标同形。"
+        },
+        {
+          "slug": "bird-fluffball-suet",
+          "problem": "同\"整只滚成球\"群：滚动+停下露喙。",
+          "suggestion": "删；山雀改成蓬毛蹲枝抖两下。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-robin-worm",
+      "issues": [
+        {
+          "slug": "bird-robin-worm",
+          "problem": "知更鸟的身份是红胸，单色下退回通用小鸟。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-kingfisher-droplet",
+      "issues": [
+        {
+          "slug": "bird-kingfisher-droplet",
+          "problem": "翠鸟靠蓝橙配色，剪影只是大喙小鸟，与燕子/雀类混。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-puffin-urchin",
+      "issues": [
+        {
+          "slug": "bird-puffin-urchin",
+          "problem": "海雀靠喙上的彩纹，单色剪影接近企鹅；海胆目标重复三次。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-bowerbird-cap",
+      "issues": [
+        {
+          "slug": "bird-bowerbird-cap",
+          "problem": "园丁鸟的身份来自收藏品和颜色，剪影是普通鸟；瓶盖是小圆盘。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-heron-frog",
+      "issues": [
+        {
+          "slug": "bird-heron-frog",
+          "problem": "苍鹭与白鹳/琵鹭/鲸头鹳/火烈鸟同为长腿长颈涉水鸟，这一簇五条互相撞。",
+          "suggestion": "整簇只留一条(白鹳或火烈鸟)，其余换动作差异极大的鸟。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-spoonbill-spoon",
+      "issues": [
+        {
+          "slug": "bird-spoonbill-spoon",
+          "problem": "同涉水鸟簇；勺形喙只有 1px，汤勺目标旋转后柄向随机。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-cassowary-fig",
+      "issues": [
+        {
+          "slug": "bird-cassowary-fig",
+          "problem": "与鸵鸟(全集出现三次)/几维鸟/渡渡鸟同为大型跑禽；无花果是无特征团。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-crow-walnut",
+      "issues": [
+        {
+          "slug": "bird-crow-walnut",
+          "problem": "乌鸦是通用鸟剪影，与喜鹊去尾/椋鸟无差；核桃是不规则圆。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-oystercatcher-oyster",
+      "issues": [
+        {
+          "slug": "bird-oystercatcher-oyster",
+          "problem": "蛎鹬是通用滩涂鸟(靠橙喙识别)，牡蛎是团块，两边都无辨识点。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-falcon-stopwatch",
+      "issues": [
+        {
+          "slug": "bird-falcon-stopwatch",
+          "problem": "游隼与老鹰/秃鹫同猛禽剪影；秒表与闹钟/时钟/表盘同一个圆。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-mantisshrimp-glove",
+      "issues": [
+        {
+          "slug": "sea-mantisshrimp-glove",
+          "problem": "螳螂虾与虾/龙虾在 16×10 同形，前肢弹出只有 2px；拳击手套与袋鼠那条重复，旋转后成团。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-manatee-lettuce",
+      "issues": [
+        {
+          "slug": "sea-manatee-lettuce",
+          "problem": "海牛与海豹/鲸/儒艮同胖纺锤，桨形尾 1px；生菜是叶团。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-sunfish-sun",
+      "issues": [
+        {
+          "slug": "sea-sunfish-sun",
+          "problem": "翻车鱼是竖圆盘，与河豚/满月/太阳目标同圆；\"侧向歪摆\"幅度在 16px 内读不出。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-narwhal-icecube",
+      "issues": [
+        {
+          "slug": "sea-narwhal-icecube",
+          "problem": "剪影是海豚加 1px 长牙；冰块又落进方糖/盐砖/砖块/骰子那堆方块里。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-lobster-fishbone",
+      "issues": [
+        {
+          "slug": "sea-lobster-fishbone",
+          "problem": "龙虾与螳螂虾/对虾同长身大钳；鱼骨是 1px 细骨刺，旋转后是斜噪线。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-eel-amphora",
+      "issues": [
+        {
+          "slug": "sea-eel-amphora",
+          "problem": "海鳗与蛇/海蛇/蠕虫同一条 S 线；陶罐是圆胖块，旋转后无向。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-squid-inkbottle",
+      "issues": [
+        {
+          "slug": "sea-squid-inkbottle",
+          "problem": "鱿鱼与乌贼/收拢的章鱼同为锥形+触手束；墨水瓶与方瓶/箱体同块。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-grub-tuber",
+      "issues": [
+        {
+          "slug": "bug-grub-tuber",
+          "problem": "蛴螬与毛毛虫/尺蠓/蚕同 C 形肥虫；块根是团块。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-inchworm-tape-reel",
+      "issues": [
+        {
+          "slug": "bug-inchworm-tape-reel",
+          "problem": "尺蠓与毛毛虫/蚕同棒虫，只有拱背幅度差异；卷尺盘落进环形目标堆。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-stinkbug-berry",
+      "issues": [
+        {
+          "slug": "bug-stinkbug-berry",
+          "problem": "盾蝽与甲虫/鼠妇同宽盾剪影，盾纹是它唯一身份；浆果是小圆。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-mole-cricket-root",
+      "issues": [
+        {
+          "slug": "bug-mole-cricket-root",
+          "problem": "蝼蛄与蟋蟀/蟑螂同形，铲状前足只有 1px；块茎是团。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-jumping-spider-fly",
+      "issues": [
+        {
+          "slug": "bug-jumping-spider-fly",
+          "problem": "跳蛛与圆蛛/宠物蜘蛛/蜘蛛精同为八足团，四条蛛类互撞；苍蝇目标重复三次。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-pillbug-rotten-leaf",
+      "issues": [
+        {
+          "slug": "bug-pillbug-rotten-leaf",
+          "problem": "蜷球与犰狳/犰狳蜥同一滚球；腐叶球与各种叶片/球目标撞。"
+        },
+        {
+          "slug": "bug-pillbug-rotten-leaf",
+          "problem": "同\"卷成球滚动、停下摊开\"群（armadillo、armadillo lizard）。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-stag-beetle-crown",
+      "issues": [
+        {
+          "slug": "bug-stag-beetle-crown",
+          "problem": "锹甲大颚与独角仙的角在 11×11 都是 1-2px 突起，甲虫这一簇(五个跑者+四个目标)彼此不可分。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-guinea-pig-cucumber",
+      "issues": [
+        {
+          "slug": "pets-guinea-pig-cucumber",
+          "problem": "无尾面包块剪影与仓鼠/龙猫/水豚一样；黄瓜片靠籽的花纹，旋转后就是个圆。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-chinchilla-raisin",
+      "issues": [
+        {
+          "slug": "pets-chinchilla-raisin",
+          "problem": "龙猫与豚鼠/仓鼠同团，\"原地爆米花蹦\"也不构成识别；葡萄干是最小的不规则点。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-quail-cherry",
+      "issues": [
+        {
+          "slug": "pets-quail-cherry",
+          "problem": "贴地圆球与小鸡/麻雀/圆胖山雀同形；樱桃梗旋转后指向随机。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-hamster-ball-seed",
+      "issues": [
+        {
+          "slug": "pets-hamster-ball-seed",
+          "problem": "球里的小影子在这个尺寸只有 1-2px，结果只读成一个滚球；葵花籽靠条纹。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-cricket-soybean",
+      "issues": [
+        {
+          "slug": "pets-cricket-soybean",
+          "problem": "蟋蟀与蚱蜢/蝗虫同为后腿折叠剪影，三条动作也一样；黄豆是小圆。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-greyhound-ring-toy",
+      "issues": [
+        {
+          "slug": "pets-greyhound-ring-toy",
+          "problem": "\"深胸细腰\"是 1px 级差异，读成普通狗或猎豹；圆环玩具与甜甜圈/贝果/呼啦圈/轴承同形。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-alpaca-oat-cookie",
+      "issues": [
+        {
+          "slug": "pets-alpaca-oat-cookie",
+          "problem": "羊驼与骆驼(无峰)/长脖绵羊同形，蓬松只能靠 1px 毛边；燕麦饼靠麸点，旋转后是圆。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-axolotl-shrimp",
+      "issues": [
+        {
+          "slug": "pets-axolotl-shrimp",
+          "problem": "与 reptile-axolotl-shrimp 完全重复；鳃羽 1px，剪影退成普通水生蜥。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-wombat-cube",
+      "issues": [
+        {
+          "slug": "wild-mammal-wombat-cube",
+          "problem": "方身四短腿与水豚/袋熊/猪无差；目标直接叫\"方块\"，本身没有身份，还与方糖/冰块/骰子/积木全撞。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-gorilla-drum",
+      "issues": [
+        {
+          "slug": "wild-mammal-gorilla-drum",
+          "problem": "拳步爬行剪影与熊/雪怪/山怪一致；手鼓与酒桶/油桶同圆柱。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-skunk-egg",
+      "issues": [
+        {
+          "slug": "wild-mammal-skunk-egg",
+          "problem": "没有白条纹的臭鼬就是蓬尾猫或雪貂；蛋是椭圆团。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-jerboa-seed",
+      "issues": [
+        {
+          "slug": "wild-mammal-jerboa-seed",
+          "problem": "双足弹跳+长尾与袋鼠/月兔同形，只有体型差(尺寸固定所以看不出)；种子是点。"
+        },
+        {
+          "slug": "wild-mammal-jerboa-seed",
+          "problem": "与同主题 wild-mammal-kangaroo-glove 同：双足弹跳+长尾拖成一条线。",
+          "suggestion": "删；跳鼠要留就把\"尾端一撮\"和超小体型做成识别点。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-panda-bamboo",
+      "issues": [
+        {
+          "slug": "wild-mammal-panda-bamboo",
+          "problem": "去掉黑白就是熊，与 wild-mammal-bear-honeycomb 撞；竹节是带节短棒，与木棍/树枝混。"
+        },
+        {
+          "slug": "wild-mammal-panda-bamboo",
+          "problem": "翻滚前进落在圆球滚群里，且熊猫最强的黑白色块在单色剪影下整个丢失。",
+          "suggestion": "删或改成抱竹坐地啃。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-cheetah-lightning",
+      "issues": [
+        {
+          "slug": "wild-mammal-cheetah-lightning",
+          "problem": "没有斑点就是通用四足猫科/犬科；闪电旋转后是随机折线，且在全集里出现五次。"
+        }
+      ]
+    },
+    {
+      "slug": "food-mouse-cheese",
+      "issues": [
+        {
+          "slug": "food-mouse-cheese",
+          "problem": "与 pets-mouse-cheese 跑者目标完全一样，动作描述也是同一个。"
+        },
+        {
+          "slug": "food-mouse-cheese",
+          "problem": "与 pets-mouse-cheese 同主体同目标（老鼠小跑+长尾）。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "food-tongs-icecube",
+      "issues": [
+        {
+          "slug": "food-tongs-icecube",
+          "problem": "食物夹\"两片夹臂当腿\"与叉子/筷子/圆规是同一套双细棍步态，四条互撞。"
+        }
+      ]
+    },
+    {
+      "slug": "food-chopsticks-sushi",
+      "issues": [
+        {
+          "slug": "food-chopsticks-sushi",
+          "problem": "筷子在 16×10 是两条 1px 线，踩高跷动作与食物夹/叉子无差别。"
+        }
+      ]
+    },
+    {
+      "slug": "food-spatula-burger",
+      "issues": [
+        {
+          "slug": "food-spatula-burger",
+          "problem": "锅铲与菜刀/打蛋器同为\"柄+片\"剪影，滑行也没有可读动作帧。"
+        }
+      ]
+    },
+    {
+      "slug": "food-cleaver-onion",
+      "issues": [
+        {
+          "slug": "food-cleaver-onion",
+          "problem": "菜刀贴地滑只有平移+前倾，看不出在跑；洋葱是圆加 1px 干梗。"
+        }
+      ]
+    },
+    {
+      "slug": "food-spaghetti-fork",
+      "issues": [
+        {
+          "slug": "food-spaghetti-fork",
+          "problem": "单根面条是一条线，与蛇/蠕虫/电缆同波；叉子目标重复三次。"
+        }
+      ]
+    },
+    {
+      "slug": "food-sausage-bun",
+      "issues": [
+        {
+          "slug": "food-sausage-bun",
+          "problem": "香肠跑者与 pets-dachshund-sausage 的目标是同一根棒，热狗面包也是同一根棒，三者同形。"
+        }
+      ]
+    },
+    {
+      "slug": "food-doughball-rollingpin",
+      "issues": [
+        {
+          "slug": "food-doughball-rollingpin",
+          "problem": "面团球是纯圆，擂面杖是横棒，旋转后与木棍/香肠/黄瓜同。"
+        }
+      ]
+    },
+    {
+      "slug": "food-ovenmitt-cookie",
+      "issues": [
+        {
+          "slug": "food-ovenmitt-cookie",
+          "problem": "隔热手套没有五指，\"五指爬行\"和造型自相矛盾；饼干是圆。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-usb-folder",
+      "issues": [
+        {
+          "slug": "desk-usb-folder",
+          "problem": "U盘是小方块贴地滑，没有任何动作帧；文件夹旋转后就是矩形，与文件/纸箱/便利贴撞。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-chip-fan",
+      "issues": [
+        {
+          "slug": "desk-chip-fan",
+          "problem": "芯片+两排针脚爬行会直接读成甲虫；散热风扇与螺旋桨/风车同形。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-gear-nut",
+      "issues": [
+        {
+          "slug": "desk-gear-nut",
+          "problem": "齿轮与六角螺母在 11×11 都是带齿/棱的圆，跑者目标近同形；螺母目标全集出现四次。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-fusebox-bot-fuse",
+      "issues": [
+        {
+          "slug": "robot-fusebox-bot-fuse",
+          "problem": "配电箱与售货机/打印机/货箱机器人同一个方箱剪影；保险丝是小圆柱，旋转后成短棒。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-printbot-paper-roll",
+      "issues": [
+        {
+          "slug": "robot-printbot-paper-roll",
+          "problem": "扁长机身滑行没有动作差异，与磁带机器人/叉车同滑块；纸卷落进环形目标堆。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-cassette-bot-tape-reel",
+      "issues": [
+        {
+          "slug": "robot-cassette-bot-tape-reel",
+          "problem": "扁平机身低速滑行是零动画；磁带盘与胶带卷/滑轮/轴承同环。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-welder-bot-spark",
+      "issues": [
+        {
+          "slug": "robot-welder-bot-spark",
+          "problem": "低身四点爬的机箱与机械臂台车同形；火花与星星/星芒同一个星形团。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-handbot-rubik-cube",
+      "issues": [
+        {
+          "slug": "robot-handbot-rubik-cube",
+          "problem": "五指机械手在 16×10 只剩梳齿状团，爬行动作又与蛛类混。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-crabbot-rivet",
+      "issues": [
+        {
+          "slug": "robot-crabbot-rivet",
+          "problem": "横向侧爬与全集里四条螃蟹 idea 同形；铆钉是小圆点。"
+        },
+        {
+          "slug": "robot-crabbot-rivet",
+          "problem": "同螃蟹群：宽身横向侧爬，机器人材质在 16×10 单色下看不出来。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-eyedrone-lens",
+      "issues": [
+        {
+          "slug": "robot-eyedrone-lens",
+          "problem": "与四轴/无人机/卫星机器人同悬浮块，\"眼球转动\"是 1px 变化；镜头是同心圆环。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-mechdog-remote",
+      "issues": [
+        {
+          "slug": "robot-mechdog-remote",
+          "problem": "四足机械狗与真狗剪影在 16×10 无区别(机械感靠直角细节，画不出)；遥控器是带点长方块。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-steam-loco-coal",
+      "issues": [
+        {
+          "slug": "robot-steam-loco-coal",
+          "problem": "与 vehicle-steam-loco-coal 跑者、目标、动作完全重复。"
+        },
+        {
+          "slug": "robot-steam-loco-coal",
+          "problem": "与 vehicle-steam-loco-coal 同名、同目标（煤块）、同动作（沿轨滑行+冒烟）。",
+          "suggestion": "删 robot 版。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-skateboard-bearing",
+      "issues": [
+        {
+          "slug": "vehicle-skateboard-bearing",
+          "problem": "滑板是一条扁板，与雪橇/木筏/太阳能车同形，\"板尾一压一抬\"只有 1px；轴承落进环形堆。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-bicycle-chainlink",
+      "issues": [
+        {
+          "slug": "vehicle-bicycle-chainlink",
+          "problem": "自行车与摩托车在 16×10 都是两个圆加几条 1px 架线，无法区分。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-escooter-battery",
+      "issues": [
+        {
+          "slug": "vehicle-escooter-battery",
+          "problem": "立柱和两个小轮都是 1px 线，剪影几乎不成立；电池目标重复三次。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-toytrain-block",
+      "issues": [
+        {
+          "slug": "vehicle-toytrain-block",
+          "problem": "积木火车与蒸汽机车/电车/巴士同为车厢方块；目标\"积木方块\"又与方糖/冰块/骰子撞。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-submarine-starfish",
+      "issues": [
+        {
+          "slug": "vehicle-submarine-starfish",
+          "problem": "与 sea-submarine-wheel 是同一个跑者同一套动作，只换了目标。"
+        },
+        {
+          "slug": "vehicle-submarine-starfish",
+          "problem": "与 sea-submarine-wheel 同：平稳潜行起伏+吐气泡。",
+          "suggestion": "潜艇全局留一艘。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-sailboat-compass",
+      "issues": [
+        {
+          "slug": "vehicle-sailboat-compass",
+          "problem": "与 sea-sailboat-anchor 跑者动作重复；罗盘指针旋转后又失义。"
+        },
+        {
+          "slug": "vehicle-sailboat-compass",
+          "problem": "与 sea-sailboat-anchor 同：船体起伏+帆随风前后晃；目标罗盘/锚又跟 sea-nautilus-compass、vehicle-tugboat-anchor 撞。",
+          "suggestion": "帆船留一条。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-rover-meteorite",
+      "issues": [
+        {
+          "slug": "vehicle-rover-meteorite",
+          "problem": "与 cosmic-rover-rock 重复；陨石落进巨石/圆石/岩石/核石那堆无特征石块里。"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-asteroid-crater",
+      "issues": [
+        {
+          "slug": "cosmic-asteroid-crater",
+          "problem": "小行星是不规则石块(与陨石/巨石/核石同)；陨石坑是俯视概念，侧视跑道里旋转后读不出\"坑\"。"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-saturn-ring",
+      "issues": [
+        {
+          "slug": "cosmic-saturn-ring",
+          "problem": "环要横穿球体且两侧各留 2px，16×10 下会糊成一条腰带；单独的\"光环\"又与甜甜圈/呼啦圈同形。"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-crescent-star",
+      "issues": [
+        {
+          "slug": "cosmic-crescent-star",
+          "problem": "跑者是月牙、目标是星星，两个都是全集里最泛的形，而月牙同时还是四条 idea 的目标。"
+        },
+        {
+          "slug": "cosmic-crescent-star",
+          "problem": "月牙+星星同框、单色剪影，会被读成伊斯兰星月标志。",
+          "suggestion": "目标换成陨石坑或非五角的光点，或把月牙换成满月。"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-astronaut-globe",
+      "issues": [
+        {
+          "slug": "cosmic-astronaut-globe",
+          "problem": "宇航员是带头盔的 humanoid 团，与潜水员/美人鱼上身混；星球要大陆轮廓才不是纯圆。"
+        }
+      ]
+    },
+    {
+      "slug": "wx-bolt-sparkball",
+      "issues": [
+        {
+          "slug": "wx-bolt-sparkball",
+          "problem": "跑者是闪电、目标是电火花球，两者都是同一套折线/放射团；闪电在别处还是目标，同资源两头用。"
+        }
+      ]
+    },
+    {
+      "slug": "wx-raindrop-ripple",
+      "issues": [
+        {
+          "slug": "wx-raindrop-ripple",
+          "problem": "雨滴旋转后失去尖端朝下的意义，成一个团；涟漪圈落进环形目标堆。"
+        }
+      ]
+    },
+    {
+      "slug": "wx-snowflake-snowbank",
+      "issues": [
+        {
+          "slug": "wx-snowflake-snowbank",
+          "problem": "雪花在 16×10 只剩模糊星号，雪团是纯团块；同一批 idea 里雪花又当着三次目标。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-compass-circle",
+      "issues": [
+        {
+          "slug": "geo-compass-circle",
+          "problem": "圆规是两条细腿，双腿开合与叉子/食物夹/筷子同一步态；圆环落进环形堆。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-protractor-anglewedge",
+      "issues": [
+        {
+          "slug": "geo-protractor-anglewedge",
+          "problem": "量角器的身份是刻度线，11×11 画不出；扇形角旋转后与派角/披萨/甜筒混。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-jigsaw-notch",
+      "issues": [
+        {
+          "slug": "geo-jigsaw-notch",
+          "problem": "拼图凸榫只有 1-2px，缺口方块旋转后就是方块，跑者目标都退化成矩形。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-tortoise-strawberry",
+      "issues": [
+        {
+          "slug": "reptile-tortoise-strawberry",
+          "problem": "与 pets-tortoise-strawberry 完全撞车：同主体、同目标、同动作（壳不动、四条短腿极慢交替）。",
+          "suggestion": "留 pets 版；这条改成箱龟\"缩头再伸\"或直接删。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-axolotl-shrimp",
+      "issues": [
+        {
+          "slug": "reptile-axolotl-shrimp",
+          "problem": "与 pets-axolotl-shrimp 同主体同目标（六角恐龙→小虾，尾鳍缓摆）。",
+          "suggestion": "留 pets 版；reptile 若要保留，改成上岸四肢爬行。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-tadpole-algaeball",
+      "issues": [
+        {
+          "slug": "reptile-tadpole-algaeball",
+          "problem": "与 pets-tadpole-algae 同：圆头不动、细尾高频摆，目标都是水藻团。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-snake-egg",
+      "issues": [
+        {
+          "slug": "reptile-snake-egg",
+          "problem": "与 pets-python-egg 同：S 形波从头传到尾，目标都是蛋。",
+          "suggestion": "蛇类全局只留一条。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-python-bird",
+      "issues": [
+        {
+          "slug": "reptile-python-bird",
+          "problem": "第三条 S 波蛇，与 pets-python-egg / reptile-snake-egg 同侧影同节奏。",
+          "suggestion": "删；把\"停下盘成一圈\"这个差异化收尾并给留下的那条蛇。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-forklift-crate",
+      "issues": [
+        {
+          "slug": "robot-forklift-crate",
+          "problem": "与 vehicle-forklift-pallet 同：叉车低速前进+叉子微抬，目标货箱/托盘同类。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-hermit-crab-shell",
+      "issues": [
+        {
+          "slug": "pets-hermit-crab-shell",
+          "problem": "与 sea-hermitcrab-shell 同主体同目标同动作（背壳歪走、一顿一顿）。",
+          "suggestion": "留 sea 版（多了\"缩进壳\"的差异帧）。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-horseshoecrab-ammonite",
+      "issues": [
+        {
+          "slug": "sea-horseshoecrab-ammonite",
+          "problem": "与 bug-horseshoe-crab-full-moon 同：半圆壳贴沙推进+尖尾拖痕。",
+          "suggestion": "留 bug 版（满月目标更抓眼）。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-dolphin-hoop",
+      "issues": [
+        {
+          "slug": "sea-dolphin-hoop",
+          "problem": "与 wild-mammal-dolphin-hoop 同主体、同目标（圈）、同动作（跃出水面画弧）。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-otter-urchin",
+      "issues": [
+        {
+          "slug": "sea-otter-urchin",
+          "problem": "与 wild-mammal-otter-urchin 同：仰泳肚皮朝上，目标海胆。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-beaver-log",
+      "issues": [
+        {
+          "slug": "sea-beaver-log",
+          "problem": "与 wild-mammal-beaver-log 同：半沉游+扁尾拍水，目标圆木/木棍。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-platypus-shrimp",
+      "issues": [
+        {
+          "slug": "sea-platypus-shrimp",
+          "problem": "与 wild-mammal-platypus-crayfish 同：水下扁尾拍水+喙前伸，目标虾类。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "food-penguin-fish",
+      "issues": [
+        {
+          "slug": "food-penguin-fish",
+          "problem": "与 bird-penguin-fish 同主体同目标同动作（肚皮贴地滑+鳍拍）。",
+          "suggestion": "留 bird 版（多了直立张鳍的停顿姿）。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-penguin-egg",
+      "issues": [
+        {
+          "slug": "sea-penguin-egg",
+          "problem": "第三只肚皮滑行企鹅，与 bird-penguin-fish、food-penguin-fish 撞。",
+          "suggestion": "企鹅全局留一只。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-pigeon-envelope",
+      "issues": [
+        {
+          "slug": "pets-pigeon-envelope",
+          "problem": "与 bird-pigeon-envelope、desk-pigeon-envelope 三家撞车：鸽子扑翅直飞→信封。",
+          "suggestion": "留一只，另两处换主体或换目标。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-pigeon-envelope",
+      "issues": [
+        {
+          "slug": "desk-pigeon-envelope",
+          "problem": "同上，鸽子→信封的第三份。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-swan-lily",
+      "issues": [
+        {
+          "slug": "sea-swan-lily",
+          "problem": "与 bird-swan-bagel 同：长颈天鹅身体几乎不动地平滑滑过水面。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-ostrich-coin",
+      "issues": [
+        {
+          "slug": "pets-ostrich-coin",
+          "problem": "与 bird-ostrich-egg 同：长腿大跨+长脖前伸压低。",
+          "suggestion": "留 bird 版。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-duck-bread",
+      "issues": [
+        {
+          "slug": "sea-duck-bread",
+          "problem": "与 pets-duck-bread-cube 目标同为面包、动作同为水面浮着点头。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-duck-bread-cube",
+      "issues": [
+        {
+          "slug": "pets-duck-bread-cube",
+          "problem": "鸭子浮水点头共四份（还有 bird-duck-snail、food-duck-peapod、sea-duck-bread）。",
+          "suggestion": "只留 bird-duck-snail（有一头扎进水里的差异动作）。"
+        }
+      ]
+    },
+    {
+      "slug": "food-duck-peapod",
+      "issues": [
+        {
+          "slug": "food-duck-peapod",
+          "problem": "同鸭群第四份：水面游+身体前后点动。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-crab-scallop",
+      "issues": [
+        {
+          "slug": "bug-crab-scallop",
+          "problem": "与 sea-crab-starfish 同：横着走+双钳一开一合。",
+          "suggestion": "螃蟹全局留一只。"
+        }
+      ]
+    },
+    {
+      "slug": "food-crab-lemonslice",
+      "issues": [
+        {
+          "slug": "food-crab-lemonslice",
+          "problem": "同螃蟹群：横向爬，腿轮流微抬。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-crab-binderclip",
+      "issues": [
+        {
+          "slug": "desk-crab-binderclip",
+          "problem": "同螃蟹群：横向侧爬+双钳开合。",
+          "suggestion": "删；\"长尾夹\"这个目标可以移给留下的那只蟹。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-fiddler-crab-sand-ball",
+      "issues": [
+        {
+          "slug": "bug-fiddler-crab-sand-ball",
+          "problem": "第五只横行蟹，\"大钳高举\"与 sea-crab-starfish 的\"双钳举起\"重合。",
+          "suggestion": "若要留，得把不对称的巨钳做成整个剪影的主体特征，否则删。"
+        }
+      ]
+    },
+    {
+      "slug": "food-octopus-clam",
+      "issues": [
+        {
+          "slug": "food-octopus-clam",
+          "problem": "与 sea-octopus-crab 同：触手轮流前伸/蹬地，头囊起伏。",
+          "suggestion": "章鱼全局留一只。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-octopus-ink",
+      "issues": [
+        {
+          "slug": "desk-octopus-ink",
+          "problem": "同章鱼群：触手轮流搭地拽身体。",
+          "suggestion": "删；myth-kraken-shipwheel 也在同一格，注意别留两只。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-spider-web",
+      "issues": [
+        {
+          "slug": "desk-spider-web",
+          "problem": "与 bug-orb-spider-web 同主体同目标：八足爬→蛛网。",
+          "suggestion": "蜘蛛→蛛网只留一份。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-spiderspirit-web",
+      "issues": [
+        {
+          "slug": "myth-spiderspirit-web",
+          "problem": "第三份蜘蛛→蛛网（八足波浪交替）。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-tarantula-beetle",
+      "issues": [
+        {
+          "slug": "pets-tarantula-beetle",
+          "problem": "又一个八腿放射状交替快走的蜘蛛，与上面三份同侧影。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-scorpion-mealworm",
+      "issues": [
+        {
+          "slug": "pets-scorpion-mealworm",
+          "problem": "与 bug-scorpion-stone 同：双钳前伸、尾巴上翘卷起、走走停停。",
+          "suggestion": "留 bug 版。"
+        }
+      ]
+    },
+    {
+      "slug": "food-hedgehog-mushroom",
+      "issues": [
+        {
+          "slug": "food-hedgehog-mushroom",
+          "problem": "与 pets-hedgehog-apple 同：圆背带锯齿刺的小跑，背刺随步起伏。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "food-squirrel-peanut",
+      "issues": [
+        {
+          "slug": "food-squirrel-peanut",
+          "problem": "与 wild-mammal-squirrel-acorn 同：弓背小跳+大尾随起落扫动。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "food-pig-corn",
+      "issues": [
+        {
+          "slug": "food-pig-corn",
+          "problem": "与 pets-pig-truffle 同：桶身矮腿小跑+鼻子前伸拱地。",
+          "suggestion": "猪只留一头。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-boar-truffle",
+      "issues": [
+        {
+          "slug": "wild-mammal-boar-truffle",
+          "problem": "与 pets-pig-truffle 同主体族且同目标松露，动作也是吻部贴地拱。",
+          "suggestion": "删；野猪若要留，改成獠牙撞击的停顿姿。"
+        }
+      ]
+    },
+    {
+      "slug": "food-hen-wheat",
+      "issues": [
+        {
+          "slug": "food-hen-wheat",
+          "problem": "与 pets-hen-corn 同：母鸡跑+脖子一伸一缩的啄式点动。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "food-bear-honeypot",
+      "issues": [
+        {
+          "slug": "food-bear-honeypot",
+          "problem": "与 wild-mammal-bear-honeycomb 同：厚重四腿慢跑+肩背大幅起伏，目标都是蜂蜜类。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "food-cow-milkjug",
+      "issues": [
+        {
+          "slug": "food-cow-milkjug",
+          "problem": "与 pets-cow-salt-lick 同：奶牛慢跑、长身重步、下垂部位跟着晃。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-giantbat-crescent",
+      "issues": [
+        {
+          "slug": "myth-giantbat-crescent",
+          "problem": "与 wild-mammal-fruit-bat-fig 同：双翼上下拍+停时倒挂收翅。",
+          "suggestion": "留 wild 版；巨蝠删或改成群飞剪影。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-owl-moon",
+      "issues": [
+        {
+          "slug": "desk-owl-moon",
+          "problem": "与 bird-owl-mouse 同：宽翼几乎不起伏的无声滑翔。",
+          "suggestion": "留 bird 版（有头扭 90 度的差异帧）。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-snail-lettuce",
+      "issues": [
+        {
+          "slug": "pets-snail-lettuce",
+          "problem": "与 desk-snail-spinner 同：壳不动、身体伸缩前拱、极慢匀速。",
+          "suggestion": "留 desk 版（加载圈这个目标更妙）。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-frog-fly",
+      "issues": [
+        {
+          "slug": "sea-frog-fly",
+          "problem": "与 pets-frog-lily-pad 同：蹲成一团蓄力大跳、落地摊开压扁。",
+          "suggestion": "青蛙留一只；myth-goldtoad-coin 也是同类连跳，注意别留三份。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-mermaid-pearlshell",
+      "issues": [
+        {
+          "slug": "myth-mermaid-pearlshell",
+          "problem": "与 sea-mermaid-comb 同：上身直立+鱼尾上下摆推进。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "bug-mantis-shrimp-clam",
+      "issues": [
+        {
+          "slug": "bug-mantis-shrimp-clam",
+          "problem": "与 sea-mantisshrimp-glove 同主体：长身平推+前爪突然弹出。",
+          "suggestion": "删一个（拳击手套那个目标更贴螳螂虾）。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-paperplane-clip",
+      "issues": [
+        {
+          "slug": "desk-paperplane-clip",
+          "problem": "与 wx-paperplane-thermal 同：纸飞机滑翔+上下起伏。",
+          "suggestion": "留 wx 版（先抬头再下坠更有戏）。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-rocket-check",
+      "issues": [
+        {
+          "slug": "desk-rocket-check",
+          "problem": "与 vehicle-rocket-star 同：尾焰喷射+平直冲刺。",
+          "suggestion": "火箭全局留一支。"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-rocket-moon",
+      "issues": [
+        {
+          "slug": "cosmic-rocket-moon",
+          "problem": "第三支火箭：水平前冲+尾焰脉冲。",
+          "suggestion": "删；cosmic 主题可换成推进器点火转向。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-drone-battery",
+      "issues": [
+        {
+          "slug": "desk-drone-battery",
+          "problem": "与 vehicle-drone-parcel 同：悬停微颤+水平平移。",
+          "suggestion": "无人机全局留一架。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-quadcopter-propeller",
+      "issues": [
+        {
+          "slug": "robot-quadcopter-propeller",
+          "problem": "同无人机群：低空平移+上下浮动。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-blimpbot-gas-cylinder",
+      "issues": [
+        {
+          "slug": "robot-blimpbot-gas-cylinder",
+          "problem": "与 vehicle-airship-propeller 同：椭圆机身缓慢平推漂移。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-balloon-sandbag",
+      "issues": [
+        {
+          "slug": "vehicle-balloon-sandbag",
+          "problem": "与 wx-hotairballoon-sun 同：热气球缓慢横移+上下浮沉。",
+          "suggestion": "留 wx 版（球体鼓缩是差异点）。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-subprobe-bubble",
+      "issues": [
+        {
+          "slug": "robot-subprobe-bubble",
+          "problem": "同潜艇群：桨叶推进+轻微起伏。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-cube-squarehole",
+      "issues": [
+        {
+          "slug": "geo-cube-squarehole",
+          "problem": "与 robot-cube-flipper-dice 同：立方体一格一格棱翻。",
+          "suggestion": "留骰子那版（点数在单色下更可读）。"
+        }
+      ]
+    },
+    {
+      "slug": "vehicle-pogo-spring",
+      "issues": [
+        {
+          "slug": "vehicle-pogo-spring",
+          "problem": "与 robot-pogo-hopper-spring 同：压缩蓄力再弹起，目标都是弹簧。",
+          "suggestion": "弹跳弹簧全局留一个。"
+        }
+      ]
+    },
+    {
+      "slug": "geo-spring-nut",
+      "issues": [
+        {
+          "slug": "geo-spring-nut",
+          "problem": "第三个\"压缩再伸展窜出\"的弹簧。",
+          "suggestion": "删。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-lamp-bulb",
+      "issues": [
+        {
+          "slug": "desk-lamp-bulb",
+          "problem": "与 robot-lampbot-bulb 同：底座蹦跳+灯罩/灯头点头→灯泡。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-stopwatch-bot-hourglass",
+      "issues": [
+        {
+          "slug": "robot-stopwatch-bot-hourglass",
+          "problem": "与 desk-stopwatch-hourglass 同主体同目标（秒表→沙漏），只是一个滚一个跑。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "bird-albatross-squid",
+      "issues": [
+        {
+          "slug": "bird-albatross-squid",
+          "problem": "与 bird-eagle-snake 同：平展双翼几乎不动的长滑翔；myth-thunderbird-lightning 也在同一格。",
+          "suggestion": "大翼滑翔全局留一个，其余改扑翅或俯冲。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-ichthyosaur-starfish",
+      "issues": [
+        {
+          "slug": "reptile-ichthyosaur-starfish",
+          "problem": "与 sea-dolphin-hoop、wild-mammal-whale-krill 同：鱼雷身+尾鳍摆动、身体几乎不弯；同主题 reptile-mosasaur-ammonite 又是一份。",
+          "suggestion": "鱼雷型海兽全局留一到两个，其余靠喷气/跃出水面区分。"
+        }
+      ]
+    },
+    {
+      "slug": "sea-turtle-jelly",
+      "issues": [
+        {
+          "slug": "sea-turtle-jelly",
+          "problem": "与 reptile-plesiosaur-squid 同：宽鳍同步划水+脖子前伸。",
+          "suggestion": "海龟改成上岸产卵式爬行，或删。"
+        }
+      ]
+    },
+    {
+      "slug": "reptile-seasnake-coral",
+      "issues": [
+        {
+          "slug": "reptile-seasnake-coral",
+          "problem": "与 sea-eel-amphora 同：细长身体波浪推进。",
+          "suggestion": "删；或强化\"尾端扁成桨\"到轮廓可见的程度。"
+        }
+      ]
+    },
+    {
+      "slug": "wild-mammal-seal-fish",
+      "issues": [
+        {
+          "slug": "wild-mammal-seal-fish",
+          "problem": "与同主题 wild-mammal-walrus-clam 同：陆上蠕动、胸腹拱起挪身。",
+          "suggestion": "删一个；留下的那个靠獠牙或体型做识别。"
+        }
+      ]
+    },
+    {
+      "slug": "pets-silkworm-mulberry-leaf",
+      "issues": [
+        {
+          "slug": "pets-silkworm-mulberry-leaf",
+          "problem": "与 bug-caterpillar-apple 同：体节波浪拱背推进、头部先探。",
+          "suggestion": "蠕虫全局留一条。"
+        }
+      ]
+    },
+    {
+      "slug": "desk-clip-magnet",
+      "issues": [
+        {
+          "slug": "desk-clip-magnet",
+          "problem": "与 bug-inchworm-tape-reel 同：拱起再伸直的尺蠓步。",
+          "suggestion": "删一个。"
+        }
+      ]
+    },
+    {
+      "slug": "robot-tinman-oilcan",
+      "issues": [
+        {
+          "slug": "robot-tinman-oilcan",
+          "problem": "\"铁皮人偶\"就是《绿野仙踪》Tin Man 的造型（漏斗帽+铁皮身），有版权/商标风险；动作又与 myth-golem-corestone、myth-skeleton-skull 的僵硬踏步撞。",
+          "suggestion": "改成无漏斗帽的通用铁皮玩偶，并换掉僵直大步。"
+        }
+      ]
+    },
+    {
+      "slug": "myth-kappa-cucumber",
+      "issues": [
+        {
+          "slug": "myth-kappa-cucumber",
+          "problem": "目标黄瓜与 pets-guinea-pig-cucumber 撞，动作又是\"四肢贴地小跑\"的通用款，河童的头顶碟子/龟壳没体现。",
+          "suggestion": "把头顶水碟做成轮廓特征并加\"晃出水\"的动作。"
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "legibility": "系统性毛病六条。一、11×11 会旋转，凡靠朝向定义的目标(月牙/水滴/火焰/冰锥/勺/钥匙/箭头/X/心/房子/沙漏/甜筒/降落伞/指针类表盘)转 45° 就废，这类占了几十条。二、目标池严重同形：圆团类(球/籽/莓/葡萄/豆/币/月/太阳/石/团)近百个，环类(甜甜圈/贝果/呼啦圈/轴承/滑轮/胶带/纸卷/涟漪/戒指)十几个，方块类(方糖/盐砖/冰块/砖/骰子/箱)十几个，横棒类(木棍/树枝/竹节/香肠/黄瓜/绷带卷)十几个——单色下这四堆各自内部完全不可分。三、跑者跨类重复：企鹅/鸭/螃蟹/章鱼/水獺/河狸/鸭嘴兽/鹈鹕/信鸽/蜈蚣/蝎/寄居蟹/马蹄蟹/蝌蚪/美西螈/潜艇/帆船/蒸汽机车各出现 2-4 次，有的连动作描述都一样。四、靠花纹或颜色的物种(熊猫/奶牛/猎豹/知更鸟/翠鸟/海雀/虎皮鹦鹉/臭鼬/盾蝽)在单色下全部失身份。五、需要场景道具的动作(爬树/攀岩/半潜/钻地/倒挂/沿草茎攀/悬挂缆车)在 16×10 无参照物，读不出来。六、剪影簇没做去重：兽脚类恐龙 6 条、长腿涉水鸟 5 条、犬科 3 条、humanoid 巨怪 4 条、蛛形 4 条、摊膜滑翔 4 条、方箱机器人 8 条，簇内每条都撞。建议先把目标池按\"旋转后仍唯一\"筛一遍，再对跑者按剪影分组每组只留一条。",
+    "dupes": "整体问题不是单点撞车，是原型太少。1) 目标物重复：蛋、太阳、水滴、面包各 6-7 份，蜂巢/甲虫/骷髅/干草捆各 3-4 份。2) 动作原型只有十来种，\"四足奔跑\"\"圆球滚动\"\"S 波蠕动\"\"悬停平移\"\"压缩弹跳\"各挤了 10+ 条，跨主题必然重复。建议按动作原型设配额，并要求每条写清 16×10 下的可辨识特征（轮廓突出物 + 节奏），否则单色剪影里分不开。约束方面：IP 风险只有 tinman 一处，宗教符号风险只有月牙+星那条，没有真实人物；另有两条 geo 主体等于目标，属于没做变形。"
+  }
+}

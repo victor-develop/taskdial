@@ -1,0 +1,53 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>inspect</title>
+<style>
+body{background:#101216;color:#e8ebef;font-family:system-ui;padding:20px}
+.row{display:flex;gap:16px;align-items:center;margin-bottom:24px;flex-wrap:wrap}
+.row h3{width:100%;margin:0 0 4px}
+svg{background:#0d0f13;image-rendering:pixelated}
+</style></head>
+<body>
+<div id="out"></div>
+<script>
+function toPath(rows, ch) {
+  let d = '';
+  rows.forEach((row, y) => {
+    let x = 0;
+    while (x < row.length) {
+      if (row[x] !== ch) { x++; continue; }
+      let w = 1;
+      while (row[x + w] === ch) w++;
+      d += `M${x} ${y}h${w}v1h-${w}z`;
+      x += w;
+    }
+  });
+  return d;
+}
+function rot90(rows) {
+  const n = rows.length;
+  return Array.from({ length: n }, (_, y) =>
+    Array.from({ length: n }, (_, x) => rows[n - 1 - x][y]).join('')
+  );
+}
+const PICK = ['pets-dachshund-sausage','pets-cat-yarn-ball','wild-mammal-elephant-peanut',
+  'reptile-cobra-mouse','sea-jellyfish-moon','bug-dung-beetle-ball','myth-loong-orb',
+  'bird-owl-mouse','robot-orb-roller-ball-bearing','vehicle-monstertruck-tire',
+  'wx-hotairballoon-sun','food-donut-mug'];
+const SCALE=8;
+fetch('sprites.json').then(r=>r.json()).then(all=>{
+  const bySlug=new Map(all.map(s=>[s.slug,s]));
+  const out=document.getElementById('out');
+  PICK.forEach(slug=>{
+    const s=bySlug.get(slug);
+    if(!s){ out.insertAdjacentHTML('beforeend',`<div class="row"><h3>${slug} — 不存在</h3></div>`); return; }
+    const frames=s.runnerFrames.map(f=>`<svg width="${16*SCALE}" height="${10*SCALE}" viewBox="0 0 16 10"><path d="${toPath(f,'#')}" fill="#d8c9a4"/><path d="${toPath(f,'o')}" fill="#1a1d22"/></svg>`);
+    const idle=`<svg width="${16*SCALE}" height="${10*SCALE}" viewBox="0 0 16 10"><path d="${toPath(s.runnerIdle,'#')}" fill="#d8c9a4"/><path d="${toPath(s.runnerIdle,'o')}" fill="#1a1d22"/></svg>`;
+    const goalFrames=[s.goalFrame0,s.goalFrame45,rot90(s.goalFrame0),rot90(s.goalFrame45)]
+      .map(g=>`<svg width="${11*SCALE}" height="${11*SCALE}" viewBox="0 0 11 11"><path d="${toPath(g,'#')}" fill="#ece5d2"/></svg>`);
+    out.insertAdjacentHTML('beforeend',`<div class="row"><h3>${s.runner} → ${s.goal}  (${slug})</h3>
+      ${frames.join('')} <span style="width:2px"></span> ${idle}
+      <span style="width:16px"></span> ${goalFrames.join('')}</div>`);
+  });
+});
+</script>
+</body></html>

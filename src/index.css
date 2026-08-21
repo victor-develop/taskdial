@@ -238,7 +238,7 @@ button.icon:disabled {
   font-size: 9px;
 }
 
-/* ── 跑步的小狗 + 漏斗 ── */
+/* ── 像素动物园：跑者 + 目标物，每轮随机换一只 ── */
 
 .runner {
   display: block;
@@ -248,10 +248,10 @@ button.icon:disabled {
   shape-rendering: crispEdges; /* 像素图别被抗锯齿糊掉 */
 }
 
-.dog {
+.zoo-runner {
   fill: #d8c9a4;
 }
-.dog-eye {
+.zoo-runner-eye {
   fill: #1a1d22;
 }
 
@@ -269,10 +269,10 @@ button.icon:disabled {
   }
 }
 
-.bone {
+.zoo-goal {
   fill: #ece5d2;
 }
-.bone.still {
+.zoo-goal.still {
   fill: #6d7583;
 }
 
