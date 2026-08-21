@@ -7,6 +7,7 @@ import {
   MS_MIN,
   createModel,
   elapsedMs,
+  sliceAngle,
   rings,
   roundMs,
   save,
@@ -161,6 +162,77 @@ describe('暂停日志', () => {
     }
     expect(s.pauses).toHaveLength(MAX_PAUSES)
     expect(s.pauses[0].at).toBe(at(MAX_PAUSES + 29)) // 留下的是最近的
+  })
+})
+
+/** 盘面转完之后，指针（正上方）底下实际是哪一片 */
+function pointerIndex(s: State) {
+  const A = sliceAngle(s.slices.length)
+  let best = 0
+  let bestDelta = Infinity
+  s.slices.forEach((_, i) => {
+    const a = (((i * A + s.rotationDeg) % 360) + 360) % 360
+    const delta = Math.min(a, 360 - a)
+    if (delta < bestDelta) {
+      bestDelta = delta
+      best = i
+    }
+  })
+  return { index: best, offBy: bestDelta }
+}
+
+describe('指针跟当前片必须始终一致', () => {
+  it('一路转下去不会漂', () => {
+    let s = running()
+    for (let i = 0; i < 12; i++) {
+      s = m.reducer(s, { type: 'complete' })
+      s = m.reducer(s, { type: 'confirm' })
+      const p = pointerIndex(s)
+      expect(p.index).toBe(s.currentIndex)
+      expect(p.offBy).toBeCloseTo(0)
+    }
+  })
+
+  it('加片之后指针还指着当前片', () => {
+    let s = running()
+    s = m.reducer(s, { type: 'complete' }) // 4 片时转过一格，rotationDeg 是 -90 的倍数
+    s = m.reducer(s, { type: 'addSlice' }) // 变 5 片，每格变成 72°
+    const p = pointerIndex(s)
+    expect(p.index).toBe(s.currentIndex)
+    expect(p.offBy).toBeCloseTo(0)
+  })
+
+  it('转过很多轮再加片也一致', () => {
+    let s = running()
+    for (let i = 0; i < 25; i++) {
+      s = m.reducer(s, { type: 'complete' })
+      s = m.reducer(s, { type: 'confirm' })
+    }
+    const before = s.rotationDeg
+    s = m.reducer(s, { type: 'addSlice' })
+    const p = pointerIndex(s)
+    expect(p.index).toBe(s.currentIndex)
+    expect(p.offBy).toBeCloseTo(0)
+    // 只做小幅修正，不能把已经转过的圈数抹掉让盘面倒转好几圈
+    expect(Math.abs(s.rotationDeg - before)).toBeLessThanOrEqual(sliceAngle(s.slices.length))
+  })
+
+  it('删片之后也一致', () => {
+    let s = running()
+    s = m.reducer(s, { type: 'complete' })
+    s = m.reducer(s, { type: 'complete' })
+    s = m.reducer(s, { type: 'removeSlice', id: s.slices[3].id })
+    const p = pointerIndex(s)
+    expect(p.index).toBe(s.currentIndex)
+    expect(p.offBy).toBeCloseTo(0)
+  })
+
+  it('存档里角度是坏的，load 要修好（现有用户就是这个状态）', () => {
+    const s = running()
+    save({ ...s, slices: [...s.slices, { id: 'x', name: '第五片', totalMs: 0, lenMin: 5 }], currentIndex: 1, rotationDeg: -90 })
+    const p = pointerIndex(m.load())
+    expect(p.index).toBe(1)
+    expect(p.offBy).toBeCloseTo(0)
   })
 })
 

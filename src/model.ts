@@ -118,6 +118,19 @@ export function rings(totalMs: number) {
   }
 }
 
+/**
+ * 把盘面角度重新对齐到「当前片正对指针」。
+ *
+ * rotationDeg 是个累加器，单位是当时的 360/片数。片数一变，之前累加的角度
+ * 就是按旧几何算的，指针会指到别的片上去。这里保留已经转过的整圈数
+ * （不然会凭空转回去一大截），只把这一圈里的角度修正到新几何下的正确值。
+ */
+function normalizeRotation(rotationDeg: number, currentIndex: number, n: number) {
+  const target = -sliceAngle(n) * currentIndex
+  const laps = Math.round((rotationDeg - target) / 360)
+  return target + laps * 360
+}
+
 function advance(s: State, steps = 1): Pick<State, 'currentIndex' | 'rotationDeg'> {
   const a = sliceAngle(s.slices.length)
   return {
@@ -253,15 +266,27 @@ export function createModel(env: Env) {
         slices: s.slices.map((sl) => (sl.id === action.id ? { ...sl, name: action.name } : sl)),
       }
 
-    case 'addSlice':
+    case 'addSlice': {
       if (s.slices.length >= 8) return s
-      return { ...s, slices: [...s.slices, makeSlice('新任务', s.defaultLenMin)] }
+      const slices = [...s.slices, makeSlice('新任务', s.defaultLenMin)]
+      // 片数变了每格的角度就变了，不重新对齐指针会指到别的片上
+      return {
+        ...s,
+        slices,
+        rotationDeg: normalizeRotation(s.rotationDeg, s.currentIndex, slices.length),
+      }
+    }
 
     case 'removeSlice': {
       if (s.slices.length <= 3) return s
       const slices = s.slices.filter((sl) => sl.id !== action.id)
       const currentIndex = Math.min(s.currentIndex, slices.length - 1)
-      return { ...s, slices, currentIndex, rotationDeg: -sliceAngle(slices.length) * currentIndex }
+      return {
+        ...s,
+        slices,
+        currentIndex,
+        rotationDeg: normalizeRotation(s.rotationDeg, currentIndex, slices.length),
+      }
     }
 
     case 'replace':
@@ -289,7 +314,12 @@ export function createModel(env: Env) {
       const raw = localStorage.getItem(KEY)
       if (!raw) return initialState()
       const parsed = JSON.parse(raw) as Partial<State> & LegacyFields
-      const s = migrate({ ...initialState(), ...parsed } as State, parsed)
+      let s = migrate({ ...initialState(), ...parsed } as State, parsed)
+      // 老存档里可能存着按旧片数算的角度，进来先对齐一次
+      s = {
+        ...s,
+        rotationDeg: normalizeRotation(s.rotationDeg, s.currentIndex, s.slices.length),
+      }
       // 关掉 app 后再打开：跑过头太久就不算这一轮，免得白给自己发奖。
       // 暂停不算跑飞 —— 那正是「先停着，回头再说」该有的样子。
       if (s.phase === 'running' && s.roundStartedAt) {
