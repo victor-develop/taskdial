@@ -71,6 +71,17 @@ export function listenIntents(
   }
 }
 
+/**
+ * 一轮到点的提示音。Tauri 里走系统 afplay（webview 的 AudioContext 可能
+ * 是 suspended 的，到点了反而不响）；浏览器里退回 WebAudio。
+ */
+export function playAlert(fallback: () => void) {
+  if (!inTauri()) return fallback()
+  void core()
+    .then(({ invoke }) => invoke('play_alert'))
+    .catch(fallback)
+}
+
 /** ▤ 按钮：开系统浏览器看 /insights。浏览器里开新标签页，行为一致。 */
 export function openInsights() {
   if (inTauri()) {

@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useRef, useState, type CSSProperties } from 'react'
 import { autoSizeWindow } from './autosize'
-import { listenIntents, loadSavedState, openInsights, pushState } from './bridge'
+import { listenIntents, loadSavedState, openInsights, playAlert, pushState } from './bridge'
 import Dial from './Dial'
 import Runner from './Runner'
 import { openPip, pipSupported } from './pip'
@@ -10,6 +10,7 @@ import {
   PAUSE_REASONS,
   MAX_LEN,
   MIN_LEN,
+  MIN_VISIBLE,
   MS_HOUR,
   MS_MIN,
   elapsedMs,
@@ -130,7 +131,8 @@ export default function App() {
 
   useEffect(() => {
     if (state.phase === 'running' && remaining <= 0) {
-      dingRoundOver()
+      // 锁片时是连着投喂同一个任务，不需要被叫住；轮转到下一片才需要
+      if (!state.pinned) playAlert(dingRoundOver)
       dispatch({ type: 'complete' })
     }
   }, [state.phase, remaining])
@@ -188,6 +190,7 @@ export default function App() {
           : { main: '开始' }
 
   const openPause = state.phase === 'paused' ? state.pauses[0] : undefined
+  const visibleN = state.slices.filter((s) => !s.hidden).length
 
   async function importSnapshot(file: File) {
     try {
@@ -355,6 +358,9 @@ export default function App() {
                 ✕
               </button>
             </div>
+            <p className="io-msg">
+              在 {visibleN} 片之间轮转{visibleN < state.slices.length ? `（藏了 ${state.slices.length - visibleN} 片）` : ''}
+            </p>
             <label className="len">
               新片默认
               <input
@@ -368,7 +374,12 @@ export default function App() {
             </label>
             <ul className="slices">
               {state.slices.map((s, i) => (
-                <li key={s.id} className={openLen === s.id ? 'open' : undefined}>
+                <li
+                  key={s.id}
+                  className={[openLen === s.id ? 'open' : '', s.hidden ? 'is-hidden' : '']
+                    .filter(Boolean)
+                    .join(' ')}
+                >
                   <div className="slice-row">
                     <span className="idx">{i + 1}</span>
                     <input
@@ -381,6 +392,14 @@ export default function App() {
                       title="改这一片的片长"
                     >
                       {s.lenMin}m
+                    </button>
+                    <button
+                      className={s.hidden ? 'icon hidden-on' : 'icon'}
+                      disabled={!s.hidden && visibleN <= MIN_VISIBLE}
+                      title={s.hidden ? '放回轮转' : '暂时移出轮转（累计不清）'}
+                      onClick={() => dispatch({ type: 'toggleHidden', id: s.id })}
+                    >
+                      {s.hidden ? '◌' : '◉'}
                     </button>
                     <button
                       className="icon"

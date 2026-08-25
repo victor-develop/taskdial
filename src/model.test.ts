@@ -1,12 +1,15 @@
 import { beforeEach, describe, expect, it } from 'vitest'
+import { wedgeAngles } from './Dial'
 import { testEnv, type TestEnv } from './env'
 import {
   CAP_MS,
   MAX_PAUSES,
   MS_HOUR,
   MS_MIN,
+  MIN_VISIBLE,
   createModel,
   elapsedMs,
+  visibleIndexes,
   sliceAngle,
   rings,
   roundMs,
@@ -165,13 +168,14 @@ describe('暂停日志', () => {
   })
 })
 
-/** 盘面转完之后，指针（正上方）底下实际是哪一片 */
+/** 盘面转完之后，指针（正上方）底下实际是哪一片。几何只看可见片。 */
 function pointerIndex(s: State) {
-  const A = sliceAngle(s.slices.length)
-  let best = 0
+  const vis = visibleIndexes(s.slices)
+  const A = sliceAngle(vis.length)
+  let best = vis[0]
   let bestDelta = Infinity
-  s.slices.forEach((_, i) => {
-    const a = (((i * A + s.rotationDeg) % 360) + 360) % 360
+  vis.forEach((i, pos) => {
+    const a = (((pos * A + s.rotationDeg) % 360) + 360) % 360
     const delta = Math.min(a, 360 - a)
     if (delta < bestDelta) {
       bestDelta = delta
@@ -180,6 +184,8 @@ function pointerIndex(s: State) {
   })
   return { index: best, offBy: bestDelta }
 }
+
+const hide = (s: State, i: number) => m.reducer(s, { type: 'toggleHidden', id: s.slices[i].id })
 
 describe('指针跟当前片必须始终一致', () => {
   it('一路转下去不会漂', () => {
@@ -469,5 +475,178 @@ describe('可替换的 env', () => {
     expect(m.initialState().dayStartedAt).toBe(T0)
     env.advance(5 * MS_MIN)
     expect(m.reducer(m.initialState(), { type: 'start' }).roundStartedAt).toBe(at(5))
+  })
+})
+
+
+describe('临时隐藏某些片', () => {
+  it('隐藏的片不参与轮转 —— 只在剩下的之间来回转', () => {
+    let s = running()
+    s = hide(s, 2)
+    s = hide(s, 3)
+    expect(visibleIndexes(s.slices)).toEqual([0, 1])
+
+    // 转一圈：0 → 1 → 0 → 1，永远不落到 2、3
+    const seen: number[] = []
+    for (let i = 0; i < 6; i++) {
+      s = m.reducer(s, { type: 'complete' })
+      seen.push(s.currentIndex)
+      s = m.reducer(s, { type: 'confirm' })
+    }
+    expect(seen).toEqual([1, 0, 1, 0, 1, 0])
+  })
+
+  it('隐藏之后指针仍然对准当前片（几何按可见片数重算）', () => {
+    let s = running()
+    s = hide(s, 1) // 4 片变 3 片可见，每格从 90° 变 120°
+    const p = pointerIndex(s)
+    expect(p.index).toBe(s.currentIndex)
+    expect(p.offBy).toBeCloseTo(0)
+
+    for (let i = 0; i < 5; i++) {
+      s = m.reducer(s, { type: 'complete' })
+      s = m.reducer(s, { type: 'confirm' })
+      const q = pointerIndex(s)
+      expect(q.index).toBe(s.currentIndex)
+      expect(q.offBy).toBeCloseTo(0)
+    }
+  })
+
+  it('把当前片藏了，指针挪到下一个可见的', () => {
+    let s = running()
+    expect(s.currentIndex).toBe(0)
+    s = hide(s, 0)
+    expect(s.currentIndex).toBe(1)
+    const p = pointerIndex(s)
+    expect(p.index).toBe(1)
+    expect(p.offBy).toBeCloseTo(0)
+  })
+
+  it('藏起来只是不轮转，累计一点不动', () => {
+    let s = running()
+    s = m.reducer(s, { type: 'complete' })   // 片 0 记满一轮
+    const before = s.slices[0].totalMs
+    expect(before).toBeGreaterThan(0)
+    s = hide(s, 0)
+    expect(s.slices[0].totalMs).toBe(before)
+    s = hide(s, 0) // 放回来
+    expect(s.slices[0].hidden).toBeFalsy()
+    expect(s.slices[0].totalMs).toBe(before)
+  })
+
+  it(`至少留 ${MIN_VISIBLE} 片可见，再藏就挡住`, () => {
+    let s = running()
+    s = hide(s, 3)
+    s = hide(s, 2)
+    expect(visibleIndexes(s.slices)).toHaveLength(2)
+    const stuck = s
+    s = hide(s, 1)
+    expect(s).toBe(stuck) // 没变
+  })
+
+  it('放回来之后重新参与轮转', () => {
+    let s = running()
+    s = hide(s, 1)
+    s = hide(s, 1) // 放回
+    expect(visibleIndexes(s.slices)).toEqual([0, 1, 2, 3])
+    s = m.reducer(s, { type: 'complete' })
+    expect(s.currentIndex).toBe(1)
+  })
+
+  it('隐藏时加片/删片，指针也不能漂', () => {
+    let s = running()
+    s = hide(s, 2)
+    s = m.reducer(s, { type: 'addSlice' })
+    let p = pointerIndex(s)
+    expect(p.index).toBe(s.currentIndex)
+    expect(p.offBy).toBeCloseTo(0)
+
+    s = m.reducer(s, { type: 'removeSlice', id: s.slices[4].id })
+    p = pointerIndex(s)
+    expect(p.index).toBe(s.currentIndex)
+    expect(p.offBy).toBeCloseTo(0)
+  })
+
+  it('删掉当前片前面的那片，当前片跟着往前挪，指针不漂', () => {
+    let s = running()
+    s = m.reducer(s, { type: 'complete' }) // currentIndex = 1
+    s = m.reducer(s, { type: 'confirm' })
+    const name = s.slices[s.currentIndex].name
+    s = m.reducer(s, { type: 'removeSlice', id: s.slices[0].id })
+    expect(s.slices[s.currentIndex].name).toBe(name) // 还是同一个任务
+    const p = pointerIndex(s)
+    expect(p.index).toBe(s.currentIndex)
+    expect(p.offBy).toBeCloseTo(0)
+  })
+
+  it('存档里藏得只剩一片，load 要放开 —— 否则转不起来', () => {
+    const s = running()
+    save({ ...s, slices: s.slices.map((sl, i) => (i === 0 ? sl : { ...sl, hidden: true })) })
+    const back = m.load()
+    expect(visibleIndexes(back.slices).length).toBeGreaterThanOrEqual(MIN_VISIBLE)
+  })
+
+  it('导入的存档同理', () => {
+    const raw = JSON.stringify({
+      slices: [
+        { id: 'a', name: '甲', totalMs: 0, lenMin: 5 },
+        { id: 'b', name: '乙', totalMs: 0, lenMin: 5, hidden: true },
+        { id: 'c', name: '丙', totalMs: 0, lenMin: 5, hidden: true },
+      ],
+    })
+    const s = m.parseSnapshot(raw)
+    expect(visibleIndexes(s.slices).length).toBeGreaterThanOrEqual(MIN_VISIBLE)
+  })
+
+  it('只剩下限那么多可见片时，删不掉可见的那片', () => {
+    let s = running()
+    s = hide(s, 3)
+    s = hide(s, 2)
+    expect(visibleIndexes(s.slices)).toHaveLength(MIN_VISIBLE)
+    const stuck = s
+    // 删可见的 → 拦住（否则可见数会掉到 1，转不起来）
+    expect(m.reducer(s, { type: 'removeSlice', id: s.slices[0].id })).toBe(stuck)
+    // 删已经藏起来的那片 → 允许，可见数不受影响
+    const after = m.reducer(s, { type: 'removeSlice', id: s.slices[3].id })
+    expect(after.slices).toHaveLength(3)
+    expect(visibleIndexes(after.slices)).toHaveLength(MIN_VISIBLE)
+  })
+
+  it('盘面几何：隐藏片不占角度，剩下的均分圆周', () => {
+    let s = running()
+    expect(wedgeAngles(s).map((w) => w.center)).toEqual([0, 90, 180, 270])
+
+    s = hide(s, 1)
+    const w = wedgeAngles(s)
+    // 只画 3 片，每格 120°；片号仍是原始下标 0/2/3
+    expect(w.map((x) => x.index)).toEqual([0, 2, 3])
+    expect(w.map((x) => x.center)).toEqual([0, 120, 240])
+    // 相邻扇区首尾相接，不重叠也不留缝
+    expect(w[0].a1).toBeCloseTo(w[1].a0)
+    expect(w[1].a1).toBeCloseTo(w[2].a0)
+  })
+
+  it('盘面上当前片正对指针', () => {
+    let s = running()
+    s = hide(s, 1)
+    for (let i = 0; i < 5; i++) {
+      const w = wedgeAngles(s).find((x) => x.index === s.currentIndex)!
+      const onScreen = (((w.center + s.rotationDeg) % 360) + 360) % 360
+      expect(Math.min(onScreen, 360 - onScreen)).toBeCloseTo(0)
+      s = m.reducer(s, { type: 'complete' })
+      s = m.reducer(s, { type: 'confirm' })
+    }
+  })
+
+  it('导入时保留合法的隐藏状态', () => {
+    const raw = JSON.stringify({
+      slices: [
+        { id: 'a', name: '甲', totalMs: 0, lenMin: 5 },
+        { id: 'b', name: '乙', totalMs: 0, lenMin: 5 },
+        { id: 'c', name: '丙', totalMs: 0, lenMin: 5, hidden: true },
+      ],
+    })
+    const s = m.parseSnapshot(raw)
+    expect(s.slices.map((x) => !!x.hidden)).toEqual([false, false, true])
   })
 })

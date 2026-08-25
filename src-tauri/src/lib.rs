@@ -70,6 +70,25 @@ fn intent_failed(id: u64, error: String, shared: State<'_, Arc<Shared>>) {
     shared.resolve(id, Err(error));
 }
 
+/// 一轮到点时的提示音。用系统自带的 afplay，不走 webview 的 AudioContext ——
+/// 那个在没有用户手势的情况下可能是 suspended 的，到点了反而不响。
+/// 声音文件不在（换系统/精简过）就退回 osascript 的 beep。
+#[tauri::command]
+fn play_alert() {
+    const SOUND: &str = "/System/Library/Sounds/Submarine.aiff";
+    let spawned = if std::path::Path::new(SOUND).exists() {
+        std::process::Command::new("/usr/bin/afplay").arg(SOUND).spawn()
+    } else {
+        std::process::Command::new("/usr/bin/osascript").args(["-e", "beep"]).spawn()
+    };
+    // 别 wait —— 等它放完会把 IPC 卡住两秒
+    if let Ok(mut child) = spawned {
+        std::thread::spawn(move || {
+            let _ = child.wait();
+        });
+    }
+}
+
 /// app 里那个 ▤ 按钮：开系统浏览器看 /insights，不再占窗口。
 #[tauri::command]
 fn open_insights(shared: State<'_, Arc<Shared>>) -> Result<(), String> {
@@ -78,6 +97,21 @@ fn open_insights(shared: State<'_, Arc<Shared>>) -> Result<(), String> {
     }
     let url = format!("http://127.0.0.1:{}/insights", shared.config.port);
     tauri_plugin_opener::open_url(url, None::<&str>).map_err(|e| e.to_string())
+}
+
+#[cfg(test)]
+mod tests {
+    /// 硬编码的系统音路径。macOS 换版本或被精简过就会没有 ——
+    /// 那时候会退回 osascript beep，但至少这条测试先把话说清楚。
+    #[test]
+    fn 提示音文件和播放器都在() {
+        assert!(
+            std::path::Path::new("/System/Library/Sounds/Submarine.aiff").exists(),
+            "系统音没了，play_alert 会退回 osascript beep"
+        );
+        assert!(std::path::Path::new("/usr/bin/afplay").exists());
+        assert!(std::path::Path::new("/usr/bin/osascript").exists());
+    }
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -121,6 +155,7 @@ pub fn run() {
             intent_done,
             intent_failed,
             open_insights,
+            play_alert,
         ])
         .build(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -759,3 +759,13 @@ button.icon.danger:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* 被藏起来的片：留在列表里但一眼看出不在轮转中 */
+.slices li.is-hidden .slice-row input,
+.slices li.is-hidden .idx,
+.slices li.is-hidden .len-chip {
+  opacity: 0.45;
+}
+button.icon.hidden-on {
+  color: #f5a623;
+}

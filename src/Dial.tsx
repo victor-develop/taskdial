@@ -1,4 +1,4 @@
-import { HUES, MAX_LAPS, RINGS_PER_LAP, rings, sliceAngle, type State } from './model'
+import { HUES, MAX_LAPS, RINGS_PER_LAP, rings, sliceAngle, visibleIndexes, type State } from './model'
 
 const C = 120 // 圆心
 const R_OUT = 104
@@ -29,6 +29,22 @@ function ringFill(hue: number, lap: number, band: number) {
   return `hsl(${hue} ${sat}% ${light}%)`
 }
 
+/**
+ * 每片画在哪儿。抽成纯函数是为了能测 —— 留在 JSX 里的话，
+ * 「角度按可见位置还是按完整下标算」这种错没有任何东西能拦住。
+ */
+export function wedgeAngles(state: State) {
+  const vis = visibleIndexes(state.slices)
+  const A = sliceAngle(vis.length)
+  return vis.map((index, pos) => ({
+    index,
+    pos,
+    center: pos * A,
+    a0: pos * A - A / 2,
+    a1: pos * A + A / 2,
+  }))
+}
+
 type Props = {
   state: State
   /** 每片当前显示的累计时长，含正在跑的这一轮 —— 年轮是连着长的 */
@@ -38,8 +54,9 @@ type Props = {
 }
 
 export default function Dial({ state, totals, hub, onDoubleClick }: Props) {
-  const n = state.slices.length
-  const A = sliceAngle(n)
+  // 隐藏的片不上盘，几何按可见片数算。片号仍用原始下标 —— 藏掉 3 之后
+  // 剩下的还是「1」「2」，跟设置里那张表对得上，不重新编号。
+  const wedges = wedgeAngles(state)
 
   return (
     <svg className="dial" viewBox="0 0 240 240" onDoubleClick={onDoubleClick}>
@@ -50,13 +67,12 @@ export default function Dial({ state, totals, hub, onDoubleClick }: Props) {
       />
 
       <g className="spin" style={{ transform: `rotate(${state.rotationDeg}deg)`, transformOrigin: `${C}px ${C}px` }}>
-        {state.slices.map((slice, i) => {
-          const a0 = i * A - A / 2
-          const a1 = i * A + A / 2
+        {wedges.map(({ index: i, center, a0, a1 }) => {
+          const slice = state.slices[i]
           const hue = HUES[i % HUES.length]
           const r = rings(totals[i])
           const isCurrent = i === state.currentIndex
-          const [numX, numY] = polar((R_IN + R_OUT) / 2, i * A)
+          const [numX, numY] = polar((R_IN + R_OUT) / 2, center)
 
           return (
             <g key={slice.id} className={isCurrent ? 'slice current' : 'slice'}>
@@ -88,7 +104,7 @@ export default function Dial({ state, totals, hub, onDoubleClick }: Props) {
 
               {/* 每满 8h 在弧边刻一道 */}
               {Array.from({ length: Math.min(r.notches, MAX_LAPS) }, (_, k) => {
-                const deg = i * A - (Math.min(r.notches, MAX_LAPS) - 1) * 3 + k * 6
+                const deg = center - (Math.min(r.notches, MAX_LAPS) - 1) * 3 + k * 6
                 const [x0, y0] = polar(R_OUT + 3, deg)
                 const [x1, y1] = polar(R_OUT + 8, deg)
                 return <line key={k} x1={x0} y1={y0} x2={x1} y2={y1} className="notch" />

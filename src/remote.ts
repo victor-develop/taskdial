@@ -5,11 +5,11 @@
  * 状态机还是 model.ts 里唯一那份，这里绝不复刻规则，只在规则挡住时
  * 给出人话的错误（server 端映射成 422）。
  */
-import type { Model, State } from './model'
+import { MIN_VISIBLE, type Model, type State } from './model'
 
 export type Intent =
   | { op: 'addSlice'; name?: string; lenMin?: number }
-  | { op: 'updateSlice'; id: string; name?: string; lenMin?: number }
+  | { op: 'updateSlice'; id: string; name?: string; lenMin?: number; hidden?: boolean }
   | { op: 'removeSlice'; id: string }
   | { op: 'pause'; reason?: string }
   | { op: 'resume' }
@@ -63,7 +63,12 @@ export function applyIntent(model: Model, s: State, raw: unknown): IntentResult 
       if (name instanceof Error) return fail(name.message)
       const lenMin = optNum(o, 'lenMin')
       if (lenMin instanceof Error) return fail(lenMin.message)
-      if (name === undefined && lenMin === undefined) return fail('至少给 name 或 lenMin 一个字段')
+      const hidden = o.hidden
+      if (hidden !== undefined && hidden !== null && typeof hidden !== 'boolean')
+        return fail('hidden 得是 true/false')
+      const wantHidden = typeof hidden === 'boolean' ? hidden : undefined
+      if (name === undefined && lenMin === undefined && wantHidden === undefined)
+        return fail('至少给 name / lenMin / hidden 其中一个字段')
       if (name !== undefined && !name.trim()) return fail('name 不能是空的')
 
       let next = s
@@ -72,6 +77,17 @@ export function applyIntent(model: Model, s: State, raw: unknown): IntentResult 
       }
       if (lenMin !== undefined) {
         next = model.reducer(next, { type: 'setLen', id: o.id, min: lenMin })
+      }
+      if (wantHidden !== undefined) {
+        const isHidden = !!next.slices.find((sl) => sl.id === o.id)?.hidden
+        if (isHidden !== wantHidden) {
+          const after = model.reducer(next, { type: 'toggleHidden', id: o.id })
+          // reducer 挡住了（会让可见片少于下限），给个人话的原因
+          if (after === next) {
+            return fail(`至少要留 ${MIN_VISIBLE} 片在轮转里，藏不了了`)
+          }
+          next = after
+        }
       }
       return { ok: true, next }
     }

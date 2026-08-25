@@ -42,6 +42,14 @@ npm run dev
 
 Open http://localhost:5183 and hit **⧉** in the top right to move the dial into a Document Picture-in-Picture window, which floats above other windows at the OS level. Chromium only — in Safari and Firefox the ⧉ button doesn't appear and the page works normally otherwise.
 
+### Hiding slices
+
+A slice can be **temporarily taken out of the rotation** from Settings (the ◉ toggle on each row) or over the API with `PATCH /control/slices/:id {"hidden": true}`. Hidden slices leave the dial entirely and the remaining ones share the circle — hide 3, 4 and 5 and you cycle between 1 and 2 only.
+
+Wedge numbers stay put: hide slice 2 and the others are still 1, 3, 4. Renumbering would make the settings list and the dial disagree every time you toggle something.
+
+Accumulated time is untouched — it's hidden, not deleted. At least two slices must stay visible, otherwise there is nothing to rotate between.
+
 ## Local HTTP API
 
 The app runs a small server on `127.0.0.1:7717` so an agent can read state and edit slices.

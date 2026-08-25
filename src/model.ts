@@ -16,7 +16,17 @@ export const LEN_PRESETS = [5, 15, 25, 50]
 export const MIN_LEN = 1
 export const MAX_LEN = 180
 
-export type Slice = { id: string; name: string; totalMs: number; lenMin: number }
+export type Slice = {
+  id: string
+  name: string
+  totalMs: number
+  lenMin: number
+  /** 暂时不参与轮转，也不画在盘上。累计时长照留 —— 是「藏起来」不是「删掉」 */
+  hidden?: boolean
+}
+
+/** 至少得留两片可见，不然「轮转」就没有意义了 */
+export const MIN_VISIBLE = 2
 export type Phase = 'idle' | 'running' | 'paused' | 'awaiting'
 
 /** 一次暂停。endedAt 为 null 表示还停着 */
@@ -64,6 +74,7 @@ export type Action =
   | { type: 'togglePin' }
   | { type: 'setLen'; id: string; min: number }
   | { type: 'setDefaultLen'; min: number }
+  | { type: 'toggleHidden'; id: string }
   | { type: 'rename'; id: string; name: string }
   | { type: 'addSlice' }
   | { type: 'removeSlice'; id: string }
@@ -99,6 +110,16 @@ function makeInitial(env: Env, makeSlice: (name: string, lenMin: number) => Slic
 // 压到同一个几何量上，年轮就没法互相比了。
 export const sliceAngle = (n: number) => 360 / n
 
+/** 可见片在完整数组里的下标，顺序不变 */
+export const visibleIndexes = (slices: Slice[]) =>
+  slices.reduce<number[]>((acc, sl, i) => (sl.hidden ? acc : [...acc, i]), [])
+
+/** 当前片在可见序列里排第几 —— 盘面几何全都按这个算，不是按完整数组 */
+export const visiblePos = (s: State) =>
+  Math.max(0, visibleIndexes(s.slices).indexOf(s.currentIndex))
+
+export const visibleCount = (s: State) => Math.max(1, visibleIndexes(s.slices).length)
+
 export const lenMsOf = (slice: Slice) => slice.lenMin * MS_MIN
 export const roundMs = (s: State) => lenMsOf(s.slices[s.currentIndex])
 
@@ -131,11 +152,39 @@ function normalizeRotation(rotationDeg: number, currentIndex: number, n: number)
   return target + laps * 360
 }
 
+/** 只在可见片之间转，隐藏的直接跳过 */
 function advance(s: State, steps = 1): Pick<State, 'currentIndex' | 'rotationDeg'> {
-  const a = sliceAngle(s.slices.length)
+  const vis = visibleIndexes(s.slices)
+  if (vis.length === 0) return { currentIndex: s.currentIndex, rotationDeg: s.rotationDeg }
+  const a = sliceAngle(vis.length)
+  const pos = Math.max(0, vis.indexOf(s.currentIndex))
   return {
-    currentIndex: (s.currentIndex + steps) % s.slices.length,
+    currentIndex: vis[(pos + steps) % vis.length],
     rotationDeg: s.rotationDeg - a * steps,
+  }
+}
+
+/** 片数或可见性变了之后，把角度和 currentIndex 一起对齐回可见序列 */
+function realign(s: State, slices: Slice[], preferIndex: number): State {
+  let vis = visibleIndexes(slices)
+  // 修复：可见片不够就转不起来。用户操作走不到这里（下面几个 case 都先拦了），
+  // 只有手改的存档 / 导入的文件会撞上，全部放出来。
+  if (vis.length < Math.min(MIN_VISIBLE, slices.length)) {
+    slices = slices.map((sl) => ({ ...sl, hidden: undefined }))
+    vis = visibleIndexes(slices)
+  }
+  const currentIndex = vis.includes(preferIndex)
+    ? preferIndex
+    : (vis.find((i) => i > preferIndex) ?? vis[0])
+  return {
+    ...s,
+    slices,
+    currentIndex,
+    rotationDeg: normalizeRotation(
+      s.rotationDeg,
+      Math.max(0, vis.indexOf(currentIndex)),
+      vis.length,
+    ),
   }
 }
 
@@ -260,6 +309,18 @@ export function createModel(env: Env) {
     case 'setDefaultLen':
       return { ...s, defaultLenMin: clampLen(action.min) }
 
+    // 临时把某片挪出轮转。累计不动，随时能放回来。
+    case 'toggleHidden': {
+      const target = s.slices.find((sl) => sl.id === action.id)
+      if (!target) return s
+      const hiding = !target.hidden
+      if (hiding && visibleIndexes(s.slices).length <= MIN_VISIBLE) return s
+      const slices = s.slices.map((sl) =>
+        sl.id === action.id ? { ...sl, hidden: hiding || undefined } : sl,
+      )
+      return realign(s, slices, s.currentIndex)
+    }
+
     case 'rename':
       return {
         ...s,
@@ -268,25 +329,23 @@ export function createModel(env: Env) {
 
     case 'addSlice': {
       if (s.slices.length >= 8) return s
-      const slices = [...s.slices, makeSlice('新任务', s.defaultLenMin)]
-      // 片数变了每格的角度就变了，不重新对齐指针会指到别的片上
-      return {
-        ...s,
-        slices,
-        rotationDeg: normalizeRotation(s.rotationDeg, s.currentIndex, slices.length),
-      }
+      // 可见片数变了每格的角度就变了，不重新对齐指针会指到别的片上
+      return realign(s, [...s.slices, makeSlice('新任务', s.defaultLenMin)], s.currentIndex)
     }
 
     case 'removeSlice': {
       if (s.slices.length <= 3) return s
+      const gone = s.slices.findIndex((sl) => sl.id === action.id)
+      if (gone < 0) return s
+      // 拦：删掉这片会让可见片不够，先让用户自己放回来几片，别偷偷改隐藏状态
+      if (!s.slices[gone].hidden && visibleIndexes(s.slices).length <= MIN_VISIBLE) return s
       const slices = s.slices.filter((sl) => sl.id !== action.id)
-      const currentIndex = Math.min(s.currentIndex, slices.length - 1)
-      return {
-        ...s,
-        slices,
-        currentIndex,
-        rotationDeg: normalizeRotation(s.rotationDeg, currentIndex, slices.length),
-      }
+      // 删掉的在当前片前面的话，当前片的下标要往前挪一位
+      const prefer = Math.min(
+        s.currentIndex > gone ? s.currentIndex - 1 : s.currentIndex,
+        slices.length - 1,
+      )
+      return realign(s, slices, prefer)
     }
 
     case 'replace':
@@ -315,11 +374,9 @@ export function createModel(env: Env) {
       if (!raw) return initialState()
       const parsed = JSON.parse(raw) as Partial<State> & LegacyFields
       let s = migrate({ ...initialState(), ...parsed } as State, parsed)
-      // 老存档里可能存着按旧片数算的角度，进来先对齐一次
-      s = {
-        ...s,
-        rotationDeg: normalizeRotation(s.rotationDeg, s.currentIndex, s.slices.length),
-      }
+      // 老存档里可能存着按旧片数算的角度；也可能被手改成一片都不可见。
+      // realign 两件事一起兜住。
+      s = realign(s, s.slices, s.currentIndex)
       // 关掉 app 后再打开：跑过头太久就不算这一轮，免得白给自己发奖。
       // 暂停不算跑飞 —— 那正是「先停着，回头再说」该有的样子。
       if (s.phase === 'running' && s.roundStartedAt) {
@@ -366,6 +423,7 @@ export function createModel(env: Env) {
         totalMs: Math.min(v.totalMs, CAP_MS),
         // 老存档的片没有自己的片长，回落到全局值
         lenMin: clampLen(num(v.lenMin, defaultLenMin)),
+        hidden: v.hidden === true ? true : undefined,
       }
     })
     const currentIndex = Math.max(0, Math.min(slices.length - 1, Math.floor(num(o.currentIndex, 0))))
@@ -386,13 +444,20 @@ export function createModel(env: Env) {
         }
       })
 
+    // 导入的存档可能藏得只剩一片（甚至零片），那样转不起来 —— 全部放出来
+    const visible = slices.filter((sl) => !sl.hidden).length
+    const safe = visible >= MIN_VISIBLE ? slices : slices.map((sl) => ({ ...sl, hidden: undefined }))
+    const vis = visibleIndexes(safe)
+
     return {
-      slices,
+      slices: safe,
       defaultLenMin,
       pauses,
       roundElapsedMs: 0,
-      currentIndex,
-      rotationDeg: -sliceAngle(slices.length) * currentIndex,
+      currentIndex: vis.includes(currentIndex) ? currentIndex : vis[0],
+      rotationDeg:
+        -sliceAngle(vis.length) *
+        Math.max(0, vis.indexOf(vis.includes(currentIndex) ? currentIndex : vis[0])),
       pinned: false,
       phase: 'idle',
       roundStartedAt: null,
