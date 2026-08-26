@@ -75,6 +75,7 @@ export type Action =
   | { type: 'setLen'; id: string; min: number }
   | { type: 'setDefaultLen'; min: number }
   | { type: 'toggleHidden'; id: string }
+  | { type: 'jump'; id: string }
   | { type: 'rename'; id: string; name: string }
   | { type: 'addSlice' }
   | { type: 'removeSlice'; id: string }
@@ -199,6 +200,12 @@ export function elapsedMs(s: State, now: number) {
  * 放到假时钟上跑，调用方也不用每次记得塞时间戳。
  */
 export function createModel(env: Env) {
+  /** 给还开着的那条暂停记录收尾 */
+  const closePause = (pauses: PauseRecord[]): PauseRecord[] => {
+    const [open, ...rest] = pauses
+    return open && open.endedAt === null ? [{ ...open, endedAt: env.now() }, ...rest] : pauses
+  }
+
   const makeSlice = (name: string, lenMin: number): Slice => ({
     id: env.newId(),
     name,
@@ -236,13 +243,34 @@ export function createModel(env: Env) {
 
     case 'resume': {
       if (s.phase !== 'paused') return s
-      const [open, ...rest] = s.pauses
+      return { ...s, phase: 'running', roundStartedAt: env.now(), pauses: closePause(s.pauses) }
+    }
+
+    /**
+     * 直接跳到某一片，不等当前这轮跑完。**当前这轮直接作废** ——
+     * 不记时长、不算一轮，因为你根本没把它做完。
+     *
+     * 跳过去立刻开跑：1.5s 的可取消窗口已经是确认了，不该再要一次。
+     * 顺手解锁：锁是锁在旧片上的，手动跳走就是要离开。
+     */
+    case 'jump': {
+      const target = s.slices.findIndex((sl) => sl.id === action.id)
+      if (target < 0 || s.slices[target].hidden || target === s.currentIndex) return s
+      const vis = visibleIndexes(s.slices)
+      const from = Math.max(0, vis.indexOf(s.currentIndex))
+      const steps = (vis.indexOf(target) - from + vis.length) % vis.length
       return {
         ...s,
+        currentIndex: target,
+        // 只往一个方向转，跟正常轮转一致（累加器只减不加）
+        rotationDeg: s.rotationDeg - sliceAngle(vis.length) * steps,
         phase: 'running',
         roundStartedAt: env.now(),
-        pauses:
-          open && open.endedAt === null ? [{ ...open, endedAt: env.now() }, ...rest] : s.pauses,
+        roundElapsedMs: 0,
+        justFinished: null,
+        pinned: false,
+        // 从暂停里跳走的话，那条暂停记录得收尾，不然永远挂着
+        pauses: closePause(s.pauses),
       }
     }
 

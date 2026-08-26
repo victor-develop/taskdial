@@ -650,3 +650,123 @@ describe('临时隐藏某些片', () => {
     expect(s.slices.map((x) => !!x.hidden)).toEqual([false, false, true])
   })
 })
+
+
+describe('点某片直接切过去', () => {
+  const jump = (s: State, i: number) => m.reducer(s, { type: 'jump', id: s.slices[i].id })
+
+  it('当前这轮直接作废：不记时长、不算一轮', () => {
+    let s = running(25)
+    env.set(at(20)) // 已经跑了 20 分钟
+    expect(elapsedMs(s, at(20))).toBe(20 * MS_MIN)
+    const roundsBefore = s.roundsToday
+
+    s = jump(s, 2)
+    expect(s.currentIndex).toBe(2)
+    expect(s.slices[0].totalMs).toBe(0) // 那 20 分钟没了 —— 你没把它做完
+    expect(s.roundsToday).toBe(roundsBefore)
+    expect(s.roundElapsedMs).toBe(0)
+  })
+
+  it('暂停累计下来的投入也一并作废（不能只清「正在跑的那一段」）', () => {
+    let s = running(25)
+    env.set(at(10))
+    s = m.reducer(s, { type: 'pause' })   // 10 分钟进了 roundElapsedMs
+    env.set(at(30))
+    s = m.reducer(s, { type: 'resume' })
+    env.set(at(35))                        // 累计 15 分钟，其中 10 分钟在 roundElapsedMs 里
+    expect(s.roundElapsedMs).toBe(10 * MS_MIN)
+    expect(elapsedMs(s, at(35))).toBe(15 * MS_MIN)
+
+    s = jump(s, 2)
+    expect(s.roundElapsedMs).toBe(0)
+    expect(elapsedMs(s, at(35))).toBe(0) // 新一轮真的从零开始
+  })
+
+  it('切过去立刻开跑，不用再确认一次', () => {
+    let s = running()
+    env.set(at(5))
+    s = jump(s, 1)
+    expect(s.phase).toBe('running')
+    expect(s.roundStartedAt).toBe(at(5))
+    expect(elapsedMs(s, at(5))).toBe(0) // 新一轮从零开始
+    expect(s.justFinished).toBeNull()
+  })
+
+  it('切过去之后指针对准目标片', () => {
+    let s = running()
+    for (const target of [2, 1, 3, 0]) {
+      s = jump(s, target)
+      const p = pointerIndex(s)
+      expect(p.index).toBe(target)
+      expect(p.offBy).toBeCloseTo(0)
+    }
+  })
+
+  it('转角只减不加 —— 往回跳也是顺着转过去', () => {
+    let s = running()
+    s = jump(s, 3)
+    const afterFar = s.rotationDeg
+    s = jump(s, 1) // 往回跳
+    expect(s.rotationDeg).toBeLessThan(afterFar)
+    const p = pointerIndex(s)
+    expect(p.index).toBe(1)
+    expect(p.offBy).toBeCloseTo(0)
+  })
+
+  it('隐藏的片跳不过去', () => {
+    let s = running()
+    s = hide(s, 2)
+    const before = s
+    expect(jump(s, 2)).toBe(before)
+  })
+
+  it('跳到自己身上不响应 —— 误触不该把进度清掉', () => {
+    let s = running()
+    env.set(at(10))
+    const before = s
+    expect(jump(s, s.currentIndex)).toBe(before)
+  })
+
+  it('解除锁片：锁是锁在旧片上的', () => {
+    let s = running()
+    s = m.reducer(s, { type: 'togglePin' })
+    expect(s.pinned).toBe(true)
+    s = jump(s, 2)
+    expect(s.pinned).toBe(false)
+    // 之后恢复正常轮转
+    s = m.reducer(s, { type: 'complete' })
+    expect(s.currentIndex).toBe(3)
+  })
+
+  it('从暂停里跳走，那条暂停记录要收尾', () => {
+    let s = running()
+    env.set(at(5))
+    s = m.reducer(s, { type: 'pause' })
+    expect(s.pauses[0].endedAt).toBeNull()
+
+    env.set(at(9))
+    s = jump(s, 1)
+    expect(s.phase).toBe('running')
+    expect(s.pauses[0].endedAt).toBe(at(9)) // 不能永远挂着
+    expect(s.pauses).toHaveLength(1)
+  })
+
+  it('隐藏之后跳转仍然按可见序列走', () => {
+    let s = running()
+    s = hide(s, 1) // 可见 0,2,3
+    s = jump(s, 3)
+    expect(s.currentIndex).toBe(3)
+    const p = pointerIndex(s)
+    expect(p.index).toBe(3)
+    expect(p.offBy).toBeCloseTo(0)
+    // 继续轮转不会落到被藏的 1 上
+    s = m.reducer(s, { type: 'complete' })
+    expect(s.currentIndex).toBe(0)
+  })
+
+  it('不存在的 id 不动状态', () => {
+    const s = running()
+    expect(m.reducer(s, { type: 'jump', id: 'nope' })).toBe(s)
+  })
+})

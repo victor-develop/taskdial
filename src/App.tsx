@@ -25,6 +25,9 @@ import {
 
 const TICKS = 12 // 一层年轮 = 1 小时 = 12 个 5 分钟刻度
 
+/** 点了某片之后给多久反悔。太短来不及看清，太长就不像「直接切」了 */
+const JUMP_DELAY_MS = 1500
+
 function tone(notes: number[]) {
   try {
     const ctx = new AudioContext()
@@ -69,6 +72,8 @@ export default function App() {
   const [pipWin, setPipWin] = useState<Window | null>(null)
   const [ioMsg, setIoMsg] = useState<string | null>(null)
   const [openLen, setOpenLen] = useState<string | null>(null)
+  /** 排上了但还没执行的跳转，给 1.5s 反悔。只在内存里 —— 存下来毫无意义 */
+  const [jumpTo, setJumpTo] = useState<string | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
 
@@ -192,6 +197,31 @@ export default function App() {
   const openPause = state.phase === 'paused' ? state.pauses[0] : undefined
   const visibleN = state.slices.filter((s) => !s.hidden).length
 
+  function armJump(id: string) {
+    // 点自己不响应：误触不该把正在跑的这一轮清掉
+    if (id === state.slices[state.currentIndex]?.id) return
+    if (state.slices.find((sl) => sl.id === id)?.hidden) return
+    setJumpTo(id)
+  }
+
+  // 排上之后 1.5s 执行；期间取消（按钮 / Esc / 双击）就撤掉
+  useEffect(() => {
+    if (!jumpTo) return
+    const t = setTimeout(() => {
+      dispatch({ type: 'jump', id: jumpTo })
+      setJumpTo(null)
+    }, JUMP_DELAY_MS)
+    return () => clearTimeout(t)
+  }, [jumpTo])
+
+  useEffect(() => {
+    if (!jumpTo) return
+    const onEsc = (e: KeyboardEvent) => e.key === 'Escape' && setJumpTo(null)
+    const docs = [document, pipWin?.document].filter(Boolean) as Document[]
+    docs.forEach((d) => d.addEventListener('keydown', onEsc))
+    return () => docs.forEach((d) => d.removeEventListener('keydown', onEsc))
+  }, [jumpTo, pipWin])
+
   async function importSnapshot(file: File) {
     try {
       const next = model.parseSnapshot(await file.text())
@@ -257,7 +287,12 @@ export default function App() {
           state={state}
           totals={totals}
           hub={hub}
-          onDoubleClick={() => dispatch({ type: 'togglePin' })}
+          onSliceClick={armJump}
+          onDoubleClick={() => {
+            // 双击 = 锁片。第一下点击已经把跳转排上了，先撤掉
+            setJumpTo(null)
+            dispatch({ type: 'togglePin' })
+          }}
         />
 
         <Runner progress={liveMs / total} phase={state.phase} />
@@ -275,7 +310,25 @@ export default function App() {
           </div>
         </footer>
 
-        {state.phase === 'paused' && sheet === 'none' && (
+        {jumpTo && (
+          <div className="sheet jump-sheet">
+            <p className="sheet-title">
+              <span className="ellip">
+                → 切到 {state.slices.findIndex((sl) => sl.id === jumpTo) + 1} ·{' '}
+                {state.slices.find((sl) => sl.id === jumpTo)?.name}
+              </span>
+            </p>
+            <p className="sheet-sub">当前这轮不计入</p>
+            <div className="jump-bar">
+              <i style={{ animationDuration: `${JUMP_DELAY_MS}ms` }} />
+            </div>
+            <div className="btns">
+              <button onClick={() => setJumpTo(null)}>取消 Esc</button>
+            </div>
+          </div>
+        )}
+
+        {!jumpTo && state.phase === 'paused' && sheet === 'none' && (
           <div className="sheet pause-sheet">
             <p className="sheet-title">
               <span className="ellip">⏸ 已暂停 {fmtDur(now - (openPause?.at ?? now))}</span>
@@ -312,7 +365,7 @@ export default function App() {
           </div>
         )}
 
-        {state.phase === 'idle' && sheet === 'none' && (
+        {!jumpTo && state.phase === 'idle' && sheet === 'none' && (
           <div className="sheet">
             <p className="sheet-title">
               <span className="ellip">从 {state.currentIndex + 1} · {current.name} 开始</span>
@@ -326,7 +379,7 @@ export default function App() {
           </div>
         )}
 
-        {state.phase === 'awaiting' && sheet === 'none' && (
+        {!jumpTo && state.phase === 'awaiting' && sheet === 'none' && (
           <div className="sheet">
             <p className="sheet-title">
               <span className="ellip">

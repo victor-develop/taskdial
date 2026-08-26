@@ -769,3 +769,43 @@ button.icon.danger:hover {
 button.icon.hidden-on {
   color: #f5a623;
 }
+
+/* ── 点某片直接切过去，1.5s 可反悔 ── */
+
+.slice {
+  cursor: pointer;
+}
+.slice.current {
+  cursor: default;
+}
+.slice:not(.current):hover .slice-bg {
+  fill: #262b34;
+}
+
+.jump-sheet {
+  border-color: var(--accent);
+}
+
+/* 排上的跳转在倒数 —— 一条自己走完的条，走完就切 */
+.jump-bar {
+  margin-top: 6px;
+  height: 3px;
+  border-radius: 2px;
+  background: #2c323c;
+  overflow: hidden;
+}
+.jump-bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  animation: jump-drain linear forwards;
+}
+@keyframes jump-drain {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}

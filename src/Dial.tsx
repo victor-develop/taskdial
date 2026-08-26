@@ -47,13 +47,15 @@ export function wedgeAngles(state: State) {
 
 type Props = {
   state: State
+  /** 点某一片 = 想直接切过去（App 那边排一个可取消的跳转） */
+  onSliceClick: (id: string) => void
   /** 每片当前显示的累计时长，含正在跑的这一轮 —— 年轮是连着长的 */
   totals: number[]
   hub: { main: string; sub?: string }
   onDoubleClick: () => void
 }
 
-export default function Dial({ state, totals, hub, onDoubleClick }: Props) {
+export default function Dial({ state, totals, hub, onSliceClick, onDoubleClick }: Props) {
   // 隐藏的片不上盘，几何按可见片数算。片号仍用原始下标 —— 藏掉 3 之后
   // 剩下的还是「1」「2」，跟设置里那张表对得上，不重新编号。
   const wedges = wedgeAngles(state)
@@ -75,7 +77,11 @@ export default function Dial({ state, totals, hub, onDoubleClick }: Props) {
           const [numX, numY] = polar((R_IN + R_OUT) / 2, center)
 
           return (
-            <g key={slice.id} className={isCurrent ? 'slice current' : 'slice'}>
+            <g
+              key={slice.id}
+              className={isCurrent ? 'slice current' : 'slice'}
+              onClick={() => onSliceClick(slice.id)}
+            >
               {/* 底：还没长到的部分 */}
               <path d={sector(R_IN, R_OUT, a0 + 0.6, a1 - 0.6)} className="slice-bg" />
 

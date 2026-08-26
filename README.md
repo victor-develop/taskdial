@@ -42,6 +42,14 @@ npm run dev
 
 Open http://localhost:5183 and hit **⧉** in the top right to move the dial into a Document Picture-in-Picture window, which floats above other windows at the OS level. Chromium only — in Safari and Firefox the ⧉ button doesn't appear and the page works normally otherwise.
 
+### Jumping straight to a task
+
+Click any wedge to switch to it **without waiting for the current slice to finish**. There's a 1.5s window to back out (the Cancel button, `Esc`, or a double-click); after that it switches and starts running immediately — the 1.5s already served as the confirmation, so it doesn't ask again.
+
+**The interrupted round counts for nothing**: no time credited, no round tallied. You didn't finish it. That includes time banked across a pause — the whole round is discarded, not just the currently-running segment.
+
+Clicking the wedge you're already on does nothing, so a misclick can't wipe a round in progress. Jumping also releases the pin, since the pin belonged to the slice you just left.
+
 ### Hiding slices
 
 A slice can be **temporarily taken out of the rotation** from Settings (the ◉ toggle on each row) or over the API with `PATCH /control/slices/:id {"hidden": true}`. Hidden slices leave the dial entirely and the remaining ones share the circle — hide 3, 4 and 5 and you cycle between 1 and 2 only.
