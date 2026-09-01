@@ -7,7 +7,9 @@ import {
   MS_HOUR,
   MS_MIN,
   MIN_VISIBLE,
+  MIN_SLICES,
   createModel,
+  removeBlocker,
   elapsedMs,
   visibleIndexes,
   sliceAngle,
@@ -768,5 +770,63 @@ describe('点某片直接切过去', () => {
   it('不存在的 id 不动状态', () => {
     const s = running()
     expect(m.reducer(s, { type: 'jump', id: 'nope' })).toBe(s)
+  })
+})
+
+
+describe('删片：能不能删、为什么不能，只有一份判定', () => {
+  it('正常情况可以删', () => {
+    const s = running()
+    expect(removeBlocker(s, s.slices[3].id)).toBeNull()
+    expect(m.reducer(s, { type: 'removeSlice', id: s.slices[3].id }).slices).toHaveLength(3)
+  })
+
+  it(`只剩 ${MIN_SLICES} 片时删不掉，并且说得出原因`, () => {
+    let s = running()
+    s = m.reducer(s, { type: 'removeSlice', id: s.slices[3].id })
+    expect(s.slices).toHaveLength(3)
+    const why = removeBlocker(s, s.slices[0].id)
+    expect(why).toContain('下限')
+    expect(m.reducer(s, { type: 'removeSlice', id: s.slices[0].id })).toBe(s)
+  })
+
+  it('可见片只剩下限时，删可见的要被拦住 —— 这正是「点了没反应」那个 bug', () => {
+    let s = running()
+    s = m.reducer(s, { type: 'addSlice' })
+    s = m.reducer(s, { type: 'addSlice' }) // 6 片，够删
+    s = hide(s, 2)
+    s = hide(s, 3)
+    s = hide(s, 4)
+    s = hide(s, 5)
+    expect(visibleIndexes(s.slices)).toHaveLength(2)
+
+    // 删可见的 → 拦住，且原因里说清楚该怎么办
+    const why = removeBlocker(s, s.slices[0].id)
+    expect(why).toContain('转不起来')
+    expect(m.reducer(s, { type: 'removeSlice', id: s.slices[0].id })).toBe(s)
+
+    // 删藏起来的 → 可以，可见数不受影响
+    expect(removeBlocker(s, s.slices[2].id)).toBeNull()
+    const after = m.reducer(s, { type: 'removeSlice', id: s.slices[2].id })
+    expect(after.slices).toHaveLength(5)
+    expect(visibleIndexes(after.slices)).toHaveLength(2)
+  })
+
+  it('不存在的 id 也说得出原因', () => {
+    expect(removeBlocker(running(), 'nope')).toContain('没有这一片')
+  })
+
+  it('判定和 reducer 永远一致 —— 说能删就真能删，说不能就真不动', () => {
+    let s = running()
+    s = m.reducer(s, { type: 'addSlice' })
+    s = hide(s, 2)
+    s = hide(s, 3)
+    for (const sl of s.slices) {
+      const blocked = removeBlocker(s, sl.id) !== null
+      const after = m.reducer(s, { type: 'removeSlice', id: sl.id })
+      expect(after === s, `${sl.name}: 判定说${blocked ? '不能' : '能'}删，reducer 却相反`).toBe(
+        blocked,
+      )
+    }
   })
 })

@@ -10,7 +10,9 @@ import {
   PAUSE_REASONS,
   MAX_LEN,
   MIN_LEN,
+  MAX_SLICES,
   MIN_VISIBLE,
+  removeBlocker,
   MS_HOUR,
   MS_MIN,
   elapsedMs,
@@ -456,7 +458,8 @@ export default function App() {
                     </button>
                     <button
                       className="icon"
-                      disabled={state.slices.length <= 3}
+                      disabled={!!removeBlocker(state, s.id)}
+                      title={removeBlocker(state, s.id) ?? '删掉这一片'}
                       onClick={() => dispatch({ type: 'removeSlice', id: s.id })}
                     >
                       ✕
@@ -489,7 +492,7 @@ export default function App() {
             </ul>
             {ioMsg && <p className="io-msg">{ioMsg}</p>}
             <div className="panel-foot">
-              <button onClick={() => dispatch({ type: 'addSlice' })} disabled={state.slices.length >= 8}>
+              <button onClick={() => dispatch({ type: 'addSlice' })} disabled={state.slices.length >= MAX_SLICES}>
                 + 加一片
               </button>
               <button onClick={() => exportSnapshot(state)}>导出</button>

@@ -27,6 +27,9 @@ export type Slice = {
 
 /** 至少得留两片可见，不然「轮转」就没有意义了 */
 export const MIN_VISIBLE = 2
+/** 少于三片就不像个盘了 */
+export const MIN_SLICES = 3
+export const MAX_SLICES = 8
 export type Phase = 'idle' | 'running' | 'paused' | 'awaiting'
 
 /** 一次暂停。endedAt 为 null 表示还停着 */
@@ -120,6 +123,22 @@ export const visiblePos = (s: State) =>
   Math.max(0, visibleIndexes(s.slices).indexOf(s.currentIndex))
 
 export const visibleCount = (s: State) => Math.max(1, visibleIndexes(s.slices).length)
+
+/**
+ * 这一片现在能不能删；不能的话返回人话的原因。
+ *
+ * 一份规则三个用处：reducer 拦、按钮置灰 + tooltip、API 返 422。
+ * 之前散成三处，结果按钮没置灰（点了没反应）、API 少一条（返回 ok
+ * 但状态没变）—— 同一条规则抄三遍就是这个下场。
+ */
+export function removeBlocker(s: State, id: string): string | null {
+  const i = s.slices.findIndex((sl) => sl.id === id)
+  if (i < 0) return `没有这一片：${id}`
+  if (s.slices.length <= MIN_SLICES) return `只剩 ${s.slices.length} 片了，下限 ${MIN_SLICES}，删不掉`
+  if (!s.slices[i].hidden && visibleIndexes(s.slices).length <= MIN_VISIBLE)
+    return `轮转里只剩 ${MIN_VISIBLE} 片，删了就转不起来。先放回来几片，或者先把这片藏起来`
+  return null
+}
 
 export const lenMsOf = (slice: Slice) => slice.lenMin * MS_MIN
 export const roundMs = (s: State) => lenMsOf(s.slices[s.currentIndex])
@@ -356,17 +375,14 @@ export function createModel(env: Env) {
       }
 
     case 'addSlice': {
-      if (s.slices.length >= 8) return s
+      if (s.slices.length >= MAX_SLICES) return s
       // 可见片数变了每格的角度就变了，不重新对齐指针会指到别的片上
       return realign(s, [...s.slices, makeSlice('新任务', s.defaultLenMin)], s.currentIndex)
     }
 
     case 'removeSlice': {
-      if (s.slices.length <= 3) return s
+      if (removeBlocker(s, action.id)) return s
       const gone = s.slices.findIndex((sl) => sl.id === action.id)
-      if (gone < 0) return s
-      // 拦：删掉这片会让可见片不够，先让用户自己放回来几片，别偷偷改隐藏状态
-      if (!s.slices[gone].hidden && visibleIndexes(s.slices).length <= MIN_VISIBLE) return s
       const slices = s.slices.filter((sl) => sl.id !== action.id)
       // 删掉的在当前片前面的话，当前片的下标要往前挪一位
       const prefer = Math.min(

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { testEnv, type TestEnv } from './env'
-import { MS_MIN, createModel, type Model, type State } from './model'
+import { MS_MIN, createModel, visibleIndexes, type Model, type State } from './model'
 import { applyIntent, type IntentResult } from './remote'
 
 // vitest 跑在 node 里没有 localStorage；model.ts 顶层不碰它，
@@ -213,5 +213,27 @@ describe('model.restore（Rust 的 state.json 和 localStorage 走同一条路�
 
   it('烂 JSON 落回全新状态，不抛', () => {
     expect(m.restore('{oops').slices).toHaveLength(4)
+  })
+})
+
+
+describe('intent: removeSlice 的可见数下限', () => {
+  it('API 不能说 ok 却什么都没删 —— 规则要跟 reducer 一致', () => {
+    let s = m.initialState()
+    s = ok(applyIntent(m, s, { op: 'addSlice', name: '第五片' }))
+    s = ok(applyIntent(m, s, { op: 'addSlice', name: '第六片' }))
+    for (const i of [2, 3, 4, 5]) {
+      s = ok(applyIntent(m, s, { op: 'updateSlice', id: s.slices[i].id, hidden: true }))
+    }
+    expect(visibleIndexes(s.slices)).toHaveLength(2)
+
+    // 删可见的：必须是明确的失败，不能返回 ok 而状态原封不动
+    const res = applyIntent(m, s, { op: 'removeSlice', id: s.slices[0].id })
+    expect(res.ok).toBe(false)
+    expect(err(res)).toContain('转不起来')
+
+    // 删藏起来的：可以
+    const after = ok(applyIntent(m, s, { op: 'removeSlice', id: s.slices[2].id }))
+    expect(after.slices).toHaveLength(5)
   })
 })

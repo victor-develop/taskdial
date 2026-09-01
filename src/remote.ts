@@ -5,7 +5,7 @@
  * 状态机还是 model.ts 里唯一那份，这里绝不复刻规则，只在规则挡住时
  * 给出人话的错误（server 端映射成 422）。
  */
-import { MIN_VISIBLE, type Model, type State } from './model'
+import { MAX_SLICES, MIN_VISIBLE, removeBlocker, type Model, type State } from './model'
 
 export type Intent =
   | { op: 'addSlice'; name?: string; lenMin?: number }
@@ -42,7 +42,8 @@ export function applyIntent(model: Model, s: State, raw: unknown): IntentResult 
       const lenMin = optNum(o, 'lenMin')
       if (lenMin instanceof Error) return fail(lenMin.message)
       if (name !== undefined && !name.trim()) return fail('name 不能是空的')
-      if (s.slices.length >= 8) return fail(`已经有 ${s.slices.length} 片了，上限 8，加不了`)
+      if (s.slices.length >= MAX_SLICES)
+        return fail(`已经有 ${s.slices.length} 片了，上限 ${MAX_SLICES}，加不了`)
 
       let next = model.reducer(s, { type: 'addSlice' })
       const id = next.slices[next.slices.length - 1].id
@@ -94,8 +95,8 @@ export function applyIntent(model: Model, s: State, raw: unknown): IntentResult 
 
     case 'removeSlice': {
       if (typeof o.id !== 'string') return fail('缺 id')
-      if (!s.slices.some((sl) => sl.id === o.id)) return fail(`没有这一片：${o.id}`)
-      if (s.slices.length <= 3) return fail(`只剩 ${s.slices.length} 片了，下限 3，删不掉`)
+      const why = removeBlocker(s, o.id)
+      if (why) return fail(why)
       return { ok: true, next: model.reducer(s, { type: 'removeSlice', id: o.id }) }
     }
 
