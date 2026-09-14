@@ -52,11 +52,15 @@ Clicking the wedge you're already on does nothing, so a misclick can't wipe a ro
 
 ### Hiding slices
 
-A slice can be **temporarily taken out of the rotation** from Settings (the ◉ toggle on each row) or over the API with `PATCH /control/slices/:id {"hidden": true}`. Hidden slices leave the dial entirely and the remaining ones share the circle — hide 3, 4 and 5 and you cycle between 1 and 2 only.
+Settings holds up to **50 tasks**, but the dial only ever draws **8**. Everything else sits in stock. The ◉ toggle on each row moves a task between the dial and stock; the API does the same with `PATCH /control/slices/:id {"hidden": true}`.
+
+Hidden slices leave the dial entirely and the remaining ones share the circle — park 3, 4 and 5 in stock and you cycle between 1 and 2 only.
 
 Wedge numbers stay put: hide slice 2 and the others are still 1, 3, 4. Renumbering would make the settings list and the dial disagree every time you toggle something.
 
-Accumulated time is untouched — it's hidden, not deleted. At least two slices must stay visible, otherwise there is nothing to rotate between.
+Colours, unlike numbers, follow the **position on the dial**, not the slice index. With 50 tasks and 8 hues, indexing by slice would routinely put the same hue on several wedges at once (indexes 0, 8, 16…) and the dial would stop being readable. Colour is a positional separator here; identity lives in the number.
+
+Accumulated time is untouched — it's stock, not deletion. At least two slices must stay on the dial, otherwise there is nothing to rotate between. Adding a task while the dial is full drops it into stock instead of refusing the add.
 
 ## Local HTTP API
 

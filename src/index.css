@@ -809,3 +809,11 @@ button.icon.hidden-on {
     transform: scaleX(0);
   }
 }
+
+/* 库存可以有 50 片，设置面板里要能滚得动、也值得多给点高度 */
+.card.tall {
+  min-height: 470px;
+}
+.slices {
+  scrollbar-width: thin;
+}

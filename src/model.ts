@@ -8,7 +8,7 @@ export const RINGS_PER_LAP = 8
 export const MAX_LAPS = 3
 export const CAP_MS = RINGS_PER_LAP * MAX_LAPS * MS_HOUR
 
-/** 每片一个色相 */
+/** 盘上每个位置一个色相。正好 MAX_VISIBLE 个，所以盘上永远不撞色 */
 export const HUES = [174, 38, 268, 344, 142, 210, 20, 300]
 
 /** 片长可选的几档，设置面板里那排 chip */
@@ -27,9 +27,12 @@ export type Slice = {
 
 /** 至少得留两片可见，不然「轮转」就没有意义了 */
 export const MIN_VISIBLE = 2
+/** 盘上最多画这么多片。再多每片就窄到点不中，年轮也挤成一条缝 */
+export const MAX_VISIBLE = 8
 /** 少于三片就不像个盘了 */
 export const MIN_SLICES = 3
-export const MAX_SLICES = 8
+/** 库存上限。设置里可以存这么多，但同时只有 MAX_VISIBLE 片能上盘 */
+export const MAX_SLICES = 50
 export type Phase = 'idle' | 'running' | 'paused' | 'awaiting'
 
 /** 一次暂停。endedAt 为 null 表示还停着 */
@@ -125,6 +128,42 @@ export const visiblePos = (s: State) =>
 export const visibleCount = (s: State) => Math.max(1, visibleIndexes(s.slices).length)
 
 /**
+ * 某片在盘上用什么颜色。按**盘上位置**取，不按原始下标 ——
+ * 库存有 50 片而色相只有 8 个，按下标取的话选出来的 8 片可能全是
+ * 同一个色相（下标 0/8/16/24…），盘就没法看了。
+ *
+ * 代价是切换隐藏时颜色会变。可以接受：颜色是盘面的位置区分符，
+ * 任务身份靠编号，编号是稳定的。
+ */
+export function hueOf(s: State, index: number) {
+  const pos = visibleIndexes(s.slices).indexOf(index)
+  return HUES[(pos < 0 ? 0 : pos) % HUES.length]
+}
+
+/** 这一片能不能移出轮转；不能的话返回人话的原因。 */
+export function hideBlocker(s: State, id: string): string | null {
+  const sl = s.slices.find((x) => x.id === id)
+  if (!sl) return `没有这一片：${id}`
+  if (sl.hidden) return null // 本来就不在轮转里
+  if (visibleIndexes(s.slices).length <= MIN_VISIBLE)
+    return `轮转里只剩 ${MIN_VISIBLE} 片了，再藏就转不起来`
+  return null
+}
+
+/**
+ * 这一片能不能放回轮转；不能的话返回人话的原因。
+ * 跟 removeBlocker 一样，一份规则给 reducer / 按钮 / API 三处用。
+ */
+export function unhideBlocker(s: State, id: string): string | null {
+  const sl = s.slices.find((x) => x.id === id)
+  if (!sl) return `没有这一片：${id}`
+  if (!sl.hidden) return null // 本来就在轮转里
+  if (visibleIndexes(s.slices).length >= MAX_VISIBLE)
+    return `盘上已经有 ${MAX_VISIBLE} 片了，先藏掉一片再放这片回来`
+  return null
+}
+
+/**
  * 这一片现在能不能删；不能的话返回人话的原因。
  *
  * 一份规则三个用处：reducer 拦、按钮置灰 + tooltip、API 返 422。
@@ -187,10 +226,16 @@ function advance(s: State, steps = 1): Pick<State, 'currentIndex' | 'rotationDeg
 /** 片数或可见性变了之后，把角度和 currentIndex 一起对齐回可见序列 */
 function realign(s: State, slices: Slice[], preferIndex: number): State {
   let vis = visibleIndexes(slices)
-  // 修复：可见片不够就转不起来。用户操作走不到这里（下面几个 case 都先拦了），
-  // 只有手改的存档 / 导入的文件会撞上，全部放出来。
+  // 修复：可见片不够就转不起来，超上限盘上画不下。用户操作走不到这里
+  // （各 case 都先拦了），只有手改的存档 / 导入的文件会撞上。
   if (vis.length < Math.min(MIN_VISIBLE, slices.length)) {
     slices = slices.map((sl) => ({ ...sl, hidden: undefined }))
+    vis = visibleIndexes(slices)
+  }
+  if (vis.length > MAX_VISIBLE) {
+    // 留前 MAX_VISIBLE 片在盘上，其余收进库存
+    const keep = new Set(vis.slice(0, MAX_VISIBLE))
+    slices = slices.map((sl, i) => (keep.has(i) ? sl : { ...sl, hidden: true }))
     vis = visibleIndexes(slices)
   }
   const currentIndex = vis.includes(preferIndex)
@@ -362,6 +407,7 @@ export function createModel(env: Env) {
       if (!target) return s
       const hiding = !target.hidden
       if (hiding && visibleIndexes(s.slices).length <= MIN_VISIBLE) return s
+      if (!hiding && unhideBlocker(s, action.id)) return s
       const slices = s.slices.map((sl) =>
         sl.id === action.id ? { ...sl, hidden: hiding || undefined } : sl,
       )
@@ -376,8 +422,12 @@ export function createModel(env: Env) {
 
     case 'addSlice': {
       if (s.slices.length >= MAX_SLICES) return s
+      const fresh = makeSlice('新任务', s.defaultLenMin)
+      // 盘上满了就先收进库存（建成隐藏的），而不是拒绝加 ——
+      // 库存 50 片的意义就在这儿：想加随时加，上不上盘另说
+      if (visibleIndexes(s.slices).length >= MAX_VISIBLE) fresh.hidden = true
       // 可见片数变了每格的角度就变了，不重新对齐指针会指到别的片上
-      return realign(s, [...s.slices, makeSlice('新任务', s.defaultLenMin)], s.currentIndex)
+      return realign(s, [...s.slices, fresh], s.currentIndex)
     }
 
     case 'removeSlice': {
@@ -447,8 +497,8 @@ export function createModel(env: Env) {
     if (typeof raw !== 'object' || raw === null) throw new Error('不是一个存档对象')
     const o = raw as Record<string, unknown>
 
-    if (!Array.isArray(o.slices) || o.slices.length < 3 || o.slices.length > 8)
-      throw new Error('slices 得是 3–8 片')
+    if (!Array.isArray(o.slices) || o.slices.length < MIN_SLICES || o.slices.length > MAX_SLICES)
+      throw new Error(`slices 得是 ${MIN_SLICES}–${MAX_SLICES} 片`)
 
     const num = (v: unknown, fallback: number) =>
       typeof v === 'number' && Number.isFinite(v) ? v : fallback
@@ -488,9 +538,16 @@ export function createModel(env: Env) {
         }
       })
 
-    // 导入的存档可能藏得只剩一片（甚至零片），那样转不起来 —— 全部放出来
-    const visible = slices.filter((sl) => !sl.hidden).length
-    const safe = visible >= MIN_VISIBLE ? slices : slices.map((sl) => ({ ...sl, hidden: undefined }))
+    // 导入的存档可能藏得只剩一片（转不起来），也可能一片没藏（50 片全上盘，
+    // 画不下）。两头都夹一下。
+    let safe = slices
+    if (visibleIndexes(safe).length < MIN_VISIBLE) {
+      safe = safe.map((sl) => ({ ...sl, hidden: undefined }))
+    }
+    if (visibleIndexes(safe).length > MAX_VISIBLE) {
+      const keep = new Set(visibleIndexes(safe).slice(0, MAX_VISIBLE))
+      safe = safe.map((sl, i) => (keep.has(i) ? sl : { ...sl, hidden: true }))
+    }
     const vis = visibleIndexes(safe)
 
     return {

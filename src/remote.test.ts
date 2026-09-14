@@ -1,6 +1,14 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { testEnv, type TestEnv } from './env'
-import { MS_MIN, createModel, visibleIndexes, type Model, type State } from './model'
+import {
+  MAX_SLICES,
+  MAX_VISIBLE,
+  MS_MIN,
+  createModel,
+  visibleIndexes,
+  type Model,
+  type State,
+} from './model'
 import { applyIntent, type IntentResult } from './remote'
 
 // vitest 跑在 node 里没有 localStorage；model.ts 顶层不碰它，
@@ -57,11 +65,29 @@ describe('intent: addSlice', () => {
     expect(ok(applyIntent(m, s, { op: 'addSlice', lenMin: -3 })).slices[4].lenMin).toBe(1)
   })
 
-  it('已有 8 片加不了，报错而不是安静忽略', () => {
+  it(`库存满 ${MAX_SLICES} 片才加不了，报错而不是安静忽略`, () => {
     let s = m.initialState()
-    for (let i = 0; i < 4; i++) s = m.reducer(s, { type: 'addSlice' })
-    expect(s.slices).toHaveLength(8)
-    expect(err(applyIntent(m, s, { op: 'addSlice' }))).toContain('8')
+    while (s.slices.length < MAX_SLICES) s = m.reducer(s, { type: 'addSlice' })
+    expect(s.slices).toHaveLength(MAX_SLICES)
+    expect(err(applyIntent(m, s, { op: 'addSlice' }))).toContain(String(MAX_SLICES))
+  })
+
+  it(`盘上满 ${MAX_VISIBLE} 片之后，加的片进库存而不是被拒`, () => {
+    let s = m.initialState()
+    for (let i = 0; i < 6; i++) {
+      s = ok(applyIntent(m, s, { op: 'addSlice', name: `多的${i}` }))
+    }
+    expect(s.slices).toHaveLength(10)
+    expect(visibleIndexes(s.slices)).toHaveLength(MAX_VISIBLE)
+  })
+
+  it('盘上满了，API 放不回来要说清楚原因', () => {
+    let s = m.initialState()
+    for (let i = 0; i < 6; i++) s = ok(applyIntent(m, s, { op: 'addSlice', name: `多的${i}` }))
+    const stock = s.slices.find((sl) => sl.hidden)!
+    const res = applyIntent(m, s, { op: 'updateSlice', id: stock.id, hidden: false })
+    expect(res.ok).toBe(false)
+    expect(err(res)).toContain(String(MAX_VISIBLE))
   })
 
   it('name 太长截到 60 字，两端空白剥掉', () => {

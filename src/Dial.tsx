@@ -1,4 +1,4 @@
-import { HUES, MAX_LAPS, RINGS_PER_LAP, rings, sliceAngle, visibleIndexes, type State } from './model'
+import { MAX_LAPS, RINGS_PER_LAP, hueOf, rings, sliceAngle, visibleIndexes, type State } from './model'
 
 const C = 120 // 圆心
 const R_OUT = 104
@@ -71,7 +71,7 @@ export default function Dial({ state, totals, hub, onSliceClick, onDoubleClick }
       <g className="spin" style={{ transform: `rotate(${state.rotationDeg}deg)`, transformOrigin: `${C}px ${C}px` }}>
         {wedges.map(({ index: i, center, a0, a1 }) => {
           const slice = state.slices[i]
-          const hue = HUES[i % HUES.length]
+          const hue = hueOf(state, i)
           const r = rings(totals[i])
           const isCurrent = i === state.currentIndex
           const [numX, numY] = polar((R_IN + R_OUT) / 2, center)

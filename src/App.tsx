@@ -5,13 +5,15 @@ import Dial from './Dial'
 import Runner from './Runner'
 import { openPip, pipSupported } from './pip'
 import {
-  HUES,
   LEN_PRESETS,
   PAUSE_REASONS,
   MAX_LEN,
   MIN_LEN,
   MAX_SLICES,
-  MIN_VISIBLE,
+  MAX_VISIBLE,
+  hideBlocker,
+  hueOf,
+  unhideBlocker,
   removeBlocker,
   MS_HOUR,
   MS_MIN,
@@ -241,7 +243,11 @@ export default function App() {
   }
 
   return (
-      <div className={state.phase === 'paused' ? 'card paused' : 'card'} ref={cardRef}>
+      <div
+        className={[state.phase === 'paused' ? 'paused' : '', sheet === 'settings' ? 'tall' : '']
+          .reduce((acc, c) => (c ? `${acc} ${c}` : acc), 'card')}
+        ref={cardRef}
+      >
         {/* 无边框窗口靠这块拖动；在浏览器里这个属性没有副作用 */}
         <header data-tauri-drag-region>
           <span className="today" data-tauri-drag-region>
@@ -274,7 +280,7 @@ export default function App() {
         <h1
           data-tauri-drag-region
           className={state.pinned ? 'title pinned' : 'title'}
-          style={{ '--hue': HUES[shownIndex % HUES.length] } as CSSProperties}
+          style={{ '--hue': hueOf(state, shownIndex) } as CSSProperties}
           title={shown.name}
         >
           <span className="badge">{shownIndex + 1}</span>
@@ -414,7 +420,11 @@ export default function App() {
               </button>
             </div>
             <p className="io-msg">
-              在 {visibleN} 片之间轮转{visibleN < state.slices.length ? `（藏了 ${state.slices.length - visibleN} 片）` : ''}
+              盘上 {visibleN}/{MAX_VISIBLE} 片
+              {state.slices.length > visibleN
+                ? ` · 库存还有 ${state.slices.length - visibleN} 片`
+                : ''}
+              {` · 共 ${state.slices.length}/${MAX_SLICES}`}
             </p>
             <label className="len">
               新片默认
@@ -448,14 +458,20 @@ export default function App() {
                     >
                       {s.lenMin}m
                     </button>
-                    <button
-                      className={s.hidden ? 'icon hidden-on' : 'icon'}
-                      disabled={!s.hidden && visibleN <= MIN_VISIBLE}
-                      title={s.hidden ? '放回轮转' : '暂时移出轮转（累计不清）'}
-                      onClick={() => dispatch({ type: 'toggleHidden', id: s.id })}
-                    >
-                      {s.hidden ? '◌' : '◉'}
-                    </button>
+                    {(() => {
+                      // 两个方向各有各的上限，判定跟 reducer 共用一份
+                      const why = s.hidden ? unhideBlocker(state, s.id) : hideBlocker(state, s.id)
+                      return (
+                        <button
+                          className={s.hidden ? 'icon hidden-on' : 'icon'}
+                          disabled={!!why}
+                          title={why ?? (s.hidden ? '放回轮转' : '暂时移出轮转（累计不清）')}
+                          onClick={() => dispatch({ type: 'toggleHidden', id: s.id })}
+                        >
+                          {s.hidden ? '◌' : '◉'}
+                        </button>
+                      )
+                    })()}
                     <button
                       className="icon"
                       disabled={!!removeBlocker(state, s.id)}

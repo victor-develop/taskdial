@@ -8,6 +8,11 @@ import {
   MS_MIN,
   MIN_VISIBLE,
   MIN_SLICES,
+  MAX_SLICES,
+  MAX_VISIBLE,
+  hideBlocker,
+  hueOf,
+  unhideBlocker,
   createModel,
   removeBlocker,
   elapsedMs,
@@ -275,15 +280,15 @@ describe('轮转', () => {
     expect(s.slices.map((sl) => sl.totalMs)).toEqual(totals)
   })
 
-  it('片数不足 3 时删不掉，超过 8 时加不了', () => {
+  it(`片数不足 ${MIN_SLICES} 时删不掉，超过 ${MAX_SLICES} 时加不了`, () => {
     let s = m.initialState()
     s = m.reducer(s, { type: 'removeSlice', id: s.slices[0].id })
-    expect(s.slices).toHaveLength(3)
+    expect(s.slices).toHaveLength(MIN_SLICES)
     const three = s
     expect(m.reducer(s, { type: 'removeSlice', id: s.slices[0].id })).toBe(three)
 
-    for (let i = 0; i < 10; i++) s = m.reducer(s, { type: 'addSlice' })
-    expect(s.slices).toHaveLength(8)
+    for (let i = 0; i < MAX_SLICES + 10; i++) s = m.reducer(s, { type: 'addSlice' })
+    expect(s.slices).toHaveLength(MAX_SLICES)
   })
 
   it('新片用默认片长', () => {
@@ -356,7 +361,9 @@ describe('导入的存档', () => {
     ['片太少', '{"slices":[{"name":"a","totalMs":0}]}'],
     [
       '片太多',
-      JSON.stringify({ slices: Array.from({ length: 9 }, () => ({ name: 'x', totalMs: 0 })) }),
+      JSON.stringify({
+        slices: Array.from({ length: MAX_SLICES + 1 }, () => ({ name: 'x', totalMs: 0 })),
+      }),
     ],
     ['没名字', '{"slices":[{"totalMs":0},{"name":"b","totalMs":0},{"name":"c","totalMs":0}]}'],
     ['负时长', '{"slices":[{"name":"a","totalMs":-5},{"name":"b","totalMs":0},{"name":"c","totalMs":0}]}'],
@@ -828,5 +835,115 @@ describe('删片：能不能删、为什么不能，只有一份判定', () => {
         blocked,
       )
     }
+  })
+})
+
+
+describe('库存 50 片，盘上最多 8 片', () => {
+  /** 造一个有 n 片的状态 */
+  function withSlices(n: number): State {
+    let s = m.initialState()
+    while (s.slices.length < n) s = m.reducer(s, { type: 'addSlice' })
+    return s
+  }
+
+  it('盘上满 8 片之后，新加的片自动收进库存而不是被拒绝', () => {
+    const s = withSlices(12)
+    expect(s.slices).toHaveLength(12)
+    expect(visibleIndexes(s.slices)).toHaveLength(MAX_VISIBLE)
+    // 后加的那几片都是隐藏的
+    expect(s.slices.slice(MAX_VISIBLE).every((sl) => sl.hidden)).toBe(true)
+  })
+
+  it('盘上满了就放不回来，且说得出原因', () => {
+    const s = withSlices(12)
+    const stock = s.slices[10]
+    expect(stock.hidden).toBe(true)
+    expect(unhideBlocker(s, stock.id)).toContain(`${MAX_VISIBLE} 片`)
+    expect(m.reducer(s, { type: 'toggleHidden', id: stock.id })).toBe(s)
+  })
+
+  it('先藏一片腾位置，就能把库存里的放上来', () => {
+    let s = withSlices(12)
+    const stock = s.slices[10]
+    s = m.reducer(s, { type: 'toggleHidden', id: s.slices[0].id }) // 腾一个位
+    expect(visibleIndexes(s.slices)).toHaveLength(MAX_VISIBLE - 1)
+    expect(unhideBlocker(s, stock.id)).toBeNull()
+    s = m.reducer(s, { type: 'toggleHidden', id: stock.id })
+    expect(s.slices[10].hidden).toBeFalsy()
+    expect(visibleIndexes(s.slices)).toHaveLength(MAX_VISIBLE)
+  })
+
+  it('50 片也只有 8 片上盘，几何按 8 算', () => {
+    const s = withSlices(MAX_SLICES)
+    expect(s.slices).toHaveLength(MAX_SLICES)
+    const w = wedgeAngles(s)
+    expect(w).toHaveLength(MAX_VISIBLE)
+    expect(w.map((x) => x.center)).toEqual([0, 45, 90, 135, 180, 225, 270, 315])
+  })
+
+  it('盘上 8 片的颜色两两不同 —— 按位置取色，不按原始下标', () => {
+    const s = withSlices(MAX_SLICES)
+    const vis = visibleIndexes(s.slices)
+    const hues = vis.map((i) => hueOf(s, i))
+    expect(new Set(hues).size).toBe(vis.length)
+  })
+
+  it('按下标取色会撞车 —— 这就是不那么干的原因', () => {
+    let s = withSlices(20)
+    // 把下标 0 和 8 同时放上盘：按下标取色的话它俩色相相同
+    const vis0 = visibleIndexes(s.slices)
+    s = m.reducer(s, { type: 'toggleHidden', id: s.slices[vis0[1]].id }) // 腾位
+    s = m.reducer(s, { type: 'toggleHidden', id: s.slices[8].id })
+    const vis = visibleIndexes(s.slices)
+    expect(vis).toContain(0)
+    expect(vis).toContain(8)
+    expect(hueOf(s, 0)).not.toBe(hueOf(s, 8))
+  })
+
+  it('两个方向的判定都给人话，而且跟 reducer 一致', () => {
+    const s = withSlices(12)
+    for (const sl of s.slices) {
+      const why = sl.hidden ? unhideBlocker(s, sl.id) : hideBlocker(s, sl.id)
+      const after = m.reducer(s, { type: 'toggleHidden', id: sl.id })
+      expect(
+        after === s,
+        `${sl.name}(${sl.hidden ? '藏' : '显'}): 判定说${why ? '不行' : '行'}，reducer 却相反`,
+      ).toBe(why !== null)
+    }
+  })
+
+  it('存档里 20 片全可见，load 要把超出的收进库存', () => {
+    let s = withSlices(20)
+    save({ ...s, slices: s.slices.map((sl) => ({ ...sl, hidden: undefined })) })
+    s = m.load()
+    expect(s.slices).toHaveLength(20)
+    expect(visibleIndexes(s.slices)).toHaveLength(MAX_VISIBLE)
+    const p = pointerIndex(s)
+    expect(p.index).toBe(s.currentIndex)
+    expect(p.offBy).toBeCloseTo(0)
+  })
+
+  it('导入的存档同理', () => {
+    const raw = JSON.stringify({
+      slices: Array.from({ length: 20 }, (_, i) => ({
+        id: `s${i}`,
+        name: `片${i}`,
+        totalMs: 0,
+        lenMin: 5,
+      })),
+    })
+    const s = m.parseSnapshot(raw)
+    expect(s.slices).toHaveLength(20)
+    expect(visibleIndexes(s.slices)).toHaveLength(MAX_VISIBLE)
+  })
+
+  it(`${MAX_SLICES} 片的存档能导入，多一片就拒绝`, () => {
+    const mk = (n: number) =>
+      JSON.stringify({
+        slices: Array.from({ length: n }, (_, i) => ({ name: `片${i}`, totalMs: 0, lenMin: 5 })),
+      })
+    expect(m.parseSnapshot(mk(MAX_SLICES)).slices).toHaveLength(MAX_SLICES)
+    expect(() => m.parseSnapshot(mk(MAX_SLICES + 1))).toThrow()
   })
 })

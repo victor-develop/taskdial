@@ -5,7 +5,14 @@
  * 状态机还是 model.ts 里唯一那份，这里绝不复刻规则，只在规则挡住时
  * 给出人话的错误（server 端映射成 422）。
  */
-import { MAX_SLICES, MIN_VISIBLE, removeBlocker, type Model, type State } from './model'
+import {
+  MAX_SLICES,
+  MIN_VISIBLE,
+  removeBlocker,
+  unhideBlocker,
+  type Model,
+  type State,
+} from './model'
 
 export type Intent =
   | { op: 'addSlice'; name?: string; lenMin?: number }
@@ -82,8 +89,12 @@ export function applyIntent(model: Model, s: State, raw: unknown): IntentResult 
       if (wantHidden !== undefined) {
         const isHidden = !!next.slices.find((sl) => sl.id === o.id)?.hidden
         if (isHidden !== wantHidden) {
+          // 放回轮转有独立的上限判定，能给出更准的原因
+          if (!wantHidden) {
+            const why = unhideBlocker(next, o.id)
+            if (why) return fail(why)
+          }
           const after = model.reducer(next, { type: 'toggleHidden', id: o.id })
-          // reducer 挡住了（会让可见片少于下限），给个人话的原因
           if (after === next) {
             return fail(`至少要留 ${MIN_VISIBLE} 片在轮转里，藏不了了`)
           }
