@@ -95,10 +95,18 @@ impl Shared {
     pub fn set_snapshot(&self, state: Value) {
         if let Ok(text) = serde_json::to_string(&state) {
             let tmp = self.state_path.with_extension("json.tmp");
-            if let Some(dir) = self.state_path.parent() {
-                let _ = std::fs::create_dir_all(dir);
-            }
-            if std::fs::write(&tmp, &text).is_ok() {
+            // 直接写；只有失败了才去建目录重试。目录几乎总是已经在，
+            // 每次都 create_dir_all 等于在热路径上白搭一个系统调用。
+            let wrote = std::fs::write(&tmp, &text).or_else(|err| {
+                match self.state_path.parent() {
+                    Some(dir) => {
+                        std::fs::create_dir_all(dir)?;
+                        std::fs::write(&tmp, &text)
+                    }
+                    None => Err(err),
+                }
+            });
+            if wrote.is_ok() {
                 let _ = std::fs::rename(&tmp, &self.state_path);
             }
         }

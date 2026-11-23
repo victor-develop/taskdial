@@ -6,18 +6,35 @@
  * 全部动态 import @tauri-apps/api，浏览器里跑（vite dev / PiP）时是空操作。
  */
 import { model, type State } from './model'
+import { createPushScheduler } from './persist'
 import { applyIntent } from './remote'
 
 export const inTauri = () => '__TAURI_INTERNALS__' in globalThis
 
 const core = () => import('@tauri-apps/api/core')
 
-/** 每次状态变化推一份给 Rust。推不动就算了 —— 别因为 server 挂掉计时。 */
-export function pushState(state: State) {
-  if (!inTauri()) return
+const pushQueue = createPushScheduler((state) => {
   void core()
     .then(({ invoke }) => invoke('sync_state', { state: JSON.stringify(state) }))
     .catch(() => {})
+})
+
+/**
+ * 把状态推给 Rust 落盘。推不动就算了 —— 别因为 server 挂掉计时。
+ *
+ * 默认合并一小段时间内的多次变化：改任务名是逐字符触发的，不合并的话
+ * 打一行字就是几十次 IPC + 几十次磁盘写，打字会明显发卡。
+ * urgent 用于阶段/片数这类要紧变化，不等。
+ */
+export function pushState(state: State, urgent = false) {
+  if (!inTauri()) return
+  pushQueue.push(state, urgent)
+}
+
+/** 把攒着还没推的那份立刻推出去（窗口要关了之类） */
+export function flushState() {
+  if (!inTauri()) return
+  pushQueue.flush()
 }
 
 /**

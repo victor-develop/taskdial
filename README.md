@@ -101,6 +101,8 @@ State lives in the webview's localStorage. Under Tauri it's keyed by the app ide
 
 In browser mode the port is pinned to 5183 with `strictPort` in `vite.config.ts`. **Don't change it**: localStorage is bucketed by origin, so a different port is a different, empty bucket and looks exactly like data loss. With `strictPort`, Vite fails loudly when the port is taken instead of silently moving to the next one. (Tauri doesn't have this problem — the frontend is served over an internal protocol, no port involved.)
 
+Writes to `state.json` are coalesced: a burst of edits (renaming a task is one write **per keystroke**) is collapsed into one write after you stop, with a hard 1s ceiling so nothing sits unsaved for long. Phase changes, adding or removing slices, and pauses skip the queue and land immediately.
+
 There's exactly one way to lose time: a slice that was running but never confirmed, picked up more than two slice-lengths later. That round is discarded rather than credited.
 
 Settings has **Export / Import** — the save file is plain JSON. Use it when moving between origins, machines, or after clearing browser data. Import always lands in the idle state; it will not resume a half-finished round from somewhere else.

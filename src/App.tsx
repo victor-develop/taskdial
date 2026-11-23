@@ -1,6 +1,13 @@
 import { useEffect, useReducer, useRef, useState, type CSSProperties } from 'react'
 import { autoSizeWindow } from './autosize'
-import { listenIntents, loadSavedState, openInsights, playAlert, pushState } from './bridge'
+import {
+  flushState,
+  listenIntents,
+  loadSavedState,
+  openInsights,
+  playAlert,
+  pushState,
+} from './bridge'
 import Dial from './Dial'
 import Runner from './Runner'
 import { openPip, pipSupported } from './pip'
@@ -88,11 +95,33 @@ export default function App() {
   // 抢在文件加载完成前把它盖掉
   const syncReady = useRef(false)
 
+  // 上一次落盘时的「要紧字段」指纹，用来区分「改了名字」和「真的换了状态」
+  const urgentKey = useRef('')
+
   useEffect(() => {
     stateRef.current = state
     save(state)
-    if (syncReady.current) pushState(state)
+    if (!syncReady.current) return
+    const key = [
+      state.phase,
+      state.currentIndex,
+      state.slices.length,
+      state.slices.filter((s) => s.hidden).length,
+      state.pauses.length,
+    ].join('|')
+    // 阶段/片数/暂停这类立刻落盘；改名字这种逐字符的高频编辑先攒着
+    pushState(state, key !== urgentKey.current)
+    urgentKey.current = key
   }, [state])
+
+  // 窗口要没了，把攒着还没落盘的那份推出去
+  useEffect(() => {
+    window.addEventListener('pagehide', flushState)
+    return () => {
+      window.removeEventListener('pagehide', flushState)
+      flushState()
+    }
+  }, [])
 
   // 启动时从 Rust 管的存档文件恢复；没有文件（首次升级）就把
   // localStorage 那份推过去完成迁移
