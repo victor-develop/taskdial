@@ -62,6 +62,14 @@ Colours, unlike numbers, follow the **position on the dial**, not the slice inde
 
 Accumulated time is untouched — it's stock, not deletion. At least two slices must stay on the dial, otherwise there is nothing to rotate between. Adding a task while the dial is full drops it into stock instead of refusing the add.
 
+## Interface size
+
+On a high-resolution screen the window takes up more room than it should. Settings has an **interface size** row — 70% / 85% / 100% / 115% / 130% — or `Cmd +` / `Cmd -` to step, `Cmd 0` to reset.
+
+It's CSS `zoom` on the whole card, and **the window shrinks with it** rather than leaving a margin inside the old frame. Measured: 168×276 at 70%, 240×386 at 100%, 312×500 at 130%.
+
+Why not a draggable window edge: the window is borderless and `resizable: false`, and its height is already computed from content (`src/autosize.ts`). A dragged size would be recomputed away the next time the content changed. An explicit scale factor keeps content and window following the same number instead of fighting over it.
+
 ## Local HTTP API
 
 The app runs a small server on `127.0.0.1:7717` so an agent can read state and edit slices.
@@ -69,7 +77,7 @@ The app runs a small server on `127.0.0.1:7717` so an agent can read state and e
 ```
 GET    /                      landing page
 GET    /insights              pause report — HTML, or ?format=md for markdown, ?format=json for the raw aggregate
-GET    /health                {ok, version, phase, uptime, window}
+GET    /health                {ok, version, phase, uptime, window, size}
 GET    /skills                capability manifest (JSON, ?format=md for markdown)
 GET    /control/state         full current state
 POST   /control/slices        add a slice        {name, lenMin}

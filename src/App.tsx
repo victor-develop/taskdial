@@ -2,6 +2,7 @@ import { useEffect, useReducer, useRef, useState, type CSSProperties } from 'rea
 import { autoSizeWindow } from './autosize'
 import {
   flushState,
+  inTauri,
   listenIntents,
   loadSavedState,
   openInsights,
@@ -18,6 +19,8 @@ import {
   MIN_LEN,
   MAX_SLICES,
   MAX_VISIBLE,
+  ZOOM_PRESETS,
+  ZOOM_STEP,
   hideBlocker,
   hueOf,
   unhideBlocker,
@@ -31,6 +34,7 @@ import {
   rings,
   roundMs,
   save,
+  type Action,
   type State,
 } from './model'
 
@@ -152,6 +156,12 @@ export default function App() {
     [],
   )
 
+  // 在 app 里才铺满窗口。以前靠 @media (max-width:260px) 猜，缩放一改
+  // 窗口宽度就猜错了 —— 直接按「是不是在 app 里」来
+  useEffect(() => {
+    if (inTauri()) document.body.classList.add('in-app')
+  }, [])
+
   // 窗口高度跟着内容走，见 autosize.ts
   useEffect(() => (cardRef.current ? autoSizeWindow(cardRef.current) : undefined), [])
 
@@ -190,6 +200,27 @@ export default function App() {
     }
     ringMark.current = { id, h }
   })
+
+  // Cmd +/- 调界面大小，Cmd 0 复位
+  useEffect(() => {
+    const onZoom = (e: KeyboardEvent) => {
+      if (!e.metaKey && !e.ctrlKey) return
+      const act: Action | null =
+        e.key === '=' || e.key === '+'
+          ? { type: 'zoomBy', delta: ZOOM_STEP }
+          : e.key === '-' || e.key === '_'
+            ? { type: 'zoomBy', delta: -ZOOM_STEP }
+            : e.key === '0'
+              ? { type: 'setZoom', pct: 100 }
+              : null
+      if (!act) return
+      e.preventDefault()
+      dispatch(act)
+    }
+    const docs = [document, pipWin?.document].filter(Boolean) as Document[]
+    docs.forEach((d) => d.addEventListener('keydown', onZoom))
+    return () => docs.forEach((d) => d.removeEventListener('keydown', onZoom))
+  }, [pipWin])
 
   // 回车 = 确认/开始。搬进 PiP 之后按键落在那个窗口里，所以两边都挂
   useEffect(() => {
@@ -276,6 +307,7 @@ export default function App() {
         className={[state.phase === 'paused' ? 'paused' : '', sheet === 'settings' ? 'tall' : '']
           .reduce((acc, c) => (c ? `${acc} ${c}` : acc), 'card')}
         ref={cardRef}
+        style={{ zoom: state.zoomPct / 100 } as CSSProperties}
       >
         {/* 无边框窗口靠这块拖动；在浏览器里这个属性没有副作用 */}
         <header data-tauri-drag-region>
@@ -455,6 +487,20 @@ export default function App() {
                 : ''}
               {` · 共 ${state.slices.length}/${MAX_SLICES}`}
             </p>
+            <label className="len">
+              界面大小
+              <span className="zoom-picks">
+                {ZOOM_PRESETS.map((pct) => (
+                  <button
+                    key={pct}
+                    className={state.zoomPct === pct ? 'on' : undefined}
+                    onClick={() => dispatch({ type: 'setZoom', pct })}
+                  >
+                    {pct}%
+                  </button>
+                ))}
+              </span>
+            </label>
             <label className="len">
               新片默认
               <input

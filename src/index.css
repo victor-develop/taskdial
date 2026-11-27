@@ -37,23 +37,21 @@ body.in-pip .runner {
   margin-top: auto;
 }
 
-/* 窗口正好就是卡片那么大时（Tauri 无边框窗口），铺满，别留边和滚动条 */
-@media (max-width: 260px) {
-  html,
-  body {
-    overflow: hidden;
-  }
-  /* 窗口高度是跟着内容调的，过渡的那一下让空隙落在下面，别上下平分 */
-  body {
-    align-items: flex-start;
-    justify-content: flex-start;
-    min-height: 0;
-  }
-  .card {
-    width: 100vw;
-    border: none;
-    border-radius: 0;
-  }
+/* 在 app 里：窗口就是卡片那么大，去掉边框圆角、别留滚动条。
+   不能再按窗口宽度猜 —— 界面一缩放宽度就变了，猜必错。
+   宽度也不能写 100vw：卡片套了 zoom，100vw 算出来会小一圈、右边留白。 */
+.in-app html,
+body.in-app {
+  overflow: hidden;
+}
+body.in-app {
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: 0;
+}
+body.in-app .card {
+  border: none;
+  border-radius: 0;
 }
 
 /* 圆盘搬走之后，原来那个 tab 留一行说明 */
@@ -816,4 +814,29 @@ button.icon.hidden-on {
 }
 .slices {
   scrollbar-width: thin;
+}
+
+/* 界面大小那排 chip */
+.zoom-picks {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+}
+.zoom-picks button {
+  flex: 1;
+  padding: 3px 0;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: #1f242c;
+  color: var(--dim);
+  cursor: pointer;
+}
+.zoom-picks button:hover {
+  color: var(--fg);
+}
+.zoom-picks button.on {
+  border-color: var(--accent);
+  color: var(--accent);
 }

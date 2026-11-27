@@ -8,6 +8,11 @@ import {
   MS_MIN,
   MIN_VISIBLE,
   MIN_SLICES,
+  MIN_ZOOM,
+  MAX_ZOOM,
+  ZOOM_PRESETS,
+  ZOOM_STEP,
+  clampZoom,
   MAX_SLICES,
   MAX_VISIBLE,
   hideBlocker,
@@ -945,5 +950,73 @@ describe('库存 50 片，盘上最多 8 片', () => {
       })
     expect(m.parseSnapshot(mk(MAX_SLICES)).slices).toHaveLength(MAX_SLICES)
     expect(() => m.parseSnapshot(mk(MAX_SLICES + 1))).toThrow()
+  })
+})
+
+describe('界面缩放', () => {
+  it('默认 100%', () => {
+    expect(m.initialState().zoomPct).toBe(100)
+  })
+
+  it('夹在合法区间，不会缩到看不见或撑爆屏幕', () => {
+    let s = m.initialState()
+    s = m.reducer(s, { type: 'setZoom', pct: 999 })
+    expect(s.zoomPct).toBe(MAX_ZOOM)
+    s = m.reducer(s, { type: 'setZoom', pct: -50 })
+    expect(s.zoomPct).toBe(MIN_ZOOM)
+    s = m.reducer(s, { type: 'setZoom', pct: 85 })
+    expect(s.zoomPct).toBe(85)
+  })
+
+  it('连按是一步接一步地走，不是拿同一个旧值算 N 次', () => {
+    let s = m.initialState()
+    for (let i = 0; i < 4; i++) s = m.reducer(s, { type: 'zoomBy', delta: -ZOOM_STEP })
+    expect(s.zoomPct).toBe(100 - 4 * ZOOM_STEP)
+    for (let i = 0; i < 10; i++) s = m.reducer(s, { type: 'zoomBy', delta: ZOOM_STEP })
+    expect(s.zoomPct).toBe(MAX_ZOOM)
+  })
+
+  it('预设都在合法区间里', () => {
+    for (const p of ZOOM_PRESETS) expect(clampZoom(p)).toBe(p)
+  })
+
+  it('老存档没有这个字段，按 100% 算', () => {
+    localStorage.setItem(
+      'dial.v1',
+      JSON.stringify({
+        slices: [
+          { id: 'a', name: '甲', totalMs: 0, lenMin: 5 },
+          { id: 'b', name: '乙', totalMs: 0, lenMin: 5 },
+          { id: 'c', name: '丙', totalMs: 0, lenMin: 5 },
+        ],
+      }),
+    )
+    expect(m.load().zoomPct).toBe(100)
+  })
+
+  it('存档里的缩放能读回来', () => {
+    save({ ...m.initialState(), zoomPct: 85 })
+    expect(m.load().zoomPct).toBe(85)
+  })
+
+  it('存档里的坏值也要夹住', () => {
+    save({ ...m.initialState(), zoomPct: 9999 })
+    expect(m.load().zoomPct).toBe(MAX_ZOOM)
+  })
+
+  it('导入的存档同理', () => {
+    const mk = (z: unknown) =>
+      JSON.stringify({
+        slices: [
+          { id: 'a', name: '甲', totalMs: 0, lenMin: 5 },
+          { id: 'b', name: '乙', totalMs: 0, lenMin: 5 },
+          { id: 'c', name: '丙', totalMs: 0, lenMin: 5 },
+        ],
+        zoomPct: z,
+      })
+    expect(m.parseSnapshot(mk(85)).zoomPct).toBe(85)
+    expect(m.parseSnapshot(mk(9999)).zoomPct).toBe(MAX_ZOOM)
+    expect(m.parseSnapshot(mk('big')).zoomPct).toBe(100)
+    expect(m.parseSnapshot(mk(undefined)).zoomPct).toBe(100)
   })
 })

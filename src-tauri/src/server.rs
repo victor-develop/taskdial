@@ -338,6 +338,15 @@ fn handle(mut req: Request, app: &AppHandle, shared: &Shared) {
                     "phase": phase,
                     "uptime": shared.started.elapsed().as_secs(),
                     "window": app.get_webview_window("main").is_some(),
+                    // 没有屏幕录制权限的 agent 只能从这儿知道窗口多大
+                    "size": app
+                        .get_webview_window("main")
+                        .and_then(|w| {
+                            let f = w.scale_factor().ok()?;
+                            let s = w.outer_size().ok()?.to_logical::<f64>(f);
+                            Some(json!({ "w": s.width.round(), "h": s.height.round() }))
+                        })
+                        .unwrap_or(Value::Null),
                 }),
             );
         }
@@ -425,7 +434,7 @@ fn skills_json(shared: &Shared) -> Value {
         "endpoints": [
             { "method": "GET",    "path": "/",                   "desc": "landing page（HTML）" },
             { "method": "GET",    "path": "/insights",           "desc": "暂停报告网页（HTML）；?format=md 出 markdown 方便 AI 分析，?format=json 出结构化聚合" },
-            { "method": "GET",    "path": "/health",             "desc": "{ok, version, phase, uptime, window}" },
+            { "method": "GET",    "path": "/health",             "desc": "{ok, version, phase, uptime, window, size}" },
             { "method": "GET",    "path": "/skills",             "desc": "本清单。?format=md 或 Accept: text/markdown 拿 markdown 版" },
             { "method": "GET",    "path": "/control/state",      "desc": "当前完整状态（JSON）" },
             { "method": "POST",   "path": "/control/slices",     "body": { "name": "string?", "lenMin": "number?" }, "desc": "加一片。省略字段用默认值" },
@@ -457,7 +466,7 @@ Base URL：`{base}`
 |---|---|---|
 | GET | `/` | landing page（HTML） |
 | GET | `/insights` | 暂停报告网页（HTML） |
-| GET | `/health` | `{{ok, version, phase, uptime, window}}` |
+| GET | `/health` | `{{ok, version, phase, uptime, window, size}}` |
 | GET | `/skills` | 本清单。`?format=md` 拿 markdown 版 |
 | GET | `/control/state` | 当前完整状态（JSON） |
 | POST | `/control/slices` | 加一片，body `{{"name"?, "lenMin"?}}` |

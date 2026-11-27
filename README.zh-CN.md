@@ -62,6 +62,14 @@ npm run dev
 
 累计时长一点不动 —— 是收进库存，不是删掉。盘上至少留两片，不然没有「轮转」可言。盘满时再加任务会直接进库存，而不是拒绝。
 
+## 界面大小
+
+屏幕分辨率高的时候窗口会显得占地方。设置里有一行 **界面大小**，70% / 85% / 100% / 115% / 130%，或者 `Cmd +` / `Cmd -` 加减，`Cmd 0` 回 100%。
+
+缩放用的是 CSS `zoom`，整张卡片等比缩，**窗口跟着一起变小** —— 不是在原来的窗口里留一圈空白。实测 70% 是 168×276，100% 是 240×386，130% 是 312×500。
+
+为什么不做成拖边框缩放：窗口无边框、`resizable: false`，而且高度一直是按内容算出来的（`src/autosize.ts`）。真让你拖，拖完下一次内容变化就被算回去了。换成一个显式的缩放比例，内容和窗口都跟着它走，不会互相打架。
+
 ## 本地 HTTP API
 
 app 内置一个只绑 `127.0.0.1:7717` 的服务，让 agent 能读状态、改任务片。
@@ -69,7 +77,7 @@ app 内置一个只绑 `127.0.0.1:7717` 的服务，让 agent 能读状态、改
 ```
 GET    /                      landing page
 GET    /insights              暂停报告 —— HTML，?format=md 出 markdown，?format=json 出结构化聚合
-GET    /health                {ok, version, phase, uptime, window}
+GET    /health                {ok, version, phase, uptime, window, size}
 GET    /skills                能力清单（JSON，?format=md 出 markdown）
 GET    /control/state         当前完整状态
 POST   /control/slices        加一片            {name, lenMin}

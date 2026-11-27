@@ -11,6 +11,14 @@ export const CAP_MS = RINGS_PER_LAP * MAX_LAPS * MS_HOUR
 /** 盘上每个位置一个色相。正好 MAX_VISIBLE 个，所以盘上永远不撞色 */
 export const HUES = [174, 38, 268, 344, 142, 210, 20, 300]
 
+/** 界面缩放，百分比。常驻置顶的小窗占屏幕多少，得让人自己说了算 */
+export const MIN_ZOOM = 70
+export const MAX_ZOOM = 130
+export const ZOOM_PRESETS = [70, 85, 100, 115, 130]
+export const ZOOM_STEP = 5
+export const clampZoom = (pct: number) =>
+  Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, Math.round(pct) || 100))
+
 /** 片长可选的几档，设置面板里那排 chip */
 export const LEN_PRESETS = [5, 15, 25, 50]
 export const MIN_LEN = 1
@@ -51,6 +59,8 @@ export const MAX_PAUSES = 200
 
 export type State = {
   slices: Slice[]
+  /** 界面缩放百分比 */
+  zoomPct: number
   /** 只用来给新片赋初值，不做继承 —— 每片都有自己的显式片长 */
   defaultLenMin: number
   currentIndex: number
@@ -80,6 +90,8 @@ export type Action =
   | { type: 'togglePin' }
   | { type: 'setLen'; id: string; min: number }
   | { type: 'setDefaultLen'; min: number }
+  | { type: 'setZoom'; pct: number }
+  | { type: 'zoomBy'; delta: number }
   | { type: 'toggleHidden'; id: string }
   | { type: 'jump'; id: string }
   | { type: 'rename'; id: string; name: string }
@@ -100,6 +112,7 @@ function makeInitial(env: Env, makeSlice: (name: string, lenMin: number) => Slic
       makeSlice('杂事', 5),
     ],
     defaultLenMin: 5,
+    zoomPct: 100,
     currentIndex: 0,
     rotationDeg: 0,
     pinned: false,
@@ -401,6 +414,13 @@ export function createModel(env: Env) {
     case 'setDefaultLen':
       return { ...s, defaultLenMin: clampLen(action.min) }
 
+    case 'setZoom':
+      return { ...s, zoomPct: clampZoom(action.pct) }
+
+    // 连按时每一步都得基于上一步的结果，不能让调用方拿着同一个旧值算 N 次
+    case 'zoomBy':
+      return { ...s, zoomPct: clampZoom(s.zoomPct + action.delta) }
+
     // 临时把某片挪出轮转。累计不动，随时能放回来。
     case 'toggleHidden': {
       const target = s.slices.find((sl) => sl.id === action.id)
@@ -553,6 +573,7 @@ export function createModel(env: Env) {
     return {
       slices: safe,
       defaultLenMin,
+      zoomPct: clampZoom(num(o.zoomPct, 100)),
       pauses,
       roundElapsedMs: 0,
       currentIndex: vis.includes(currentIndex) ? currentIndex : vis[0],
@@ -591,6 +612,7 @@ function migrate(merged: State, raw: LegacyFields): State {
   return {
     ...merged,
     defaultLenMin: fallback,
+    zoomPct: clampZoom(merged.zoomPct ?? 100),
     slices: merged.slices.map((sl) => ({
       ...sl,
       lenMin: typeof sl.lenMin === 'number' ? clampLen(sl.lenMin) : fallback,
